@@ -16,11 +16,8 @@ export default function LayoutClient({
 }: {
   children: React.ReactNode;
 }) {
-  var {
-    data: session,
-    isPending: sessionIsPending,
-    error: sessionError,
-  } = authClient.useSession();
+  const { isPending: sessionIsPending, error: sessionError } =
+    authClient.useSession();
   const generalTranslations = useTranslations("general");
   const [mounted, setMounted] = useState(false);
 
