@@ -1,12 +1,8 @@
 // profile/page.tsx
 "use client";
 
-import { Card } from "@heroui/react";
-import { Logo } from "@/components/icons";
-import { authClient } from "@/lib/better-auth/auth-client";
-import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
-import { toast, Button, Surface, Separator, Avatar } from "@heroui/react";
+import { useTranslations } from "next-intl";
+import { toast } from "@heroui/react";
 import { useEffect } from "react";
 import ProfileBannerCard from "@/components/ui/cards/ProfileBannerCard";
 import PersonalInfoCard from "@/components/ui/cards/PersonalInfoCard";
@@ -14,9 +10,6 @@ import MilitaryInformationCard from "@/components/ui/cards/MilitaryInformation";
 import AccountInformationCard from "@/components/ui/cards/AccountInformation";
 
 export default function ProfilePage() {
-  const locale = useLocale();
-  const router = useRouter();
-  const generalTranslations = useTranslations("general");
   const profileInfoTranslations = useTranslations(
     "component_ui_cards_profileInfo",
   );
