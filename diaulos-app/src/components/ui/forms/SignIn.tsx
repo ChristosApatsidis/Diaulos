@@ -16,7 +16,7 @@ import { useTranslations } from "next-intl";
 import { authClient } from "@/lib/better-auth/auth-client";
 
 export default function SignIn() {
-  const signInTranslations = useTranslations("component_ui_form_signIn");
+  const signInTranslations = useTranslations("component_ui_forms_signIn");
 
   const [errors, setErrors] = useState<{
     username?: string;

@@ -157,7 +157,7 @@
     }
   },
 
-  "component_ui_form_signIn": {
+  "component_ui_forms_signIn": {
     "errors": {
       "usernameTooShort": "Username must be at least 4 characters long.",
       "invalidUsernameOrPassword": "Invalid username or password. Please try again.",

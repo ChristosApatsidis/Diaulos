@@ -157,7 +157,7 @@
     }
   },
 
-  "component_ui_form_signIn": {
+  "component_ui_forms_signIn": {
     "errors": {
       "usernameTooShort": "Το όνομα χρήστη πρέπει να έχει τουλάχιστον 4 χαρακτήρες.",
       "invalidUsernameOrPassword": "Μη έγκυρο όνομα χρήστη ή κωδικός. Παρακαλώ δοκιμάστε ξανά.",
