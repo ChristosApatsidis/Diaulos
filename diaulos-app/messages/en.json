@@ -1,0 +1,604 @@
+{
+  "general": {
+    "siteTitle": "Diaulos",
+    "description": "",
+    "errors": {
+      "generic": "An error occurred. Please try again later.",
+      "401": "Unauthorized. Please check your credentials and try again.",
+      "403": "Forbidden. You don't have permission to access this resource.",
+      "404": "Not Found. The requested resource could not be found.",
+      "500": "Internal Server Error. Please try again later."
+    },
+    "loading": "Loading...",
+    "back": "Back",
+
+    "userPermissions": {
+      "View content": {
+        "title": "View Content",
+        "description": "Allows users to view content."
+      },
+      "Create content": {
+        "title": "Create Content",
+        "description": "Allows users to create new content."
+      },
+      "Edit content": {
+        "title": "Edit Content",
+        "description": "Allows users to edit content."
+      },
+      "Edit own content": {
+        "title": "Edit Own Content",
+        "description": "Allows users to edit only the content they have created."
+      },
+      "Delete content": {
+        "title": "Delete Content",
+        "description": "Allows users to delete content."
+      },
+      "Delete own content": {
+        "title": "Delete Own Content",
+        "description": "Allows users to delete only the content they have created."
+      }
+    },
+
+    "branches": {
+      "Hellenic Army": "Hellenic Army",
+      "Hellenic Navy": "Hellenic Navy",
+      "Hellenic Air Force": "Hellenic Air Force"
+    },
+
+    "roles": {
+      "user": "User",
+      "viewer": "Viewer",
+      "admin": "Administrator"
+    },
+
+    "ranks": {
+      "Hellenic Army": {
+        "OR-1": "Soldier",
+        "OR-2": "Lance Corporal",
+        "OR-4": "Corporal",
+        "OR-6": "Sergeant",
+        "OR-7": "Staff Sergeant",
+        "OR-8": "Master Sergeant",
+        "OR-9": "Warrant Officer class 1",
+        "OF-1a": "2nd Lieutenant (Second Lieutenant)",
+        "OF-1b": "First Lieutenant",
+        "OF-2": "Captain",
+        "OF-3": "Major",
+        "OF-4": "Lieutenant Colonel",
+        "OF-5": "Colonel",
+        "OF-6": "Brigadier",
+        "OF-7": "Major General",
+        "OF-8": "Lieutenant General",
+        "OF-9": "General"
+      },
+      "Hellenic Navy": {
+        "OR-1": "Seaman Recruit",
+        "OR-2": "Seaman Apprentice",
+        "OR-3": "Seaman",
+        "OR-4": "Petty Officer 3rd Class",
+        "OR-5": "Petty Officer 2nd Class",
+        "OR-6": "Petty Officer 1st Class",
+        "OR-7": "Chief Petty Officer",
+        "OR-8": "Senior Chief Petty Officer",
+        "OR-9": "Master Chief Petty Officer",
+        "OF-1a": "Ensign",
+        "OF-1b": "Lieutenant Junior Grade",
+        "OF-2": "Lieutenant",
+        "OF-3": "Lieutenant Commander",
+        "OF-4": "Commander",
+        "OF-5": "Captain",
+        "OF-6": "Rear Admiral (Lower Half)",
+        "OF-7": "Rear Admiral (Upper Half)",
+        "OF-8": "Vice Admiral",
+        "OF-9": "Admiral"
+      },
+      "Hellenic Air Force": {
+        "OR-1": "Airman Basic",
+        "OR-2": "Airman",
+        "OR-3": "Airman First Class",
+        "OR-4": "Senior Airman",
+        "OR-5": "Staff Sergeant",
+        "OR-6": "Technical Sergeant",
+        "OR-7": "Master Sergeant",
+        "OR-8": "Senior Master Sergeant",
+        "OR-9": "Chief Master Sergeant",
+        "OF-1a": "Second Lieutenant",
+        "OF-1b": "First Lieutenant",
+        "OF-2": "Captain",
+        "OF-3": "Major",
+        "OF-4": "Lieutenant Colonel",
+        "OF-5": "Colonel",
+        "OF-6": "Brigadier General",
+        "OF-7": "Major General",
+        "OF-8": "Lieutenant General",
+        "OF-9": "General"
+      }
+    }
+  },
+
+  "navigation": {
+    "home": {
+      "title": "Home",
+      "ariaLabel": "Navigate to Home page"
+    },
+    "page2": {
+      "title": "Page 2",
+      "ariaLabel": "Navigate to Page 2"
+    },
+    "page3": {
+      "title": "Page3",
+      "ariaLabel": "Navigate to Page3",
+      "personal": {
+        "title": "Personal",
+        "ariaLabel": "Navigate to Personal pricing"
+      },
+      "business": {
+        "title": "Business",
+        "ariaLabel": "Navigate to Business pricing"
+      },
+      "enterprise": {
+        "title": "Enterprise",
+        "ariaLabel": "Navigate to Enterprise pricing"
+      }
+    },
+    "profileDropdown": {
+      "profile": {
+        "title": "Profile",
+        "ariaLabel": "Navigate to Profile page"
+      },
+      "database": {
+        "title": "Database",
+        "ariaLabel": "Navigate to Database page"
+      },
+      "signOut": {
+        "title": "Sign Out",
+        "ariaLabel": "Sign out of your account"
+      }
+    }
+  },
+
+  "component_ui_form_signIn": {
+    "errors": {
+      "usernameTooShort": "Username must be at least 4 characters long.",
+      "invalidUsernameOrPassword": "Invalid username or password. Please try again.",
+      "userDisabled": "This account has been disabled. Please contact support.",
+      "tooManyAttempts": "Too many failed attempts. Please try again later.",
+      "networkError": "Network error. Please check your connection and try again."
+    },
+    "validation": {
+      "usernameRequired": "Username is required.",
+      "usernameMinLength": "Username must be at least 4 characters long.",
+      "usernameMaxLength": "Username must be less than 20 characters long.",
+      "passwordRequired": "Password is required.",
+      "passwordMinLength": "Password must be at least 4 characters long."
+    },
+    "labels": {
+      "username": "Username",
+      "password": "Password"
+    },
+    "placeholders": {
+      "username": "Enter your username",
+      "password": "Enter your password"
+    },
+    "buttons": {
+      "submit": "Sign In",
+      "submitting": "Signing In..."
+    }
+  },
+
+  "component_ui_cards_activeSession": {
+    "errorTitle": "Session Error",
+    "activeSessionTitle": "Active Session",
+    "username": "Username {username}",
+    "profileButton": "View Profile",
+    "signOutButton": "Sign Out",
+    "signOutLoadingButton": "Signing Out..."
+  },
+
+  "component_ui_cards_profileBanner": {
+    "buttons": {
+      "edit": "Edit Profile"
+    }
+  },
+
+  "component_ui_cards_personalInfo": {
+    "title": "Personal Information",
+    "infoRows": {
+      "name": "Full Name",
+      "username": "Username",
+      "email": "Email"
+    }
+  },
+
+  "component_ui_cards_accountInformation": {
+    "title": "Account Information",
+    "infoRows": {
+      "userId": "User ID",
+      "memberSince": "Member Since",
+      "lastUpdated": "Last Updated",
+      "role": "Role",
+      "permissions": "Permissions"
+    }
+  },
+
+  "component_ui_cards_militaryInformation": {
+    "title": "Military Information",
+    "infoRows": {
+      "branch": "Branch",
+      "combatArmsSupportBranch": "Combat Arms / Support Branch",
+      "rank": "Rank",
+      "specialization": "Specialization",
+      "unitOfService": "Unit of Service"
+    }
+  },
+
+  "adminMenu": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "database": "Database",
+    "settings": "Settings"
+  },
+
+  "home": {
+    "signIn": {
+      "title": "Sign In",
+      "description": "Enter your credentials to access your account",
+      "errors": {
+        "invalidCredentials": "Invalid username or password. Please try again.",
+        "networkError": "Network error. Please check your connection and try again."
+      },
+      "form": {
+        "validation": {
+          "usernameRequired": "Username is required.",
+          "usernameMinLength": "Username must be at least 4 characters long.",
+          "maxUsernameLength": "Username must be less than 20 characters long.",
+          "passwordRequired": "Password is required.",
+          "passwordMinLength": "Password must be at least 4 characters long."
+        },
+        "inputPlaceholders": {
+          "username": "Enter your username",
+          "password": "Enter your password"
+        },
+        "labels": {
+          "username": "Username",
+          "password": "Password"
+        },
+        "buttons": {
+          "submit": "Sign In",
+          "submiting": "Signing In..."
+        }
+      }
+    }
+  },
+
+  "profile": {
+    "editButton": "Edit Profile",
+    "cards": {
+      "personalInfo": {
+        "title": "Personal Information",
+        "fields": {
+          "fullName": "Full Name",
+          "username": "Username",
+          "email": "Email",
+          "userId": "User ID"
+        }
+      },
+      "militaryInfo": {
+        "title": "Military Information",
+        "fields": {
+          "branch": "Branch",
+          "combatArmsSupportBranch": "Combat arms / Support branch",
+          "rank": "Rank",
+          "specialization": "Specialization",
+          "unitOfService": "Unit of service"
+        }
+      },
+      "accountInfo": {
+        "title": "Account Information",
+        "fields": {
+          "memberSince": "Member Since",
+          "lastUpdated": "Last Updated",
+          "accountType": "Account Type",
+          "permissions": "Permissions"
+        }
+      }
+    },
+    "toast": {
+      "updateSuccess": {
+        "title": "Profile updated",
+        "description": "Your profile has been successfully updated."
+      }
+    }
+  },
+
+  "editProfile": {
+    "personalInfo": {
+      "title": "Personal Information"
+    },
+    "militaryInfo": {
+      "title": "Military Information"
+    },
+    "form": {
+      "labels": {
+        "fullName": "Full Name",
+        "username": "Username",
+        "email": "Email",
+        "rank": "Rank",
+        "specialization": "Specialization",
+        "unitOfService": "Unit of service"
+      },
+      "placeholders": {
+        "fullName": "Enter your full name",
+        "username": "Enter your username",
+        "email": "Enter your email address",
+        "specialization": "Enter your specialization",
+        "unitOfService": "Enter your unit of service"
+      },
+      "buttons": {
+        "saveChanges": "Save Changes",
+        "savingChanges": "Saving Changes...",
+        "saveEmail": "Save Email",
+        "savingEmail": "Saving Email...",
+        "cancel": "Cancel"
+      },
+      "validation": {
+        "usernameRequired": "Username is required.",
+        "usernameMinLength": "Username must be at least 4 characters long.",
+        "usernameMaxLength": "Username must be less than 20 characters long.",
+        "nameRequired": "Name is required.",
+        "emailRequired": "Email is required.",
+        "emailInvalid": "Please enter a valid email address."
+      }
+    }
+  },
+
+  "adminUsersManagement": {
+    "statistics": {
+      "totalUsers": "Total Users",
+      "admins": "Administrators",
+      "viewers": "Viewers",
+      "regularUsers": "Regular Users"
+    },
+    "title": "Users Management",
+    "buttons": {
+      "createNewUser": "Create New User"
+    },
+    "table": {
+      "headers": {
+        "name": "Full Name",
+        "username": "Username",
+        "email": "Email",
+        "role": "Role",
+        "branch": "Branch",
+        "rank": "Rank",
+        "actions": "Actions"
+      },
+      "buttons": {
+        "viewDetails": "View Details",
+        "edit": "Edit",
+        "delete": "Delete"
+      }
+    },
+    "modals": {
+      "deleteConfirmation": {
+        "title": "Confirm Deletion",
+        "description": "Are you sure you want to delete this user? This action cannot be undone.",
+        "buttons": {
+          "confirm": "Yes, Delete",
+          "cancel": "Cancel"
+        }
+      },
+      "createUser": {
+        "title": "Create New User",
+        "buttons": {
+          "confirm": "Create",
+          "cancel": "Cancel"
+        }
+      }
+    },
+    "messages": {
+      "deleteSuccess": {
+        "title": "User Deleted",
+        "description": "The user has been successfully deleted."
+      },
+      "deleteError": {
+        "title": "Deletion Failed",
+        "description": "An error occurred while trying to delete the user. Please try again later."
+      }
+    }
+  },
+
+  "createNewUserModal": {
+    "title": "Create New User",
+    "fields": {
+      "name": {
+        "label": "Full Name",
+        "placeholder": "Enter the user's full name"
+      },
+      "username": {
+        "label": "Username",
+        "placeholder": "Enter the user's username"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter the user's email address"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter the user's password",
+        "options": {
+          "length": "Password Length",
+          "useSymbols": "Include Symbols",
+          "useDigits": "Include Digits",
+          "generateRandomPassword": "Generate Random Password"
+        }
+      },
+      "role": {
+        "label": "Role",
+        "placeholder": "Select a role for the user"
+      },
+      "branch": {
+        "label": "Branch",
+        "placeholder": "Select a branch for the user"
+      },
+      "rank": {
+        "label": "Rank",
+        "placeholder": "Select a rank for the user"
+      },
+      "specialization": {
+        "label": "Specialization",
+        "placeholder": "Enter the user's specialization"
+      },
+      "unitOfService": {
+        "label": "Unit of Service",
+        "placeholder": "Enter the user's unit of service"
+      },
+      "permissions": {
+        "label": "Permissions",
+        "placeholder": "Select permissions for the user"
+      },
+      "combatArmsSupportBranch": {
+        "label": "Combat Arms / Support Branch",
+        "placeholder": "Select a combat arms or support branch for the user"
+      },
+      "accountType": {
+        "label": "Account Type",
+        "placeholder": "Select an account type for the user"
+      }
+    },
+    "validation": {
+      "usernameRequired": "Username is required.",
+      "usernameMinLength": "Username must be at least 4 characters long.",
+      "usernameMaxLength": "Username must be less than 20 characters long.",
+      "nameRequired": "Name is required.",
+      "emailRequired": "Email is required.",
+      "emailInvalid": "Please enter a valid email address.",
+      "passwordRequired": "Password is required.",
+      "passwordMinLength": "Password must be at least 4 characters long.",
+      "rankRequired": "Rank is required."
+    },
+    "errors": {
+      "NETWORK_ERROR": "Network error. Please check your connection.",
+      "CREATE_ERROR": "Failed to create user. Please try again.",
+      "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL": "This email is already in use.",
+      "USERNAME_IS_ALREADY_TAKEN": "This username is already in use."
+    },
+    "buttons": {
+      "confirm": "Create",
+      "cancel": "Cancel"
+    }
+  },
+
+  "updateUserModal": {
+    "title": "Update User",
+    "form": {
+      "name": {
+        "label": "Full Name",
+        "placeholder": "Enter the user's full name"
+      },
+      "username": {
+        "label": "Username",
+        "placeholder": "Enter the user's username"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter the user's email address"
+      },
+      "role": {
+        "label": "Role",
+        "placeholder": "Select a role for the user"
+      },
+      "branch": {
+        "label": "Branch",
+        "placeholder": "Select a branch for the user"
+      },
+      "rank": {
+        "label": "Rank",
+        "placeholder": "Select a rank for the user"
+      },
+      "specialization": {
+        "label": "Specialization",
+        "placeholder": "Enter the user's specialization"
+      },
+      "unitOfService": {
+        "label": "Unit of Service",
+        "placeholder": "Enter the user's unit of service"
+      },
+      "permissions": {
+        "label": "Permissions",
+        "placeholder": "Select permissions for the user"
+      },
+      "combatArmsSupportBranch": {
+        "label": "Combat Arms / Support Branch",
+        "placeholder": "Select a combat arms or support branch for the user"
+      },
+      "accountType": {
+        "label": "Account Type",
+        "placeholder": "Select an account type for the user"
+      }
+    },
+    "validation": {
+      "usernameRequired": "Username is required.",
+      "usernameMinLength": "Username must be at least 4 characters long.",
+      "usernameMaxLength": "Username must be less than 20 characters long.",
+      "nameRequired": "Name is required.",
+      "emailRequired": "Email is required.",
+      "emailInvalid": "Please enter a valid email address."
+    },
+    "errors": {
+      "NETWORK_ERROR": "Network error. Please check your connection.",
+      "UPDATE_ERROR": "Failed to update user. Please try again.",
+      "USER_NOT_FOUND": "User not found.",
+      "EMAIL_TAKEN": "This email is already in use.",
+      "NO_FIELDS_TO_UPDATE": "No fields to update."
+    },
+    "toast": {
+      "updateSuccess": {
+        "title": "User Updated",
+        "description": "The user has been successfully updated."
+      }
+    },
+    "buttons": {
+      "save": "Save Changes",
+      "cancel": "Cancel"
+    }
+  },
+
+  "userDetailsModal": {
+    "title": "User Details",
+    "personalInfo": {
+      "title": "Personal Information",
+      "fields": {
+        "fullName": "Full Name",
+        "username": "Username",
+        "email": "Email",
+        "userId": "User ID"
+      }
+    },
+    "militaryInfo": {
+      "title": "Military Information",
+      "fields": {
+        "branch": "Branch",
+        "combatArmsSupportBranch": "Combat Arms / Support Branch",
+        "rank": "Rank",
+        "specialization": "Specialization",
+        "unitOfService": "Unit of Service"
+      }
+    },
+    "accountInfo": {
+      "title": "Account Information",
+      "fields": {
+        "userId": "User ID",
+        "role": "Role",
+        "memberSince": "Member Since",
+        "lastUpdated": "Last Updated",
+        "accountType": "Account Type",
+        "permissions": "Permissions"
+      }
+    },
+    "buttons": {
+      "downloadPDF": "Download PDF",
+      "close": "Close"
+    }
+  }
+}

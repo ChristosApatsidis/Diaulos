@@ -1,0 +1,91 @@
+version: "3.8"
+
+services:
+  couchdb1:
+    image: couchdb:latest
+    container_name: couchdb1
+    ports:
+      - "5984:5984"
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=secret123456789
+      - COUCHDB_SECRET=mysecrettoken1
+    volumes:
+      - couchdb1-data:/opt/couchdb/data
+    configs:
+      - source: couchdb_replicator_config
+        target: /opt/couchdb/etc/local.d/replicator.ini
+    networks:
+      - couchdb-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 1G
+
+  couchdb2:
+    image: couchdb:latest
+    container_name: couchdb2
+    ports:
+      - "5985:5984"
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=secret123456789
+      - COUCHDB_SECRET=mysecrettoken2
+    volumes:
+      - couchdb2-data:/opt/couchdb/data
+    configs:
+      - source: couchdb_replicator_config
+        target: /opt/couchdb/etc/local.d/replicator.ini
+    networks:
+      - couchdb-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 1G
+
+  couchdb3:
+    image: couchdb:latest
+    container_name: couchdb3
+    ports:
+      - "5986:5984"
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=secret123456789
+      - COUCHDB_SECRET=mysecrettoken3
+    volumes:
+      - couchdb3-data:/opt/couchdb/data
+    configs:
+      - source: couchdb_replicator_config
+        target: /opt/couchdb/etc/local.d/replicator.ini
+    networks:
+      - couchdb-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 1G
+
+volumes:
+  couchdb1-data:
+  couchdb2-data:
+  couchdb3-data:
+
+configs:
+  couchdb_replicator_config:
+    content: |
+      [replicator]
+      retries_per_request = 99999
+      min_retry_timeout_msec = 1000
+      max_retry_timeout_msec = 5000
+
+networks:
+  couchdb-net:
+    driver: bridge
