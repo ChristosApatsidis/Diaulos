@@ -221,6 +221,45 @@
     }
   },
 
+  "component_ui_cards_editPersonalInformation": {
+    "title": "Personal Information",
+    "errors": {
+      "emailIsTheSame": "The new email address is the same as the current one.",
+      "invalidEmail": "Please enter a valid email address.",
+      "validationError": "Please correct the errors in the form and try again."
+    },
+    "toast": {
+      "changeEmailSuccess": {
+        "title": "Email Updated",
+        "description": "Your email address has been successfully updated."
+      },
+      "changeEmailError": {
+        "title": "Email Update Failed",
+        "description": "An error occurred while updating your email address. Please try again later."
+      },
+      "toManyRequests": {
+        "title": "Too Many Requests",
+        "description": "You have made too many requests in a short period. Please wait and try again later."
+      }
+    },
+    "form": {
+      "labels": {
+        "name": "Full Name",
+        "username": "Username",
+        "email": "Email"
+      },
+      "placeholders": {
+        "name": "Enter your full name",
+        "username": "Enter your username",
+        "email": "Enter your email address"
+      },
+      "buttons": {
+        "updateEmail": "Save Email",
+        "updatingEmail": "Saving Email..."
+      }
+    }
+  },
+
   "component_ui_cards_militaryInformation": {
     "title": "Military Information",
     "infoRows": {
@@ -229,6 +268,22 @@
       "rank": "Rank",
       "specialization": "Specialization",
       "unitOfService": "Unit of Service"
+    }
+  },
+
+  "component_ui_cards_editMilitaryInformation": {
+    "title": "Military Information",
+    "form": {
+      "labels": {
+        "specialization": "Specialization"
+      },
+      "placeholders": {
+        "specialization": "Enter your specialization"
+      },
+      "buttons": {
+        "save": "Save Changes",
+        "saving": "Saving Changes..."
+      }
     }
   },
 

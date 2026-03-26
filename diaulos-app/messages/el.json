@@ -221,6 +221,45 @@
     }
   },
 
+  "component_ui_cards_editPersonalInformation": {
+    "title": "Προσωπικές Πληροφορίες",
+    "errors": {
+      "emailIsTheSame": "Το νέο email είναι το ίδιο με το τρέχον. Παρακαλώ εισάγετε διαφορετικό email.",
+      "invalidEmail": "Το email δεν είναι έγκυρο. Παρακαλώ εισάγετε ένα έγκυρο email.",
+      "validationError": "Παρακαλώ διορθώστε τα σφάλματα στο φόρμα και δοκιμάστε ξανά."
+    },
+    "toast": {
+      "changeEmailSuccess": {
+        "title": "Ενημέρωση Email",
+        "description": "Το email σας ενημερώθηκε με επιτυχία."
+      },
+      "changeEmailError": {
+        "title": "Αποτυχία Ενημέρωσης Email",
+        "description": "Προέκυψε σφάλμα κατά την ενημέρωση του email σας. Παρακαλώ δοκιμάστε ξανά αργότερα."
+      },
+      "toManyRequests": {
+        "title": "Πολλές Αιτήσεις",
+        "description": "Έχετε κάνει πολλές αιτήσεις για αλλαγή email. Παρακαλώ δοκιμάστε ξανά αργότερα."
+      }
+    },
+    "form": {
+      "labels": {
+        "name": "Πλήρες Όνομα",
+        "username": "Όνομα Χρήστη",
+        "email": "Ηλεκτρονικό Ταχυδρομείο"
+      },
+      "placeholders": {
+        "name": "Εισάγετε το πλήρες όνομά σας",
+        "username": "Εισάγετε το όνομα χρήστη σας",
+        "email": "Εισάγετε το ηλεκτρονικό ταχυδρομείο σας"
+      },
+      "buttons": {
+        "updateEmail": "Αποθήκευση Email",
+        "updatingEmail": "Αποθήκευση Email..."
+      }
+    }
+  },
+
   "component_ui_cards_militaryInformation": {
     "title": "Στρατιωτικές Πληροφορίες",
     "infoRows": {
@@ -229,6 +268,22 @@
       "rank": "Βαθμός",
       "specialization": "Ειδικότητα",
       "unitOfService": "Μονάδα Υπηρεσίας"
+    }
+  },
+
+  "component_ui_cards_editMilitaryInformation": {
+    "title": "Στρατιωτικές Πληροφορίες",
+    "form": {
+      "labels": {
+        "specialization": "Ειδικότητα"
+      },
+      "placeholders": {
+        "specialization": "Εισάγετε την ειδικότητά σας"
+      },
+      "buttons": {
+        "save": "Αποθήκευση",
+        "saving": "Αποθήκευση..."
+      }
     }
   },
 
