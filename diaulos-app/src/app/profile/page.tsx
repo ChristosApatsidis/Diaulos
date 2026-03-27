@@ -10,9 +10,7 @@ import MilitaryInformationCard from "@/components/ui/cards/MilitaryInformation";
 import AccountInformationCard from "@/components/ui/cards/AccountInformation";
 
 export default function ProfilePage() {
-  const profileInfoTranslations = useTranslations(
-    "component_ui_cards_profileInfo",
-  );
+  const profileTranslations = useTranslations("page_profile");
 
   // Check for profile update flag in sessionStorage and show toast if set
   useEffect(() => {
@@ -21,8 +19,8 @@ export default function ProfilePage() {
       sessionStorage.removeItem("profileUpdated");
 
       // Show success toast
-      toast.success(profileInfoTranslations("toast.updateSuccess.title"), {
-        description: profileInfoTranslations("toast.updateSuccess.description"),
+      toast.success(profileTranslations("toast.updateSuccess.title"), {
+        description: profileTranslations("toast.updateSuccess.description"),
       });
     }
   }, []);

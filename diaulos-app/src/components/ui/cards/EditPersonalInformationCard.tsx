@@ -1,7 +1,7 @@
 // components/ui/cards/EditProfileCard.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   toast,
   Button,
@@ -9,62 +9,64 @@ import {
   Form,
   Input,
   Label,
-  Surface,
   TextField,
 } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { authClient } from "@/lib/better-auth/auth-client";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
-import useSWR from "swr";
-import { useRouter } from "next/navigation";
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
-
 type EditProfileForm = {
   name: string;
   username: string;
   email: string;
+  specialization: string;
 };
 
-export default function EditPersonalInformationCard() {
-  const router = useRouter();
-  const {
-    data: session,
-    isPending: sessionIsPending,
-    error: sessionError,
-  } = authClient.useSession();
-  const generalTranslations = useTranslations("general");
+/**
+ * EditPersonalInformationCard is a form component that allows users to edit their personal information such as name, username, and email.
+ * It handles form state, validation errors, and integrates with the authClient to update the user's email.
+ * @param formData - The current state of the form data.
+ * @param setFormData - A function to update the form data state.
+ * @param errors - An object containing validation error messages for each form field.
+ * @param setErrors - A function to update the errors state.
+ * @returns A React component that renders the personal information edit form.
+ */
+export default function EditPersonalInformationCard({
+  formData,
+  setFormData,
+  errors,
+  setErrors,
+}: {
+  formData: EditProfileForm;
+  setFormData: React.Dispatch<React.SetStateAction<EditProfileForm>>;
+  errors: {
+    name?: string;
+    username?: string;
+    email?: string;
+    general?: string;
+  };
+  setErrors: React.Dispatch<
+    React.SetStateAction<{
+      name?: string;
+      username?: string;
+      email?: string;
+      general?: string;
+    }>
+  >;
+}) {
+  const { data: session } = authClient.useSession();
   const editPersonalInformationTranslations = useTranslations(
     "component_ui_cards_editPersonalInformation",
   );
 
   const [loadingChangeEmail, setLoadingChangeEmail] = useState<boolean>(false);
-  const [errors, setErrors] = useState<{
-    name?: string;
-    username?: string;
-    email?: string;
-  }>({});
-  const [formData, setFormData] = useState<EditProfileForm>({
-    name: "",
-    username: "",
-    email: "",
-  });
-
-  // Pre-fill form with session data
-  useEffect(() => {
-    if (session?.user) {
-      const user = session.user as any;
-      setFormData({
-        name: user.name ?? "",
-        username: user.username ?? "",
-        email: user.email ?? "",
-      });
-    }
-  }, [session]);
 
   // Change email handler
   const handleChangeEmail = async () => {
+    // Check if email is actually changed before making API call
+    if (formData.email === session?.user?.email) return;
+
     setLoadingChangeEmail(true);
+
     try {
       const { error } = await authClient.changeEmail({
         newEmail: formData.email,
@@ -230,9 +232,12 @@ export default function EditPersonalInformationCard() {
               </FieldError>
             </TextField>
             <Button
-              type="submit"
               onPress={handleChangeEmail}
-              isDisabled={loadingChangeEmail}
+              isDisabled={
+                loadingChangeEmail ||
+                !formData.email ||
+                formData.email === session?.user?.email
+              }
             >
               {editPersonalInformationTranslations("form.buttons.updateEmail")}
             </Button>

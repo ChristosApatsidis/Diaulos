@@ -287,6 +287,24 @@
     }
   },
 
+  "page_profile": {
+    "toast": {
+      "updateSuccess": {
+        "title": "Profile Updated",
+        "description": "Your profile has been successfully updated."
+      }
+    }
+  },
+
+  "page_editProfile": {
+    "buttons": {
+      "save": "Save Changes",
+      "saving": "Saving Changes...",
+      "cancel": "Cancel"
+    }
+  },
+
+
   "adminMenu": {
     "dashboard": "Dashboard",
     "users": "Users",

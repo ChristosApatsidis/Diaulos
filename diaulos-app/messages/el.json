@@ -287,6 +287,24 @@
     }
   },
 
+  "page_profile": {
+    "toast": {
+      "updateSuccess": {
+        "title": "Ενημέρωση Προφίλ",
+        "description": "Το προφίλ σας ενημερώθηκε με επιτυχία."
+      }
+    }
+  },
+
+  "page_editProfile": {
+    "buttons": {
+      "save": "Αποθήκευση",
+      "saving": "Αποθήκευση...",
+      "cancel": "Ακύρωση"
+    }
+  },
+
+
   "adminMenu": {
     "dashboard": "Πίνακας Ελέγχου",
     "users": "Χρήστες",
