@@ -9,10 +9,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import LayoutClient from "./layout-client";
 
 export const metadata: Metadata = {
-  title: {
-    default: `${siteConfig.name}`,
-    template: `%s - ${siteConfig.name}`,
-  },
+  title: `${siteConfig.name}`,
   description: siteConfig.description,
   icons: {
     icon: "/favicon.ico",
