@@ -3,18 +3,37 @@
 
 import { Chip, Button, Skeleton } from "@heroui/react";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { authClient } from "@/lib/better-auth/auth-client";
 import { Avatar } from "@heroui/react";
 import { useRouter } from "next/dist/client/components/navigation";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { UserProfilePDF } from "@/utils/pdf";
+import { UserPen, Download } from "lucide-react";
 
-export default function ProfileBannerCard() {
+export default function ProfileBannerCard({
+  editProfileButton,
+  updatePasswordButton,
+}: {
+  editProfileButton?: boolean;
+  updatePasswordButton?: boolean;
+}) {
   const router = useRouter();
   const { data: session, isPending: isSessionPending } =
     authClient.useSession();
+  const locale = useLocale();
   const generalTranslations = useTranslations("general");
   const profileBannerTranslations = useTranslations(
     "component_ui_cards_profileBanner",
+  );
+  const personalInfoTranslations = useTranslations(
+    "component_ui_cards_personalInfo",
+  );
+  const militaryInformationTranslations = useTranslations(
+    "component_ui_cards_militaryInformation",
+  );
+  const accountInformationTranslations = useTranslations(
+    "component_ui_cards_accountInformation",
   );
 
   return (
@@ -74,19 +93,61 @@ export default function ProfileBannerCard() {
           </div>
         </div>
       </InfoCard.Body>
-      <InfoCard.Footer>
-        {isSessionPending ? (
-          <Skeleton className="h-8 w-24 rounded-3xl" />
-        ) : (
-          <Button
-            variant="tertiary"
-            size="sm"
-            onClick={() => router.push("/profile/edit")}
-          >
-            {profileBannerTranslations("buttons.edit")}
-          </Button>
-        )}
-      </InfoCard.Footer>
+      {(editProfileButton || updatePasswordButton) && (
+        <InfoCard.Footer>
+          {isSessionPending ? (
+            <Skeleton className="h-8 w-24 rounded-3xl" />
+          ) : (
+            <div className="flex gap-2">
+              {editProfileButton && (
+                <Button
+                  variant="tertiary"
+                  size="sm"
+                  onClick={() => router.push("/profile/edit")}
+                >
+                  <UserPen size={16} />
+                  {profileBannerTranslations("buttons.edit")}
+                </Button>
+              )}
+              {updatePasswordButton && (
+                <Button
+                  variant="outline"
+                  className="bg-warning/10 border-warning/50 hover:bg-warning/20 focus:ring-warning/50"
+                  size="sm"
+                  onClick={() => router.push("/profile/update-password")}
+                >
+                  {profileBannerTranslations("buttons.updatePassword")}
+                </Button>
+              )}
+              {session?.user && (
+                <PDFDownloadLink
+                  document={
+                    <UserProfilePDF
+                      user={session.user}
+                      locale={locale}
+                      generalTranslations={generalTranslations}
+                      personalInfoTranslations={personalInfoTranslations}
+                      militaryInformationTranslations={
+                        militaryInformationTranslations
+                      }
+                      accountInformationTranslations={
+                        accountInformationTranslations
+                      }
+                    />
+                  }
+                  fileName={`user-${session.user.username || "profile"}.pdf`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Button variant="tertiary" size="sm">
+                    <Download size={16} />
+                    {profileBannerTranslations("buttons.downloadPDF")}
+                  </Button>
+                </PDFDownloadLink>
+              )}
+            </div>
+          )}
+        </InfoCard.Footer>
+      )}
     </InfoCard>
   );
 }

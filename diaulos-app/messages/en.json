@@ -9,6 +9,17 @@
       "404": "Not Found. The requested resource could not be found.",
       "500": "Internal Server Error. Please try again later."
     },
+    "alerts": {
+      "networkError": {
+        "title": "Network Error",
+        "description": "We're experiencing connection issues. Please check your internet connection and try again.",
+        "suggestions": {
+          "checkConnection": "Check your internet connection",
+          "refreshPage": "Refresh the page",
+          "clearBrowserData": "Clear your browser's cache and cookies"  
+        }
+      }
+    },
     "loading": "Loading...",
     "back": "Back",
 
@@ -197,7 +208,9 @@
 
   "component_ui_cards_profileBanner": {
     "buttons": {
-      "edit": "Edit Profile"
+      "edit": "Edit Profile",
+      "updatePassword": "Update Password",
+      "downloadPDF": "Download PDF"
     }
   },
 
@@ -275,10 +288,12 @@
     "title": "Military Information",
     "form": {
       "labels": {
-        "specialization": "Specialization"
+        "specialization": "Specialization",
+        "rank": "Rank"
       },
       "placeholders": {
-        "specialization": "Enter your specialization"
+        "specialization": "Enter your specialization",
+        "rank": "Select your rank"
       },
       "buttons": {
         "save": "Save Changes",
@@ -301,6 +316,19 @@
       "save": "Save Changes",
       "saving": "Saving Changes...",
       "cancel": "Cancel"
+    },
+    "validation": {
+      "nameRequired": "Name is required.",
+      "nameMinLength": "Name must be at least 2 characters long.",
+      "nameMaxLength": "Name must be less than 50 characters long.",
+      "usernameRequired": "Username is required.",
+      "usernameMinLength": "Username must be at least 4 characters long.",
+      "usernameMaxLength": "Username must be less than 20 characters long.",
+      "emailRequired": "Email is required.",
+      "emailInvalid": "Please enter a valid email address.",
+      "specializationRequired": "Specialization is required.",
+      "specializationMinLength": "Specialization must be at least 2 characters long.",
+      "specializationMaxLength": "Specialization must be less than 100 characters long."
     }
   },
 

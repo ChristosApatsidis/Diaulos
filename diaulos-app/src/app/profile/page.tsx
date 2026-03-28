@@ -28,7 +28,7 @@ export default function ProfilePage() {
   return (
     <main className="container mx-auto px-4 pt-2 pb-4 flex flex-col gap-2">
       {/* Profile Banner */}
-      <ProfileBannerCard />
+      <ProfileBannerCard editProfileButton />
       {/* Personal & Military Info */}
       <div className="grid lg:grid-cols-2 gap-2 items-start">
         <PersonalInfoCard />

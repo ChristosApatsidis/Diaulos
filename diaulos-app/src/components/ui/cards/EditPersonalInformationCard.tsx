@@ -14,11 +14,13 @@ import {
 import { useTranslations } from "next-intl";
 import { authClient } from "@/lib/better-auth/auth-client";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
+
 type EditProfileForm = {
   name: string;
   username: string;
   email: string;
   specialization: string;
+  rank: string;
 };
 
 /**

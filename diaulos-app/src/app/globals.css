@@ -82,3 +82,13 @@
   --warning: oklch(82.03% 0.1392 76.34);
   --warning-foreground: oklch(21.03% 0.0059 76.34);
 }
+
+@layer components {
+  .alert__title {
+    @apply font-bold text-lg;
+  }
+
+  .alert--danger {
+    @apply border-2 border-red-400;
+  }
+}

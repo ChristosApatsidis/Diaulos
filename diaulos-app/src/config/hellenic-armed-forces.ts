@@ -1,0 +1,91 @@
+// config/hellenic-armed-forces.ts
+
+/**
+ * This file defines the configuration for the Hellenic Armed Forces,
+ */
+export type HellenicArmedForcesConfig = typeof hellenicArmedForcesConfig;
+
+export const hellenicArmedForcesConfig = {
+  branches: ["Hellenic Army", "Hellenic Navy", "Hellenic Air Force"],
+  cobatarmsAndSupportBranches: {
+    "Hellenic Army": [
+      "ΠΖ",
+      "ΤΘ",
+      "ΠΒ",
+      "ΑΣ",
+      "ΜΧ",
+      "ΔΒ-HΠ",
+      "ΤΧ",
+      "ΤΧ",
+      "ΕΜ",
+      "ΥΠ",
+      "ΕΠ",
+      "ΥΠ"
+    ],
+    "Hellenic Navy": ["ΔΝ", "ΤΠ", "ΥΠ", "ΕΜ", "ΕΠ"],
+    "Hellenic Air Force": ["ΙΠ", "ΜΧ", "ΕΜ", "ΥΠ", "ΕΠ"]
+  },
+  ranks: {
+    "Hellenic Army": {
+      "OR-1": "Soldier",
+      "OR-2": "Lance Corporal",
+      "OR-4": "Corporal",
+      "OR-6": "Lance Corporal",
+      "OR-7": "Staff Sergeant",
+      "OR-8": "Master Sergeant",
+      "OR-9": "Warrant Officer class 1",
+      "OF-1a": "2nd Lieutenant (Second Lieutenant)",
+      "OF-1b": "First Lieutenant",
+      "OF-2": "Captain",
+      "OF-3": "Major",
+      "OF-4": "Lieutenant Colonel",
+      "OF-5": "Colonel",
+      "OF-6": "Brigadier",
+      "OF-7": "Major General",
+      "OF-8": "Lieutenant General",
+      "OF-9": "General"
+    },
+    "Hellenic Navy": {
+      "OR-1": "Seaman Recruit",
+      "OR-2": "Seaman Apprentice",
+      "OR-3": "Seaman",
+      "OR-4": "Petty Officer 3rd Class",
+      "OR-5": "Petty Officer 2nd Class",
+      "OR-6": "Petty Officer 1st Class",
+      "OR-7": "Chief Petty Officer",
+      "OR-8": "Senior Chief Petty Officer",
+      "OR-9": "Master Chief Petty Officer",
+      "OF-1a": "Ensign",
+      "OF-1b": "Lieutenant Junior Grade",
+      "OF-2": "Lieutenant",
+      "OF-3": "Lieutenant Commander",
+      "OF-4": "Commander",
+      "OF-5": "Captain",
+      "OF-6": "Rear Admiral (Lower Half)",
+      "OF-7": "Rear Admiral (Upper Half)",
+      "OF-8": "Vice Admiral",
+      "OF-9": "Admiral"
+    },
+    "Hellenic Air Force": {
+      "OR-1": "Airman Basic",
+      "OR-2": "Airman",
+      "OR-3": "Airman First Class",
+      "OR-4": "Senior Airman",
+      "OR-5": "Staff Sergeant",
+      "OR-6": "Technical Sergeant",
+      "OR-7": "Master Sergeant",
+      "OR-8": "Senior Master Sergeant",
+      "OR-9": "Chief Master Sergeant",
+      "OF-1a": "Second Lieutenant",
+      "OF-1b": "First Lieutenant",
+      "OF-2": "Captain",
+      "OF-3": "Major",
+      "OF-4": "Lieutenant Colonel",
+      "OF-5": "Colonel",
+      "OF-6": "Brigadier General",
+      "OF-7": "Major General",
+      "OF-8": "Lieutenant General",
+      "OF-9": "General"
+    }
+  }
+};
