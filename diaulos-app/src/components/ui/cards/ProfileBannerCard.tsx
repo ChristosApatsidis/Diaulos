@@ -9,7 +9,7 @@ import { Avatar } from "@heroui/react";
 import { useRouter } from "next/dist/client/components/navigation";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { UserProfilePDF } from "@/utils/pdf";
-import { UserPen, Download } from "lucide-react";
+import { UserPen, Download, KeyRound } from "lucide-react";
 
 export default function ProfileBannerCard({
   editProfileButton,
@@ -116,6 +116,7 @@ export default function ProfileBannerCard({
                   size="sm"
                   onClick={() => router.push("/profile/update-password")}
                 >
+                  <KeyRound size={16} />
                   {profileBannerTranslations("buttons.updatePassword")}
                 </Button>
               )}

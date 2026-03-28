@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import ProfileBannerCard from "@/components/ui/cards/ProfileBannerCard";
 import EditPersonalInformationCard from "@/components/ui/cards/EditPersonalInformationCard";
 import EditMilitaryInformationCard from "@/components/ui/cards/EditMilitaryInformationCard";
+import { Save } from "lucide-react";
 
 export default function EditProfilePage() {
   const router = useRouter();
@@ -248,6 +249,7 @@ export default function EditProfilePage() {
             {editProfileTranslations("buttons.cancel")}
           </Button>
           <Button onPress={handleSave} isDisabled={isSaving}>
+            <Save size={16} />
             {isSaving
               ? editProfileTranslations("buttons.saving")
               : editProfileTranslations("buttons.save")}
