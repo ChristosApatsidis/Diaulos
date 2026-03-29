@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/better-auth/auth";
+import { getCookieCache } from "better-auth/cookies";
 
 /**
  * Middleware function that checks for an active authentication session before allowing access to protected routes.
@@ -9,9 +10,7 @@ import { auth } from "@/lib/better-auth/auth";
  */
 export async function proxy(request: NextRequest) {
   try {
-    const session = await auth.api.getSession({
-      headers: await headers(),
-    });
+    const session = await getCookieCache(request);
 
     // Define URLs that can be accessed without authentication
     const openUrls = ["/"];
