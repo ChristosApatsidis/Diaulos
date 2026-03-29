@@ -1,7 +1,7 @@
 // app/layout-client.tsx
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Toast, Spinner } from "@heroui/react";
 import { authClient } from "@/lib/better-auth/auth-client";
 import { useTranslations } from "next-intl";
@@ -63,7 +63,11 @@ export default function LayoutClient({
     <div className="h-full">
       <Toast.Provider />
       <AnimatePresence>
-        {sessionIsPending ? <Loading /> : children}
+        {sessionIsPending ? (
+          <Loading />
+        ) : (
+          <Suspense fallback={<Loading />}>{children}</Suspense>
+        )}
       </AnimatePresence>
     </div>
   );
