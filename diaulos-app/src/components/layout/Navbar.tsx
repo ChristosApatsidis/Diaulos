@@ -17,7 +17,7 @@ import {
   ChevronDown,
   DatabaseIcon,
   Logo,
-  SettingsIcon,
+  ShieldUserIcon,
   SignOutIcon,
   UserIcon,
 } from "@/components/icons";
@@ -122,7 +122,7 @@ export const Navbar = () => {
                     size="lg"
                     onPress={() => router.push("/admin/dashboard")}
                   >
-                    <SettingsIcon size={6} />
+                    <ShieldUserIcon size={6} />
                   </Button>
                 )}
                 <UserDropdown />

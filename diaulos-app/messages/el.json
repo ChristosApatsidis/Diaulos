@@ -12,9 +12,9 @@
     "alerts": {
       "networkError": {
         "title": "Σφάλμα Δικτύου",
-        "description": "Αντιμετωπίζουμε προβλήματα σύνδεσης. Παρακαλώ ελέγξτε τη σύνδεσή σας στο διαδίκτυο και δοκιμάστε ξανά.",
+        "description": "Αντιμετωπίζουμε προβλήματα σύνδεσης. Παρακαλώ ελέγξτε τη σύνδεσή σαςκαι δοκιμάστε ξανά.",
         "suggestions": {
-          "checkConnection": "Ελέγξτε τη σύνδεσή σας στο διαδίκτυο",
+          "checkConnection": "Ελέγξτε τη σύνδεσή σας",
           "refreshPage": "Ανανέωση της σελίδας",
           "clearBrowserData": "Καθαρίστε την προσωρινή μνήμη και τα cookies του προγράμματος περιήγησής σας"  
         }
@@ -301,6 +301,47 @@
       }
     }
   },
+
+  "component_ui_modals_updatePassword": {
+    "title": "Ενημέρωση Κωδικού",
+    "fields": {
+      "currentPassword": {
+        "label": "Τρέχων Κωδικός",
+        "placeholder": "Εισάγετε τον τρέχοντα κωδικό σας"
+      },
+      "newPassword": {
+        "label": "Νέος Κωδικός",
+        "placeholder": "Εισάγετε τον νέο κωδικό σας"
+      },
+      "confirmNewPassword": {
+        "label": "Επιβεβαίωση Νέου Κωδικού",
+        "placeholder": "Εισάγετε ξανά τον νέο κωδικό σας"
+      }
+    },
+    "errors": {
+      "incorrectCurrentPassword": "Ο τρέχων κωδικός που εισάγατε είναι λανθασμένος.",
+      "updateFailed": "Αποτυχία ενημέρωσης κωδικού. Παρακαλώ δοκιμάστε ξανά αργότερα."
+    },
+    "toast": {
+      "updateSuccess": {
+        "title": "Ενημέρωση Κωδικού",
+        "description": "Ο κωδικός σας ενημερώθηκε με επιτυχία."
+      }
+    },
+    "validation": {
+      "currentPasswordRequired": "Ο τρέχων κωδικός είναι υποχρεωτικός.",
+      "newPasswordRequired": "Ο νέος κωδικός είναι υποχρεωτικός.",
+      "confirmNewPasswordRequired": "Παρακαλώ επιβεβαιώστε τον νέο σας κωδικό.",
+      "newPasswordMinLength": "Ο νέος κωδικός πρέπει να έχει τουλάχιστον 4 χαρακτήρες.",
+      "passwordsDoNotMatch": "Ο νέος κωδικός και η επιβεβαίωση δεν ταιριάζουν."
+    },
+    "buttons": {
+      "cancel": "Ακύρωση",
+      "updatePassword": "Ενημέρωση Κωδικού",
+      "updatingPassword": "Ενημέρωση Κωδικού..."
+    }
+  },
+
 
   "page_profile": {
     "toast": {

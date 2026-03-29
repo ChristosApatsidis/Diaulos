@@ -10,6 +10,7 @@ import { useRouter } from "next/dist/client/components/navigation";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { UserProfilePDF } from "@/utils/pdf";
 import { UserPen, Download, KeyRound } from "lucide-react";
+import { UpdatePasswordModal } from "@/components/ui/modals/UpdatePassword";
 
 export default function ProfileBannerCard({
   editProfileButton,
@@ -109,17 +110,7 @@ export default function ProfileBannerCard({
                   {profileBannerTranslations("buttons.edit")}
                 </Button>
               )}
-              {updatePasswordButton && (
-                <Button
-                  variant="outline"
-                  className="bg-warning/10 border-warning/50 hover:bg-warning/20 focus:ring-warning/50"
-                  size="sm"
-                  onClick={() => router.push("/profile/update-password")}
-                >
-                  <KeyRound size={16} />
-                  {profileBannerTranslations("buttons.updatePassword")}
-                </Button>
-              )}
+              {updatePasswordButton && <UpdatePasswordModal />}
               {session?.user && (
                 <PDFDownloadLink
                   document={

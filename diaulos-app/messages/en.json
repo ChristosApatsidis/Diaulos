@@ -12,9 +12,9 @@
     "alerts": {
       "networkError": {
         "title": "Network Error",
-        "description": "We're experiencing connection issues. Please check your internet connection and try again.",
+        "description": "We're experiencing connection issues. Please check your connection and try again.",
         "suggestions": {
-          "checkConnection": "Check your internet connection",
+          "checkConnection": "Check your connection",
           "refreshPage": "Refresh the page",
           "clearBrowserData": "Clear your browser's cache and cookies"  
         }
@@ -299,6 +299,46 @@
         "save": "Save Changes",
         "saving": "Saving Changes..."
       }
+    }
+  },
+
+  "component_ui_modals_updatePassword": {
+    "title": "Update Password",
+    "fields": {
+      "currentPassword": {
+        "label": "Current Password",
+        "placeholder": "Enter your current password"
+      },
+      "newPassword": {
+        "label": "New Password",
+        "placeholder": "Enter your new password"
+      },
+      "confirmNewPassword": {
+        "label": "Confirm New Password",
+        "placeholder": "Re-enter your new password"
+      }
+    },
+    "errors": {
+      "incorrectCurrentPassword": "The current password you entered is incorrect.",
+      "updateFailed": "Failed to update password. Please try again later."
+    },
+    "toast": {
+      "updateSuccess": {
+        "title": "Password Updated",
+        "description": "Your password has been successfully updated."
+      }
+    },
+    "validation": {
+      "currentPasswordRequired": "Current password is required.",
+      "newPasswordRequired": "New password is required.",
+      "confirmNewPasswordRequired": "Please confirm your new password.",
+      "newPasswordMinLength": "New password must be at least 4 characters long.",
+      "passwordsDoNotMatch": "New password and confirmation do not match."
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "updatePassword": "Update Password",
+      "updatingPassword": "Updating Password..."
     }
   },
 
