@@ -1,6 +1,5 @@
 import { headers } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/better-auth/auth";
 import { getCookieCache } from "better-auth/cookies";
 
 /**
