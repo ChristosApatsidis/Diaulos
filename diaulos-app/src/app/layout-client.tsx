@@ -60,7 +60,7 @@ export default function LayoutClient({
   }
 
   return (
-    <div className="h-full">
+    <div className="flex-1">
       <Toast.Provider />
       <AnimatePresence>
         {sessionIsPending ? (

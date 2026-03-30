@@ -1,8 +1,8 @@
 // api/admin/users-management/users/route.ts
 import { headers } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth/auth";
-import { couch } from "@/lib/db";
+import { auth } from "@/lib/better-auth/auth";
+import nano from "@/lib/db";
 
 /**
  * API route handler for fetching all users in the system.
@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
   const skip = (page - 1) * limit;
 
   try {
-    const db = couch.use("users");
+    const db = nano.db.use("users");
 
     // Ensure we have an index on createdAt for efficient pagination
     await db.createIndex({
@@ -65,6 +65,14 @@ export async function GET(request: NextRequest) {
 
     // wait 2 seconds to simulate loading state (for demo purposes)
     await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    // Normalize _id to id for frontend consistency
+    users.forEach((user: any) => {
+      if (user._id) {
+        user.id = user._id;
+        delete user._id;
+      }
+    });
 
     return NextResponse.json({ users, stats, page, totalPages, limit });
   } catch (_error) {

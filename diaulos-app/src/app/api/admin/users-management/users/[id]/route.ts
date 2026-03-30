@@ -1,8 +1,8 @@
 // api/admin/users-management/users/[id]/route.ts
 import { headers } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth/auth";
-import { couch } from "@/lib/db";
+import { auth } from "@/lib/better-auth/auth";
+import nano from "@/lib/db";
 
 /**
  * GET handler for fetching a user by ID. Only accessible by admin users.
@@ -30,7 +30,7 @@ export async function GET(
     return NextResponse.json({ error: "User ID is required" }, { status: 400 });
   }
 
-  const db = couch.use("users");
+  const db = nano.db.use("users");
 
   try {
     const user = await db.get(id);
@@ -80,7 +80,7 @@ export async function DELETE(
     );
   }
 
-  const db = couch.use("users");
+  const db = nano.db.use("users");
 
   try {
     const doc = await db.get(id);
@@ -88,7 +88,7 @@ export async function DELETE(
 
     // Delete all linked accounts and sessions
     const bulkDelete = async (dbName: string) => {
-      const linkedDb = couch.use(dbName);
+      const linkedDb = nano.db.use(dbName);
       const { docs } = await linkedDb.find({
         selector: { userId: id },
         limit: 1000,
@@ -170,7 +170,7 @@ export async function PATCH(
 
   if (email !== undefined) {
     // Check if email is already taken by another user
-    const db = couch.use("users");
+    const db = nano.db.use("users");
     const { docs } = await db.find({
       selector: {
         email,
@@ -196,7 +196,7 @@ export async function PATCH(
     );
   }
 
-  const db = couch.use("users");
+  const db = nano.db.use("users");
 
   try {
     const doc = await db.get(id);

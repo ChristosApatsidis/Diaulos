@@ -410,21 +410,9 @@
   },
 
   "component_ui_modals_viewUserDetails": {
-    "labels": {
-      "userId": "User ID",
-      "name": "Name",
-      "username": "Username",
-      "email": "Email",
-      "branch": "Branch",
-      "rank": "Rank",
-      "specialization": "Specialization",
-      "unitOfService": "Unit of Service"
-    },
-
     "buttons": {
       "viewDetails": "View Details"
     }
-    
   }
 
 }

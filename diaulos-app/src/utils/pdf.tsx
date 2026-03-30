@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
  * @param accountInformationTranslations - An object containing translations specific to account information.
  * @returns A PDF document component that can be rendered and downloaded by the user.
  */
-export function UserProfilePDF({
+export function UserDetailsPDF({
   user,
   locale,
   generalTranslations,

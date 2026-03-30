@@ -3,13 +3,12 @@
 
 import { Chip, Button, Skeleton } from "@heroui/react";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { authClient } from "@/lib/better-auth/auth-client";
 import { Avatar } from "@heroui/react";
 import { useRouter } from "next/dist/client/components/navigation";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import { UserProfilePDF } from "@/utils/pdf";
-import { UserPen, Download, KeyRound } from "lucide-react";
+import { UserPen } from "lucide-react";
+import UserDetailsPDFButton from "@/components/ui/buttons/UserDetailsPDF";
 import { UpdatePasswordModal } from "@/components/ui/modals/UpdatePassword";
 
 export default function ProfileBannerCard({
@@ -22,19 +21,9 @@ export default function ProfileBannerCard({
   const router = useRouter();
   const { data: session, isPending: isSessionPending } =
     authClient.useSession();
-  const locale = useLocale();
   const generalTranslations = useTranslations("general");
   const profileBannerTranslations = useTranslations(
     "component_ui_cards_profileBanner",
-  );
-  const personalInfoTranslations = useTranslations(
-    "component_ui_cards_personalInfo",
-  );
-  const militaryInformationTranslations = useTranslations(
-    "component_ui_cards_militaryInformation",
-  );
-  const accountInformationTranslations = useTranslations(
-    "component_ui_cards_accountInformation",
   );
 
   return (
@@ -111,31 +100,7 @@ export default function ProfileBannerCard({
                 </Button>
               )}
               {updatePasswordButton && <UpdatePasswordModal />}
-              {session?.user && (
-                <PDFDownloadLink
-                  document={
-                    <UserProfilePDF
-                      user={session.user}
-                      locale={locale}
-                      generalTranslations={generalTranslations}
-                      personalInfoTranslations={personalInfoTranslations}
-                      militaryInformationTranslations={
-                        militaryInformationTranslations
-                      }
-                      accountInformationTranslations={
-                        accountInformationTranslations
-                      }
-                    />
-                  }
-                  fileName={`user-${session.user.username || "profile"}.pdf`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Button variant="tertiary" size="sm">
-                    <Download size={16} />
-                    {profileBannerTranslations("buttons.downloadPDF")}
-                  </Button>
-                </PDFDownloadLink>
-              )}
+              {session?.user && <UserDetailsPDFButton user={session.user} />}
             </div>
           )}
         </InfoCard.Footer>

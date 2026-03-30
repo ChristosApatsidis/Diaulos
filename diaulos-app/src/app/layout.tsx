@@ -30,10 +30,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={theme} data-theme={theme}>
-      <body
-        className="min-h-screen text-foreground bg-background antialiased"
-        suppressHydrationWarning
-      >
+      <body className="h-screen flex flex-col text-foreground bg-background antialiased">
         <NextIntlClientProvider messages={messages}>
           <Navbar />
           <LayoutClient>{children}</LayoutClient>

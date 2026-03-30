@@ -382,50 +382,38 @@
 
   "component_ui_tables_users": {
     "columns": {
-      "userId": "User ID",
-      "name": "Name",
-      "username": "Username",
+      "userId": "ID Χρήστη",
+      "name": "Όνομα",
+      "username": "Όνομα Χρήστη",
       "email": "Email",
-      "role": "Role",
-      "branch": "Branch",
-      "rank": "Rank",
-      "actions": "Actions"
+      "role": "Ρόλος",
+      "branch": "Κλάδος",
+      "rank": "Βαθμός",
+      "actions": "Ενέργειες"
     },
     "emptyState": {
-      "title": "No Users Found",
-      "description": "There are no users to display. Please check back later."
+      "title": "Δεν βρέθηκαν χρήστες",
+      "description": "Δεν υπάρχουν χρήστες για εμφάνιση. Παρακαλώ ελέγξτε ξανά αργότερα."
     },
     "buttons": {
-      "delete": "Delete"
+      "delete": "Διαγραφή"
     },
     "toast": {
       "deleteSuccess": {
-        "title": "User Deleted",
-        "description": "The user has been successfully deleted."
+        "title": "Διαγραφή Χρήστη",
+        "description": "Ο χρήστης διαγράφηκε με επιτυχία."
       },
       "deleteError": {
-        "title": "Delete Failed",
-        "description": "An error occurred while deleting the user. Please try again later."
+        "title": "Αποτυχία Διαγραφής",
+        "description": "Παρουσιάστηκε σφάλμα κατά τη διαγραφή του χρήστη. Παρακαλώ δοκιμάστε ξανά αργότερα."
       }
     }
   },
 
   "component_ui_modals_viewUserDetails": {
-    "labels": {
-      "userId": "User ID",
-      "name": "Name",
-      "username": "Username",
-      "email": "Email",
-      "branch": "Branch",
-      "rank": "Rank",
-      "specialization": "Specialization",
-      "unitOfService": "Unit of Service"
-    },
-    
     "buttons": {
-      "viewDetails": "View Details"
+      "viewDetails": "Προβολή λεπτομερειών"
     }
-    
   }
 
   
