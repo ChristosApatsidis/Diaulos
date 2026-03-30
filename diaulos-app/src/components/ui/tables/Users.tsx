@@ -24,6 +24,10 @@ export type UsersResponse = {
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
+/**
+ * UsersTable is a component that displays a paginated table of users for admin management. It fetches user data from the server, handles loading and error states, and provides actions for each user such as viewing details, editing, and deleting. The table is built using the Table component from HeroUI and is designed to be responsive and user-friendly.
+ * @returns A React component that renders a table of users with pagination and action buttons.
+ */
 export default function UsersTable() {
   const generalTranslations = useTranslations("general");
   const usersTableTranslations = useTranslations("component_ui_tables_users");
@@ -88,14 +92,6 @@ export default function UsersTable() {
         <p className="text-red-500">
           {generalTranslations("errors.fetchingData")}
         </p>
-      </div>
-    );
-  }
-
-  if (usersValidating && !usersData) {
-    return (
-      <div className="container mx-auto px-4 py-4">
-        <p>{generalTranslations("loading")}</p>
       </div>
     );
   }
