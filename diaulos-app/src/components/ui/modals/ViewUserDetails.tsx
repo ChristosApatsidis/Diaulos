@@ -33,7 +33,6 @@ export default function ViewUserDetailsModal({ user }: { user: User }) {
         <UserIcon size={16} />
         {viewUserDetailsTranslations("buttons.viewDetails")}
       </Button>
-
       <Modal.Backdrop isOpen={state.isOpen} onOpenChange={state.setOpen}>
         <Modal.Container size="lg">
           <Modal.Dialog className="md:min-w-[700px] lg:min-w-[800px]">
@@ -42,11 +41,7 @@ export default function ViewUserDetailsModal({ user }: { user: User }) {
               <Modal.Icon className="bg-warning-soft text-warning-soft-foreground">
                 <UserIcon size={20} />
               </Modal.Icon>
-              <Modal.Heading>
-                {user.name} ({user.username})
-              </Modal.Heading>
             </Modal.Header>
-
             <Modal.Body className="p-1 space-y-2">
               <div className="flex flex-col gap-2">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
