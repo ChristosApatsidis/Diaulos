@@ -5,13 +5,16 @@ import { Skeleton } from "@heroui/react";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
 import { useTranslations } from "next-intl";
 import { authClient } from "@/lib/better-auth/auth-client";
+import type { User } from "@/types";
 
-export default function PersonalInfoCard() {
+export default function PersonalInfoCard({ user }: { user?: User }) {
   const { data: session, isPending: isSessionPending } =
     authClient.useSession();
   const personalInfoTranslations = useTranslations(
     "component_ui_cards_personalInfo",
   );
+
+  user = user ?? (session?.user as User | undefined);
 
   return (
     <InfoCard className="h-full">
@@ -24,17 +27,17 @@ export default function PersonalInfoCard() {
         <div className="space-y-2">
           <InfoRow
             label={personalInfoTranslations("infoRows.name")}
-            value={session?.user?.name}
+            value={user?.name}
             skeleton={isSessionPending}
           />
           <InfoRow
             label={personalInfoTranslations("infoRows.username")}
-            value={session?.user?.username}
+            value={user?.username}
             skeleton={isSessionPending}
           />
           <InfoRow
             label={personalInfoTranslations("infoRows.email")}
-            value={session?.user?.email}
+            value={user?.email}
             skeleton={isSessionPending}
           />
         </div>

@@ -5,14 +5,17 @@ import { Skeleton } from "@heroui/react";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
 import { useTranslations } from "next-intl";
 import { authClient } from "@/lib/better-auth/auth-client";
+import type { User } from "@/types";
 
-export default function MilitaryInformationCard() {
+export default function MilitaryInformationCard({ user }: { user?: User }) {
   const { data: session, isPending: isSessionPending } =
     authClient.useSession();
   const generalTranslations = useTranslations("general");
   const militaryInformationTranslations = useTranslations(
     "component_ui_cards_militaryInformation",
   );
+
+  user = user ?? (session?.user as User | undefined);
 
   return (
     <InfoCard className="h-full">

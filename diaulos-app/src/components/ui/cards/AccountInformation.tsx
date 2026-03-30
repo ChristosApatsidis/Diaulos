@@ -6,8 +6,9 @@ import { InfoCard } from "@/components/ui/cards/InfoCard";
 import { useTranslations, useLocale } from "next-intl";
 import { authClient } from "@/lib/better-auth/auth-client";
 import { formatDateTime } from "@/utils/formatDateTime";
+import type { User } from "@/types";
 
-export default function AccountInformationCard() {
+export default function AccountInformationCard({ user }: { user?: User }) {
   const { data: session, isPending: isSessionPending } =
     authClient.useSession();
   const locale = useLocale();
@@ -15,6 +16,8 @@ export default function AccountInformationCard() {
   const accountInformationTranslations = useTranslations(
     "component_ui_cards_accountInformation",
   );
+
+  user = user ?? (session?.user as User | undefined);
 
   return (
     <InfoCard>
@@ -29,16 +32,16 @@ export default function AccountInformationCard() {
           <div className="flex flex-col gap-2">
             <InfoRow
               label={accountInformationTranslations("infoRows.userId")}
-              value={session?.user?.id}
+              value={user?.id}
               skeleton={isSessionPending}
             />
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-2">
               <InfoRow
                 label={accountInformationTranslations("infoRows.memberSince")}
                 value={
-                  session?.user?.createdAt
+                  user?.createdAt
                     ? formatDateTime({
-                        date: session.user.createdAt,
+                        date: user.createdAt,
                         timeZone: "Europe/Athens",
                         locale: locale,
                         showDST: true,
@@ -50,9 +53,9 @@ export default function AccountInformationCard() {
               <InfoRow
                 label={accountInformationTranslations("infoRows.lastUpdated")}
                 value={
-                  session?.user?.updatedAt
+                  user?.updatedAt
                     ? formatDateTime({
-                        date: session.user.updatedAt,
+                        date: user.updatedAt,
                         timeZone: "Europe/Athens",
                         locale: locale,
                         showDST: true,
@@ -71,8 +74,8 @@ export default function AccountInformationCard() {
             <div className="flex flex-wrap gap-1">
               {isSessionPending ? (
                 <Skeleton className="h-5 w-32" />
-              ) : session?.user?.permissions?.length ? (
-                session.user.permissions.map((perm: string) => (
+              ) : user?.permissions?.length ? (
+                user.permissions.map((perm: string) => (
                   <Tooltip delay={0} key={perm}>
                     <Tooltip.Trigger>
                       <Chip size="sm" color="accent" className="cursor-default">
