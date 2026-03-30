@@ -167,6 +167,13 @@
       }
     }
   },
+  
+  "adminMenu": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "database": "Database",
+    "settings": "Settings"
+  },
 
   "component_ui_forms_signIn": {
     "errors": {
@@ -372,374 +379,52 @@
     }
   },
 
-
-  "adminMenu": {
-    "dashboard": "Dashboard",
-    "users": "Users",
-    "database": "Database",
-    "settings": "Settings"
-  },
-
-  "home": {
-    "signIn": {
-      "title": "Sign In",
-      "description": "Enter your credentials to access your account",
-      "errors": {
-        "invalidCredentials": "Invalid username or password. Please try again.",
-        "networkError": "Network error. Please check your connection and try again."
-      },
-      "form": {
-        "validation": {
-          "usernameRequired": "Username is required.",
-          "usernameMinLength": "Username must be at least 4 characters long.",
-          "maxUsernameLength": "Username must be less than 20 characters long.",
-          "passwordRequired": "Password is required.",
-          "passwordMinLength": "Password must be at least 4 characters long."
-        },
-        "inputPlaceholders": {
-          "username": "Enter your username",
-          "password": "Enter your password"
-        },
-        "labels": {
-          "username": "Username",
-          "password": "Password"
-        },
-        "buttons": {
-          "submit": "Sign In",
-          "submiting": "Signing In..."
-        }
-      }
-    }
-  },
-
-  "profile": {
-    "editButton": "Edit Profile",
-    "cards": {
-      "personalInfo": {
-        "title": "Personal Information",
-        "fields": {
-          "fullName": "Full Name",
-          "username": "Username",
-          "email": "Email",
-          "userId": "User ID"
-        }
-      },
-      "militaryInfo": {
-        "title": "Military Information",
-        "fields": {
-          "branch": "Branch",
-          "combatArmsSupportBranch": "Combat arms / Support branch",
-          "rank": "Rank",
-          "specialization": "Specialization",
-          "unitOfService": "Unit of service"
-        }
-      },
-      "accountInfo": {
-        "title": "Account Information",
-        "fields": {
-          "memberSince": "Member Since",
-          "lastUpdated": "Last Updated",
-          "accountType": "Account Type",
-          "permissions": "Permissions"
-        }
-      }
+  "component_ui_tables_users": {
+    "columns": {
+      "userId": "User ID",
+      "name": "Name",
+      "username": "Username",
+      "email": "Email",
+      "role": "Role",
+      "branch": "Branch",
+      "rank": "Rank",
+      "actions": "Actions"
+    },
+    "emptyState": {
+      "title": "No Users Found",
+      "description": "There are no users to display. Please check back later."
+    },
+    "buttons": {
+      "delete": "Delete"
     },
     "toast": {
-      "updateSuccess": {
-        "title": "Profile updated",
-        "description": "Your profile has been successfully updated."
-      }
-    }
-  },
-
-  "editProfile": {
-    "personalInfo": {
-      "title": "Personal Information"
-    },
-    "militaryInfo": {
-      "title": "Military Information"
-    },
-    "form": {
-      "labels": {
-        "fullName": "Full Name",
-        "username": "Username",
-        "email": "Email",
-        "rank": "Rank",
-        "specialization": "Specialization",
-        "unitOfService": "Unit of service"
-      },
-      "placeholders": {
-        "fullName": "Enter your full name",
-        "username": "Enter your username",
-        "email": "Enter your email address",
-        "specialization": "Enter your specialization",
-        "unitOfService": "Enter your unit of service"
-      },
-      "buttons": {
-        "saveChanges": "Save Changes",
-        "savingChanges": "Saving Changes...",
-        "saveEmail": "Save Email",
-        "savingEmail": "Saving Email...",
-        "cancel": "Cancel"
-      },
-      "validation": {
-        "usernameRequired": "Username is required.",
-        "usernameMinLength": "Username must be at least 4 characters long.",
-        "usernameMaxLength": "Username must be less than 20 characters long.",
-        "nameRequired": "Name is required.",
-        "emailRequired": "Email is required.",
-        "emailInvalid": "Please enter a valid email address."
-      }
-    }
-  },
-
-  "adminUsersManagement": {
-    "statistics": {
-      "totalUsers": "Total Users",
-      "admins": "Administrators",
-      "viewers": "Viewers",
-      "regularUsers": "Regular Users"
-    },
-    "title": "Users Management",
-    "buttons": {
-      "createNewUser": "Create New User"
-    },
-    "table": {
-      "headers": {
-        "name": "Full Name",
-        "username": "Username",
-        "email": "Email",
-        "role": "Role",
-        "branch": "Branch",
-        "rank": "Rank",
-        "actions": "Actions"
-      },
-      "buttons": {
-        "viewDetails": "View Details",
-        "edit": "Edit",
-        "delete": "Delete"
-      }
-    },
-    "modals": {
-      "deleteConfirmation": {
-        "title": "Confirm Deletion",
-        "description": "Are you sure you want to delete this user? This action cannot be undone.",
-        "buttons": {
-          "confirm": "Yes, Delete",
-          "cancel": "Cancel"
-        }
-      },
-      "createUser": {
-        "title": "Create New User",
-        "buttons": {
-          "confirm": "Create",
-          "cancel": "Cancel"
-        }
-      }
-    },
-    "messages": {
       "deleteSuccess": {
         "title": "User Deleted",
         "description": "The user has been successfully deleted."
       },
       "deleteError": {
-        "title": "Deletion Failed",
-        "description": "An error occurred while trying to delete the user. Please try again later."
+        "title": "Delete Failed",
+        "description": "An error occurred while deleting the user. Please try again later."
       }
     }
   },
 
-  "createNewUserModal": {
-    "title": "Create New User",
-    "fields": {
-      "name": {
-        "label": "Full Name",
-        "placeholder": "Enter the user's full name"
-      },
-      "username": {
-        "label": "Username",
-        "placeholder": "Enter the user's username"
-      },
-      "email": {
-        "label": "Email",
-        "placeholder": "Enter the user's email address"
-      },
-      "password": {
-        "label": "Password",
-        "placeholder": "Enter the user's password",
-        "options": {
-          "length": "Password Length",
-          "useSymbols": "Include Symbols",
-          "useDigits": "Include Digits",
-          "generateRandomPassword": "Generate Random Password"
-        }
-      },
-      "role": {
-        "label": "Role",
-        "placeholder": "Select a role for the user"
-      },
-      "branch": {
-        "label": "Branch",
-        "placeholder": "Select a branch for the user"
-      },
-      "rank": {
-        "label": "Rank",
-        "placeholder": "Select a rank for the user"
-      },
-      "specialization": {
-        "label": "Specialization",
-        "placeholder": "Enter the user's specialization"
-      },
-      "unitOfService": {
-        "label": "Unit of Service",
-        "placeholder": "Enter the user's unit of service"
-      },
-      "permissions": {
-        "label": "Permissions",
-        "placeholder": "Select permissions for the user"
-      },
-      "combatArmsSupportBranch": {
-        "label": "Combat Arms / Support Branch",
-        "placeholder": "Select a combat arms or support branch for the user"
-      },
-      "accountType": {
-        "label": "Account Type",
-        "placeholder": "Select an account type for the user"
-      }
+  "component_ui_modals_viewUserDetails": {
+    "labels": {
+      "userId": "User ID",
+      "name": "Name",
+      "username": "Username",
+      "email": "Email",
+      "branch": "Branch",
+      "rank": "Rank",
+      "specialization": "Specialization",
+      "unitOfService": "Unit of Service"
     },
-    "validation": {
-      "usernameRequired": "Username is required.",
-      "usernameMinLength": "Username must be at least 4 characters long.",
-      "usernameMaxLength": "Username must be less than 20 characters long.",
-      "nameRequired": "Name is required.",
-      "emailRequired": "Email is required.",
-      "emailInvalid": "Please enter a valid email address.",
-      "passwordRequired": "Password is required.",
-      "passwordMinLength": "Password must be at least 4 characters long.",
-      "rankRequired": "Rank is required."
-    },
-    "errors": {
-      "NETWORK_ERROR": "Network error. Please check your connection.",
-      "CREATE_ERROR": "Failed to create user. Please try again.",
-      "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL": "This email is already in use.",
-      "USERNAME_IS_ALREADY_TAKEN": "This username is already in use."
-    },
-    "buttons": {
-      "confirm": "Create",
-      "cancel": "Cancel"
-    }
-  },
 
-  "updateUserModal": {
-    "title": "Update User",
-    "form": {
-      "name": {
-        "label": "Full Name",
-        "placeholder": "Enter the user's full name"
-      },
-      "username": {
-        "label": "Username",
-        "placeholder": "Enter the user's username"
-      },
-      "email": {
-        "label": "Email",
-        "placeholder": "Enter the user's email address"
-      },
-      "role": {
-        "label": "Role",
-        "placeholder": "Select a role for the user"
-      },
-      "branch": {
-        "label": "Branch",
-        "placeholder": "Select a branch for the user"
-      },
-      "rank": {
-        "label": "Rank",
-        "placeholder": "Select a rank for the user"
-      },
-      "specialization": {
-        "label": "Specialization",
-        "placeholder": "Enter the user's specialization"
-      },
-      "unitOfService": {
-        "label": "Unit of Service",
-        "placeholder": "Enter the user's unit of service"
-      },
-      "permissions": {
-        "label": "Permissions",
-        "placeholder": "Select permissions for the user"
-      },
-      "combatArmsSupportBranch": {
-        "label": "Combat Arms / Support Branch",
-        "placeholder": "Select a combat arms or support branch for the user"
-      },
-      "accountType": {
-        "label": "Account Type",
-        "placeholder": "Select an account type for the user"
-      }
-    },
-    "validation": {
-      "usernameRequired": "Username is required.",
-      "usernameMinLength": "Username must be at least 4 characters long.",
-      "usernameMaxLength": "Username must be less than 20 characters long.",
-      "nameRequired": "Name is required.",
-      "emailRequired": "Email is required.",
-      "emailInvalid": "Please enter a valid email address."
-    },
-    "errors": {
-      "NETWORK_ERROR": "Network error. Please check your connection.",
-      "UPDATE_ERROR": "Failed to update user. Please try again.",
-      "USER_NOT_FOUND": "User not found.",
-      "EMAIL_TAKEN": "This email is already in use.",
-      "NO_FIELDS_TO_UPDATE": "No fields to update."
-    },
-    "toast": {
-      "updateSuccess": {
-        "title": "User Updated",
-        "description": "The user has been successfully updated."
-      }
-    },
     "buttons": {
-      "save": "Save Changes",
-      "cancel": "Cancel"
+      "viewDetails": "View Details"
     }
-  },
-
-  "userDetailsModal": {
-    "title": "User Details",
-    "personalInfo": {
-      "title": "Personal Information",
-      "fields": {
-        "fullName": "Full Name",
-        "username": "Username",
-        "email": "Email",
-        "userId": "User ID"
-      }
-    },
-    "militaryInfo": {
-      "title": "Military Information",
-      "fields": {
-        "branch": "Branch",
-        "combatArmsSupportBranch": "Combat Arms / Support Branch",
-        "rank": "Rank",
-        "specialization": "Specialization",
-        "unitOfService": "Unit of Service"
-      }
-    },
-    "accountInfo": {
-      "title": "Account Information",
-      "fields": {
-        "userId": "User ID",
-        "role": "Role",
-        "memberSince": "Member Since",
-        "lastUpdated": "Last Updated",
-        "accountType": "Account Type",
-        "permissions": "Permissions"
-      }
-    },
-    "buttons": {
-      "downloadPDF": "Download PDF",
-      "close": "Close"
-    }
+    
   }
+
 }

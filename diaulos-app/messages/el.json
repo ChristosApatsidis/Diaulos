@@ -168,6 +168,13 @@
     }
   },
 
+  "adminMenu": {
+    "dashboard": "Πίνακας Ελέγχου",
+    "users": "Χρήστες",
+    "database": "Βάση Δεδομένων",
+    "settings": "Ρυθμίσεις"
+  },
+
   "component_ui_forms_signIn": {
     "errors": {
       "usernameTooShort": "Το όνομα χρήστη πρέπει να έχει τουλάχιστον 4 χαρακτήρες.",
@@ -373,377 +380,53 @@
     }
   },
 
-
-  "adminMenu": {
-    "dashboard": "Πίνακας Ελέγχου",
-    "users": "Χρήστες",
-    "database": "Βάση Δεδομένων",
-    "settings": "Ρυθμίσεις"
-  },
-
-  "home": {
-    "signIn": {
-      "title": "Σύνδεση",
-      "description": "Εισάγετε τα στοιχεία σας για να αποκτήσετε πρόσβαση στον λογαριασμό σας",
-      "errors": {
-        "invalidCredentials": "Μη έγκυρο όνομα χρήστη ή κωδικός. Παρακαλώ δοκιμάστε ξανά.",
-        "networkError": "Σφάλμα δικτύου. Παρακαλώ ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά."
-      },
-      "form": {
-        "validation": {
-          "usernameRequired": "Το όνομα χρήστη είναι υποχρεωτικό.",
-          "usernameMinLength": "Το όνομα χρήστη πρέπει να έχει τουλάχιστον 4 χαρακτήρες.",
-          "maxUsernameLength": "Το όνομα χρήστη πρέπει να έχει λιγότερους από 20 χαρακτήρες.",
-          "passwordRequired": "Ο κωδικός είναι υποχρεωτικός.",
-          "passwordMinLength": "Ο κωδικός πρέπει να έχει τουλάχιστον 4 χαρακτήρες."
-        },
-        "inputPlaceholders": {
-          "username": "Εισάγετε το όνομα χρήστη σας",
-          "password": "Εισάγετε τον κωδικό σας"
-        },
-        "labels": {
-          "username": "Όνομα χρήστη",
-          "password": "Κωδικός"
-        },
-        "buttons": {
-          "submit": "Σύνδεση",
-          "submiting": "Σύνδεση..."
-        }
-      }
-    }
-  },
-
-  "profile": {
-    "personalInfo": {
-      "title": "Προσωπικές Πληροφορίες"
+  "component_ui_tables_users": {
+    "columns": {
+      "userId": "User ID",
+      "name": "Name",
+      "username": "Username",
+      "email": "Email",
+      "role": "Role",
+      "branch": "Branch",
+      "rank": "Rank",
+      "actions": "Actions"
     },
-    "militaryInfo": {
-      "title": "Στρατιωτικές Πληροφορίες"
+    "emptyState": {
+      "title": "No Users Found",
+      "description": "There are no users to display. Please check back later."
     },
-    "editButton": "Επεξεργασία Προφίλ",
-    "cards": {
-      "personalInfo": {
-        "title": "Προσωπικές Πληροφορίες",
-        "fields": {
-          "fullName": "Πλήρες Όνομα",
-          "username": "Όνομα Χρήστη",
-          "email": "Ηλεκτρονικό Ταχυδρομείο",
-          "userId": "ID Χρήστη"
-        }
-      },
-      "militaryInfo": {
-        "title": "Στρατιωτικές Πληροφορίες",
-        "fields": {
-          "branch": "Κλάδος",
-          "combatArmsSupportBranch": "Κλάδος Υπηρεσίας",
-          "rank": "Βαθμός",
-          "specialization": "Ειδικότητα",
-          "unitOfService": "Μονάδα Υπηρεσίας"
-        }
-      },
-      "accountInfo": {
-        "title": "Πληροφορίες Λογαριασμού",
-        "fields": {
-          "memberSince": "Μέλος από",
-          "lastUpdated": "Τελευταία ενημέρωση",
-          "accountType": "Τύπος λογαριασμού",
-          "permissions": "Δικαιώματα"
-        }
-      }
+    "buttons": {
+      "delete": "Delete"
     },
     "toast": {
-      "updateSuccess": {
-        "title": "Ενημέρωση προφίλ",
-        "description": "Το προφίλ σας ενημερώθηκε με επιτυχία."
-      }
-    }
-  },
-
-  "editProfile": {
-    "personalInfo": {
-      "title": "Προσωπικές Πληροφορίες"
-    },
-    "militaryInfo": {
-      "title": "Στρατιωτικές Πληροφορίες"
-    },
-    "form": {
-      "labels": {
-        "fullName": "Πλήρες Όνομα",
-        "username": "Όνομα Χρήστη",
-        "email": "Ηλεκτρονικό Ταχυδρομείο",
-        "rank": "Βαθμός",
-        "specialization": "Ειδικότητα",
-        "unitOfService": "Μονάδα Υπηρεσίας"
-      },
-      "placeholders": {
-        "fullName": "Εισάγετε το πλήρες όνομά σας",
-        "username": "Εισάγετε το όνομα χρήστη σας",
-        "email": "Εισάγετε τη διεύθυνση email σας",
-        "specialization": "Εισάγετε την ειδικότητά σας",
-        "unitOfService": "Εισάγετε τη μονάδα υπηρεσίας σας"
-      },
-      "buttons": {
-        "saveChanges": "Αποθήκευση Αλλαγών",
-        "savingChanges": "Αποθήκευση Αλλαγών...",
-        "saveEmail": "Αποθήκευση Email",
-        "savingEmail": "Αποθήκευση Email...",
-        "cancel": "Ακύρωση"
-      },
-      "validation": {
-        "usernameRequired": "Το όνομα χρήστη είναι υποχρεωτικό.",
-        "usernameMinLength": "Το όνομα χρήστη πρέπει να έχει τουλάχιστον 4 χαρακτήρες.",
-        "usernameMaxLength": "Το όνομα χρήστη πρέπει να έχει λιγότερους από 20 χαρακτήρες.",
-        "nameRequired": "Το όνομα είναι υποχρεωτικό.",
-        "emailRequired": "Το email είναι υποχρεωτικό.",
-        "emailInvalid": "Το email δεν είναι έγκυρο."
-      }
-    }
-  },
-
-  "adminUsersManagement": {
-    "statistics": {
-      "totalUsers": "Συνολικοί Χρήστες",
-      "admins": "Διαχειριστές",
-      "viewers": "Προβολείς",
-      "regularUsers": "Κανονικοί Χρήστες"
-    },
-    "title": "Διαχείριση Χρηστών",
-    "buttons": {
-      "createNewUser": "Δημιουργία Νέου Χρήστη"
-    },
-    "table": {
-      "headers": {
-        "name": "Πλήρες Όνομα",
-        "username": "Όνομα Χρήστη",
-        "email": "Ηλεκτρονικό Ταχυδρομείο",
-        "role": "Ρόλος",
-        "branch": "Κλάδος",
-        "rank": "Βαθμός",
-        "actions": "Ενέργειες"
-      },
-      "buttons": {
-        "viewDetails": "Προβολή Λεπτομερειών",
-        "edit": "Επεξεργασία",
-        "delete": "Διαγραφή"
-      }
-    },
-    "modals": {
-      "deleteConfirmation": {
-        "title": "Επιβεβαίωση Διαγραφής",
-        "description": "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτόν τον χρήστη; Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.",
-        "buttons": {
-          "confirm": "Ναι, Διαγραφή",
-          "cancel": "Ακύρωση"
-        }
-      }
-    },
-    "messages": {
       "deleteSuccess": {
-        "title": "Χρήστης Διαγράφηκε",
-        "description": "Ο χρήστης διαγράφηκε με επιτυχία."
+        "title": "User Deleted",
+        "description": "The user has been successfully deleted."
       },
       "deleteError": {
-        "title": "Αποτυχία Διαγραφής",
-        "description": "Προέκυψε σφάλμα κατά την προσπάθεια διαγραφής του χρήστη. Παρακαλώ δοκιμάστε ξανά αργότερα."
+        "title": "Delete Failed",
+        "description": "An error occurred while deleting the user. Please try again later."
       }
     }
   },
 
-  "createNewUserModal": {
-    "title": "Δημιουργία Νέου Χρήστη",
-    "fields": {
-      "name": {
-        "label": "Πλήρες Όνομα",
-        "placeholder": "Εισάγετε το πλήρες όνομα του χρήστη"
-      },
-      "username": {
-        "label": "Όνομα Χρήστη",
-        "placeholder": "Εισάγετε το όνομα χρήστη"
-      },
-      "email": {
-        "label": "Ηλεκτρονικό Ταχυδρομείο",
-        "placeholder": "Εισάγετε το email του χρήστη"
-      },
-      "password": {
-        "label": "Κωδικός",
-        "placeholder": "Εισάγετε τον κωδικό",
-        "options": {
-          "length": "Μήκος Κωδικού",
-          "useSymbols": "Συμπερίληψη Συμβόλων",
-          "useDigits": "Συμπερίληψη Ψηφίων",
-          "generateRandomPassword": "Δημιουργία Τυχαίου Κωδικού"
-        }
-      },
-      "confirmPassword": {
-        "label": "Επιβεβαίωση Κωδικού",
-        "placeholder": "Επιβεβαιώστε τον κωδικό"
-      },
-      "role": {
-        "label": "Ρόλος",
-        "placeholder": "Επιλέξτε ρόλο"
-      },
-      "branch": {
-        "label": "Κλάδος",
-        "placeholder": "Επιλέξτε κλάδο"
-      },
-      "rank": {
-        "label": "Βαθμός",
-        "placeholder": "Επιλέξτε βαθμό"
-      },
-      "specialization": {
-        "label": "Ειδικότητα",
-        "placeholder": "Εισάγετε την ειδικότητα"
-      },
-      "unitOfService": {
-        "label": "Μονάδα Υπηρεσίας",
-        "placeholder": "Εισάγετε τη μονάδα υπηρεσίας"
-      },
-      "permissions": {
-        "label": "Δικαιώματα",
-        "placeholder": "Επιλέξτε δικαιώματα"
-      },
-      "combatArmsSupportBranch": {
-        "label": "Κλάδος Υπηρεσίας",
-        "placeholder": "Επιλέξτε κλάδο υπηρεσίας"
-      },
-      "accountType": {
-        "label": "Τύπος Λογαριασμού",
-        "placeholder": "Επιλέξτε τύπο λογαριασμού"
-      }
+  "component_ui_modals_viewUserDetails": {
+    "labels": {
+      "userId": "User ID",
+      "name": "Name",
+      "username": "Username",
+      "email": "Email",
+      "branch": "Branch",
+      "rank": "Rank",
+      "specialization": "Specialization",
+      "unitOfService": "Unit of Service"
     },
-    "validation": {
-      "usernameRequired": "Το όνομα χρήστη είναι υποχρεωτικό.",
-      "usernameMinLength": "Το όνομα χρήστη πρέπει να έχει τουλάχιστον 4 χαρακτήρες.",
-      "usernameMaxLength": "Το όνομα χρήστη πρέπει να έχει λιγότερους από 20 χαρακτήρες.",
-      "nameRequired": "Το όνομα είναι υποχρεωτικό.",
-      "emailRequired": "Το email είναι υποχρεωτικό.",
-      "emailInvalid": "Παρακαλώ εισάγετε μια έγκυρη διεύθυνση email.",
-      "passwordRequired": "Ο κωδικός είναι υποχρεωτικός.",
-      "passwordMinLength": "Ο κωδικός πρέπει να έχει τουλάχιστον 4 χαρακτήρες.",
-      "rankRequired": "Ο βαθμός είναι υποχρεωτικός."
-    },
-    "errors": {
-      "NETWORK_ERROR": "Σφάλμα δικτύου. Ελέγξτε τη σύνδεσή σας.",
-      "CREATE_ERROR": "Αποτυχία δημιουργίας χρήστη. Δοκιμάστε ξανά.",
-      "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL": "Αυτό το email χρησιμοποιείται ήδη.",
-      "USERNAME_IS_ALREADY_TAKEN": "Αυτό το όνομα χρήστη χρησιμοποιείται ήδη."
-    },
+    
     "buttons": {
-      "confirm": "Δημιουργία",
-      "cancel": "Ακύρωση"
+      "viewDetails": "View Details"
     }
-  },
-
-  "updateUserModal": {
-    "title": "Ενημέρωση Χρήστη",
-    "form": {
-      "name": {
-        "label": "Πλήρες Όνομα",
-        "placeholder": "Εισάγετε το πλήρες όνομα του χρήστη"
-      },
-      "username": {
-        "label": "Όνομα Χρήστη",
-        "placeholder": "Εισάγετε το όνομα χρήστη"
-      },
-      "email": {
-        "label": "Ηλεκτρονικό Ταχυδρομείο",
-        "placeholder": "Εισάγετε το email του χρήστη"
-      },
-      "role": {
-        "label": "Ρόλος",
-        "placeholder": "Επιλέξτε ρόλο"
-      },
-      "branch": {
-        "label": "Κλάδος",
-        "placeholder": "Επιλέξτε κλάδο"
-      },
-      "rank": {
-        "label": "Βαθμός",
-        "placeholder": "Επιλέξτε βαθμό"
-      },
-      "specialization": {
-        "label": "Ειδικότητα",
-        "placeholder": "Εισάγετε την ειδικότητα"
-      },
-      "unitOfService": {
-        "label": "Μονάδα Υπηρεσίας",
-        "placeholder": "Εισάγετε τη μονάδα υπηρεσίας"
-      },
-      "permissions": {
-        "label": "Δικαιώματα",
-        "placeholder": "Επιλέξτε δικαιώματα"
-      },
-      "combatArmsSupportBranch": {
-        "label": "Κλάδος Υπηρεσίας",
-        "placeholder": "Επιλέξτε κλάδο υπηρεσίας"
-      },
-      "accountType": {
-        "label": "Τύπος Λογαριασμού",
-        "placeholder": "Επιλέξτε τύπο λογαριασμού"
-      }
-    },
-    "validation": {
-      "usernameRequired": "Το όνομα χρήστη είναι υποχρεωτικό.",
-      "usernameMinLength": "Το όνομα χρήστη πρέπει να έχει τουλάχιστον 4 χαρακτήρες.",
-      "usernameMaxLength": "Το όνομα χρήστη πρέπει να έχει λιγότερους από 20 χαρακτήρες.",
-      "nameRequired": "Το όνομα είναι υποχρεωτικό.",
-      "emailRequired": "Το email είναι υποχρεωτικό.",
-      "emailInvalid": "Παρακαλώ εισάγετε μια έγκυρη διεύθυνση email."
-    },
-    "errors": {
-      "NETWORK_ERROR": "Σφάλμα δικτύου. Ελέγξτε τη σύνδεσή σας.",
-      "UPDATE_ERROR": "Αποτυχία ενημέρωσης χρήστη. Δοκιμάστε ξανά.",
-      "USER_NOT_FOUND": "Ο χρήστης δεν βρέθηκε.",
-      "EMAIL_TAKEN": "Αυτό το email χρησιμοποιείται ήδη.",
-      "NO_FIELDS_TO_UPDATE": "Δεν υπάρχουν πεδία για ενημέρωση."
-    },
-    "toast": {
-      "updateSuccess": {
-        "title": "Ενημέρωση χρήστη",
-        "description": "Ο χρήστης ενημερώθηκε με επιτυχία."
-      }
-    },
-    "buttons": {
-      "save": "Αποθήκευση Αλλαγών",
-      "cancel": "Ακύρωση"
-    }
-  },
-
-  "userDetailsModal": {
-    "title": "Λεπτομέρειες Χρήστη",
-    "personalInfo": {
-      "title": "Προσωπικές Πληροφορίες",
-      "fields": {
-        "fullName": "Πλήρες Όνομα",
-        "username": "Όνομα Χρήστη",
-        "email": "Ηλεκτρονικό Ταχυδρομείο",
-        "userId": "ID Χρήστη"
-      }
-    },
-    "militaryInfo": {
-      "title": "Στρατιωτικές Πληροφορίες",
-      "fields": {
-        "branch": "Κλάδος",
-        "combatArmsSupportBranch": "Κλάδος Υπηρεσίας",
-        "rank": "Βαθμός",
-        "specialization": "Ειδικότητα",
-        "unitOfService": "Μονάδα Υπηρεσίας"
-      }
-    },
-    "accountInfo": {
-      "title": "Πληροφορίες Λογαριασμού",
-      "fields": {
-        "userId": "ID Χρήστη",
-        "role": "Ρόλος",
-        "memberSince": "Μέλος από",
-        "lastUpdated": "Τελευταία ενημέρωση",
-        "accountType": "Τύπος λογαριασμού",
-        "permissions": "Δικαιώματα"
-      }
-    },
-    "buttons": {
-      "downloadPDF": "Λήψη PDF",
-      "close": "Κλείσιμο"
-    }
+    
   }
+
+  
 }
