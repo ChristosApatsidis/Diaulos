@@ -16,7 +16,7 @@
         "suggestions": {
           "checkConnection": "Ελέγξτε τη σύνδεσή σας",
           "refreshPage": "Ανανέωση της σελίδας",
-          "clearBrowserData": "Καθαρίστε την προσωρινή μνήμη και τα cookies του προγράμματος περιήγησής σας"  
+          "clearBrowserData": "Καθαρίστε την προσωρινή μνήμη και τα cookies του προγράμματος περιήγησής σας"
         }
       }
     },
@@ -349,7 +349,6 @@
     }
   },
 
-
   "page_profile": {
     "toast": {
       "updateSuccess": {
@@ -420,6 +419,4 @@
       "viewDetails": "Προβολή λεπτομερειών"
     }
   }
-
-  
 }

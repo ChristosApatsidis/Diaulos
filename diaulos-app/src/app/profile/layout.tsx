@@ -1,5 +1,5 @@
 // profile/layout.tsx
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {

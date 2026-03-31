@@ -1,15 +1,14 @@
 // components/ui/cards/ProfileBannerCard.tsx
 "use client";
 
-import { Chip, Button, Skeleton } from "@heroui/react";
-import { InfoCard } from "@/components/ui/cards/InfoCard";
-import { useTranslations } from "next-intl";
-import { authClient } from "@/lib/better-auth/auth-client";
-import { Avatar } from "@heroui/react";
 import { useRouter } from "next/dist/client/components/navigation";
+import { Avatar, Button, Chip, Skeleton } from "@heroui/react";
 import { UserPen } from "lucide-react";
+import { useTranslations } from "next-intl";
 import UserDetailsPDFButton from "@/components/ui/buttons/UserDetailsPDF";
+import { InfoCard } from "@/components/ui/cards/InfoCard";
 import { UpdatePasswordModal } from "@/components/ui/modals/UpdatePassword";
+import { authClient } from "@/lib/better-auth/auth-client";
 
 export default function ProfileBannerCard({
   editProfileButton,

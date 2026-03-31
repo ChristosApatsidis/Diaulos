@@ -2,14 +2,11 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { toast, Button, Table, EmptyState } from "@heroui/react";
-import { useState, useEffect, Suspense } from "react";
-import useSWR from "swr";
 import UsersTable from "@/components/ui/tables/Users";
 
 export default function AdminUsersPage() {
-  const generalTranslations = useTranslations("general");
-  const adminUsersManagementTranslations = useTranslations(
+  const _generalTranslations = useTranslations("general");
+  const _adminUsersManagementTranslations = useTranslations(
     "adminUsersManagement",
   );
 

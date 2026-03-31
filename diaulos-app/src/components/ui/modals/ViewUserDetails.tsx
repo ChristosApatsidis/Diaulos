@@ -1,13 +1,13 @@
 // components/ui/modals/ViewUserDetails.tsx
 "use client";
 
-import { Modal, Button, useOverlayState } from "@heroui/react";
-import { useTranslations } from "next-intl";
+import { Button, Modal, useOverlayState } from "@heroui/react";
 import { User as UserIcon } from "lucide-react";
-import PersonalInfoCard from "@/components/ui/cards/PersonalInfoCard";
-import MilitaryInformationCard from "@/components/ui/cards/MilitaryInformation";
-import AccountInformationCard from "@/components/ui/cards/AccountInformation";
+import { useTranslations } from "next-intl";
 import UserDetailsPDFButton from "@/components/ui/buttons/UserDetailsPDF";
+import AccountInformationCard from "@/components/ui/cards/AccountInformation";
+import MilitaryInformationCard from "@/components/ui/cards/MilitaryInformation";
+import PersonalInfoCard from "@/components/ui/cards/PersonalInfoCard";
 import type { User } from "@/types";
 
 /**

@@ -2,10 +2,10 @@
 "use client";
 
 import { Button } from "@heroui/react";
-import { Download } from "lucide-react";
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import { Download } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { UserDetailsPDF } from "@/utils/pdf";
-import { useTranslations, useLocale } from "next-intl";
 
 export default function UserDetailsPDFButton({ user }: { user: any }) {
   const locale = useLocale();

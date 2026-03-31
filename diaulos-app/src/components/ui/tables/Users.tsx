@@ -1,22 +1,21 @@
 // componetnents/ui/tables/Users.tsx
 "use client";
 
-import { useTranslations, useLocale } from "next-intl";
-import {
-  toast,
-  Button,
-  Table,
-  Pagination,
-  EmptyState,
-  Skeleton,
-  Label,
-  ListBox,
-  Select,
-} from "@heroui/react";
 import { useState } from "react";
+import {
+  Button,
+  EmptyState,
+  ListBox,
+  Pagination,
+  Select,
+  Skeleton,
+  Table,
+  toast,
+} from "@heroui/react";
+import { useLocale, useTranslations } from "next-intl";
 import useSWR from "swr";
-import { authClient } from "@/lib/better-auth/auth-client";
 import ViewUserDetailsModal from "@/components/ui/modals/ViewUserDetails";
+import { authClient } from "@/lib/better-auth/auth-client";
 import type { User } from "@/types";
 
 export type UsersResponse = {
@@ -314,7 +313,7 @@ function UserActions({
         });
         onUserDeleted();
       })
-      .catch((err) =>
+      .catch((_err) =>
         toast.danger(usersTableTranslations("toast.deleteError.title"), {
           description: usersTableTranslations("toast.deleteError.description"),
         }),

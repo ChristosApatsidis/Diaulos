@@ -14,15 +14,17 @@ export function formatDateTime({
 }) {
   // Define labels for DST and standard time in supported locales
   const localeLabels: Record<string, { standard: string; dst: string }> = {
-    "en": { standard: "Standard Time", dst: "Daylight Time" },
-    "el": { standard: "Κανονική ώρα", dst: "Θερινή ώρα" },
+    en: { standard: "Standard Time", dst: "Daylight Time" },
+    el: { standard: "Κανονική ώρα", dst: "Θερινή ώρα" },
   };
 
   // Get labels for the current locale, defaulting to English if not defined
-  const labels = localeLabels[locale] || localeLabels["en"];
+  const labels = localeLabels[locale] || localeLabels.en;
 
   // Convert input to DateTime in specified time zone
-  const dt = DateTime.fromJSDate(new Date(date), { zone: timeZone }).setLocale(locale);
+  const dt = DateTime.fromJSDate(new Date(date), { zone: timeZone }).setLocale(
+    locale,
+  );
 
   // Format date and time
   const formatted = dt.toFormat("dd LLL yyyy, HH:mm");

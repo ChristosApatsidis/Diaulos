@@ -16,7 +16,7 @@
         "suggestions": {
           "checkConnection": "Check your connection",
           "refreshPage": "Refresh the page",
-          "clearBrowserData": "Clear your browser's cache and cookies"  
+          "clearBrowserData": "Clear your browser's cache and cookies"
         }
       }
     },
@@ -167,7 +167,7 @@
       }
     }
   },
-  
+
   "adminMenu": {
     "dashboard": "Dashboard",
     "users": "Users",
@@ -419,5 +419,4 @@
       "viewDetails": "View Details"
     }
   }
-
 }

@@ -1,15 +1,15 @@
 // profile/edit/page.tsx
 "use client";
 
-import { authClient } from "@/lib/better-auth/auth-client";
-import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Alert, Button } from "@heroui/react";
-import { useEffect, useState } from "react";
-import ProfileBannerCard from "@/components/ui/cards/ProfileBannerCard";
-import EditPersonalInformationCard from "@/components/ui/cards/EditPersonalInformationCard";
-import EditMilitaryInformationCard from "@/components/ui/cards/EditMilitaryInformationCard";
 import { Save } from "lucide-react";
+import { useTranslations } from "next-intl";
+import EditMilitaryInformationCard from "@/components/ui/cards/EditMilitaryInformationCard";
+import EditPersonalInformationCard from "@/components/ui/cards/EditPersonalInformationCard";
+import ProfileBannerCard from "@/components/ui/cards/ProfileBannerCard";
+import { authClient } from "@/lib/better-auth/auth-client";
 
 export default function EditProfilePage() {
   const router = useRouter();

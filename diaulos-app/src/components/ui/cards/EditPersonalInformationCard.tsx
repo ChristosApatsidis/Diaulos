@@ -3,17 +3,17 @@
 
 import { useState } from "react";
 import {
-  toast,
   Button,
   FieldError,
   Form,
   Input,
   Label,
   TextField,
+  toast,
 } from "@heroui/react";
 import { useTranslations } from "next-intl";
-import { authClient } from "@/lib/better-auth/auth-client";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
+import { authClient } from "@/lib/better-auth/auth-client";
 
 type EditProfileForm = {
   name: string;
@@ -124,7 +124,7 @@ export default function EditPersonalInformationCard({
           },
         );
       }
-    } catch (err) {
+    } catch (_err) {
       toast.danger(
         editPersonalInformationTranslations("toast.changeEmailError.title"),
         {

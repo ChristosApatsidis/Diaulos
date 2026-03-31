@@ -3,8 +3,8 @@
 
 import { Card } from "@heroui/react";
 import { Logo } from "@/components/icons";
-import ActiveSession from "@/components/ui/surface/ActiveSession";
 import SignIn from "@/components/ui/forms/SignIn";
+import ActiveSession from "@/components/ui/surface/ActiveSession";
 import { authClient } from "@/lib/better-auth/auth-client";
 
 export default function Home() {

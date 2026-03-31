@@ -2,10 +2,10 @@
 "use client";
 
 import { Suspense, useEffect, useState } from "react";
-import { Toast, Spinner } from "@heroui/react";
-import { authClient } from "@/lib/better-auth/auth-client";
+import { Spinner, Toast } from "@heroui/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { motion, AnimatePresence } from "motion/react";
+import { authClient } from "@/lib/better-auth/auth-client";
 
 /**
  * This component is used to wrap the children of the RootLayout and ensures that it is only rendered on the client side. This is necessary to prevent hydration mismatches

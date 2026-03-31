@@ -1,9 +1,9 @@
 // components/ui/cards/AccountInformation.tsx
 "use client";
 
-import { Skeleton, Tooltip, Chip } from "@heroui/react";
+import { Chip, Skeleton, Tooltip } from "@heroui/react";
+import { useLocale, useTranslations } from "next-intl";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
-import { useTranslations, useLocale } from "next-intl";
 import { authClient } from "@/lib/better-auth/auth-client";
 import { formatDateTime } from "@/utils/formatDateTime";
 import type { User } from "@/types";

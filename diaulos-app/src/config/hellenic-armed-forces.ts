@@ -20,10 +20,10 @@ export const hellenicArmedForcesConfig = {
       "ΕΜ",
       "ΥΠ",
       "ΕΠ",
-      "ΥΠ"
+      "ΥΠ",
     ],
     "Hellenic Navy": ["ΔΝ", "ΤΠ", "ΥΠ", "ΕΜ", "ΕΠ"],
-    "Hellenic Air Force": ["ΙΠ", "ΜΧ", "ΕΜ", "ΥΠ", "ΕΠ"]
+    "Hellenic Air Force": ["ΙΠ", "ΜΧ", "ΕΜ", "ΥΠ", "ΕΠ"],
   },
   ranks: {
     "Hellenic Army": {
@@ -43,7 +43,7 @@ export const hellenicArmedForcesConfig = {
       "OF-6": "Brigadier",
       "OF-7": "Major General",
       "OF-8": "Lieutenant General",
-      "OF-9": "General"
+      "OF-9": "General",
     },
     "Hellenic Navy": {
       "OR-1": "Seaman Recruit",
@@ -64,7 +64,7 @@ export const hellenicArmedForcesConfig = {
       "OF-6": "Rear Admiral (Lower Half)",
       "OF-7": "Rear Admiral (Upper Half)",
       "OF-8": "Vice Admiral",
-      "OF-9": "Admiral"
+      "OF-9": "Admiral",
     },
     "Hellenic Air Force": {
       "OR-1": "Airman Basic",
@@ -85,7 +85,7 @@ export const hellenicArmedForcesConfig = {
       "OF-6": "Brigadier General",
       "OF-7": "Major General",
       "OF-8": "Lieutenant General",
-      "OF-9": "General"
-    }
-  }
+      "OF-9": "General",
+    },
+  },
 };

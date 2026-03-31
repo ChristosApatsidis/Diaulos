@@ -1,13 +1,13 @@
 // profile/page.tsx
 "use client";
 
-import { useTranslations } from "next-intl";
-import { toast } from "@heroui/react";
 import { useEffect } from "react";
-import ProfileBannerCard from "@/components/ui/cards/ProfileBannerCard";
-import PersonalInfoCard from "@/components/ui/cards/PersonalInfoCard";
-import MilitaryInformationCard from "@/components/ui/cards/MilitaryInformation";
+import { toast } from "@heroui/react";
+import { useTranslations } from "next-intl";
 import AccountInformationCard from "@/components/ui/cards/AccountInformation";
+import MilitaryInformationCard from "@/components/ui/cards/MilitaryInformation";
+import PersonalInfoCard from "@/components/ui/cards/PersonalInfoCard";
+import ProfileBannerCard from "@/components/ui/cards/ProfileBannerCard";
 
 export default function ProfilePage() {
   const profileTranslations = useTranslations("page_profile");
@@ -23,7 +23,7 @@ export default function ProfilePage() {
         description: profileTranslations("toast.updateSuccess.description"),
       });
     }
-  }, []);
+  }, [profileTranslations]);
 
   return (
     <main className="container mx-auto px-4 pt-2 pb-4 flex flex-col gap-2">

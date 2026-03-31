@@ -4,16 +4,16 @@
 import {
   FieldError,
   Form,
-  TextField,
   Input,
+  Label,
   ListBox,
   Select,
-  Label,
+  TextField,
 } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
-import { hellenicArmedForcesConfig } from "@/config/hellenic-armed-forces";
 import { authClient } from "@/lib/better-auth/auth-client";
+import { hellenicArmedForcesConfig } from "@/config/hellenic-armed-forces";
 
 type EditProfileForm = {
   name: string;

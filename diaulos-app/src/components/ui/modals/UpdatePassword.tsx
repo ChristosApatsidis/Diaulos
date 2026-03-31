@@ -1,21 +1,21 @@
 // components/ui/modals/UpdatePassword.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
-  Modal,
   Alert,
   Button,
   FieldError,
   Form,
   Input,
   Label,
+  Modal,
   TextField,
-  useOverlayState,
   toast,
+  useOverlayState,
 } from "@heroui/react";
-import { useTranslations } from "next-intl";
 import { KeyRound } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { authClient } from "@/lib/better-auth/auth-client";
 
 /**

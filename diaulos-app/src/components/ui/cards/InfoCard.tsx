@@ -1,6 +1,7 @@
 // components/ui/surface/InfoCard.tsx
-import { Surface, Separator } from "@heroui/react";
+
 import React from "react";
+import { Separator, Surface } from "@heroui/react";
 
 type InfoCardProps = {
   children: React.ReactNode;

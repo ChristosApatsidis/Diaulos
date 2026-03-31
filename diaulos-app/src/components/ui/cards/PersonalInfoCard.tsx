@@ -2,8 +2,8 @@
 "use client";
 
 import { Skeleton } from "@heroui/react";
-import { InfoCard } from "@/components/ui/cards/InfoCard";
 import { useTranslations } from "next-intl";
+import { InfoCard } from "@/components/ui/cards/InfoCard";
 import { authClient } from "@/lib/better-auth/auth-client";
 import type { User } from "@/types";
 
