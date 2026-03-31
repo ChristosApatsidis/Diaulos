@@ -1,9 +1,19 @@
 // componetnents/ui/tables/Users.tsx
 "use client";
 
-import { useTranslations } from "next-intl";
-import { toast, Button, Table, EmptyState } from "@heroui/react";
-import { useState, useEffect, Suspense } from "react";
+import { useTranslations, useLocale } from "next-intl";
+import {
+  toast,
+  Button,
+  Table,
+  Pagination,
+  EmptyState,
+  Skeleton,
+  Label,
+  ListBox,
+  Select,
+} from "@heroui/react";
+import { useState } from "react";
 import useSWR from "swr";
 import { authClient } from "@/lib/better-auth/auth-client";
 import ViewUserDetailsModal from "@/components/ui/modals/ViewUserDetails";
@@ -29,22 +39,31 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json());
  * @returns A React component that renders a table of users with pagination and action buttons.
  */
 export default function UsersTable() {
+  const locale = useLocale();
   const generalTranslations = useTranslations("general");
   const usersTableTranslations = useTranslations("component_ui_tables_users");
 
-  const [page, setPage] = useState<Number>(1);
-  const [limit, setLimit] = useState<Number>(10);
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(10);
 
   const {
     data: usersData,
     error: usersError,
     isValidating: usersValidating,
+    isLoading: usersLoading,
     mutate: fetchUsers,
   } = useSWR<UsersResponse>(
     `/api/admin/users-management/users?page=${page}&limit=${limit}`,
     fetcher,
     { revalidateOnFocus: true, loadingTimeout: 10000, keepPreviousData: true },
   );
+
+  // Handle change in rows per page selection
+  const handleLimitChange = (value: unknown) => {
+    const num = Number(value);
+    setLimit(Number.isInteger(num) && num > 0 ? num : 10);
+    setPage(1);
+  };
 
   // Define the columns for the users table
   const columns = [
@@ -97,11 +116,14 @@ export default function UsersTable() {
   }
 
   return (
-    <Table>
-      <Table.ScrollContainer>
+    <Table key={locale} className="min-w-full">
+      <Table.ScrollContainer className="max-h-[680px] overflow-y-auto">
         <Table.Content>
           {/* Table Header */}
-          <Table.Header columns={columns}>
+          <Table.Header
+            columns={columns}
+            className="sticky top-0 z-10 bg-surface-secondary"
+          >
             {(column) => (
               <Table.Column isRowHeader={column.id === "name"} key={column.id}>
                 {column.name}
@@ -109,30 +131,155 @@ export default function UsersTable() {
             )}
           </Table.Header>
           {/* Table Body */}
-          <Table.Body items={usersData?.users || []}>
-            {(user: User) => (
-              <Table.Row key={user.id}>
-                <Table.Cell>{user.name}</Table.Cell>
-                <Table.Cell>{user.username || "-"}</Table.Cell>
-                <Table.Cell>{user.email || "-"}</Table.Cell>
-                <Table.Cell>{user.role}</Table.Cell>
-                <Table.Cell>{user.branch}</Table.Cell>
-                <Table.Cell>{user.rank}</Table.Cell>
-                <Table.Cell>
-                  <UserActions
-                    user={user}
-                    onUserDeleted={fetchUsers}
-                    onUserUpdated={fetchUsers}
-                  />
-                </Table.Cell>
-                <Table.Cell>
-                  <ViewUserDetailsModal user={user} />
-                </Table.Cell>
-              </Table.Row>
-            )}
+          <Table.Body
+            items={usersData?.users || []}
+            renderEmptyState={() =>
+              usersValidating ? (
+                <div className="flex flex-col w-full py-0">
+                  {[...Array(limit)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="border-b border-default-100 last:border-none"
+                    >
+                      <Skeleton
+                        animationType="shimmer"
+                        className={`h-14 bg-overlay w-full ${
+                          i === 0
+                            ? "rounded-t-lg"
+                            : i === limit - 1
+                              ? "rounded-b-2xl"
+                              : ""
+                        }`}
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <EmptyState className="flex h-full w-full flex-col items-center justify-center gap-4 text-center">
+                  <span className="text-sm text-muted">
+                    {usersTableTranslations("emptyState.title")}
+                  </span>
+                  <p className="text-sm text-muted">
+                    {usersTableTranslations("emptyState.description")}
+                  </p>
+                </EmptyState>
+              )
+            }
+          >
+            {usersLoading
+              ? null
+              : (user: User) => (
+                  <Table.Row key={user.id}>
+                    <Table.Cell>{user.name}</Table.Cell>
+                    <Table.Cell>{user.username || "-"}</Table.Cell>
+                    <Table.Cell>{user.email || "-"}</Table.Cell>
+                    <Table.Cell>{user.role}</Table.Cell>
+                    <Table.Cell>
+                      {generalTranslations(`branches.${user.branch}`) ||
+                        user.branch}
+                    </Table.Cell>
+                    <Table.Cell>
+                      {" "}
+                      {generalTranslations(
+                        `ranks.${user?.branch}.${user?.rank}`,
+                      ) || user?.rank}
+                    </Table.Cell>
+                    <Table.Cell>
+                      <UserActions
+                        user={user}
+                        onUserDeleted={fetchUsers}
+                        onUserUpdated={fetchUsers}
+                      />
+                    </Table.Cell>
+                    <Table.Cell>
+                      <ViewUserDetailsModal user={user} />
+                    </Table.Cell>
+                  </Table.Row>
+                )}
           </Table.Body>
         </Table.Content>
       </Table.ScrollContainer>
+      {/* Table Footer with Pagination */}
+      <Table.Footer>
+        <Pagination size="sm">
+          {/* Pagination Summary */}
+          <Pagination.Summary>
+            {usersData
+              ? usersTableTranslations("pagination.results", {
+                  start: (usersData.page - 1) * usersData.limit + 1,
+                  end: Math.min(
+                    usersData.page * usersData.limit,
+                    usersData.stats.total,
+                  ),
+                  total: usersData.stats.total,
+                })
+              : null}
+          </Pagination.Summary>
+          {/* Pagination Controls */}
+          <Pagination.Content>
+            {/* Rows per page selection */}
+            <Pagination.Item>
+              <Pagination.Content>
+                <Select
+                  placeholder="Select one"
+                  value={limit}
+                  onChange={(value) => handleLimitChange(Number(value))}
+                  className="w-22"
+                >
+                  <Select.Trigger>
+                    <Select.Value />
+                    <Select.Indicator />
+                  </Select.Trigger>
+                  <Select.Popover>
+                    <ListBox>
+                      {[5, 10, 25, 50, 100].map((n: number) => (
+                        <ListBox.Item id={n} textValue={n.toString()} key={n}>
+                          {n}
+                          <ListBox.ItemIndicator />
+                        </ListBox.Item>
+                      ))}
+                    </ListBox>
+                  </Select.Popover>
+                </Select>
+              </Pagination.Content>
+            </Pagination.Item>
+            {/* Page selection */}
+            <Pagination.Item>
+              <Pagination.Previous
+                isDisabled={page === 1}
+                onPress={() => setPage((p) => Math.max(1, p - 1))}
+              >
+                <Pagination.PreviousIcon />
+                {usersTableTranslations("pagination.previous")}
+              </Pagination.Previous>
+            </Pagination.Item>
+            {usersData &&
+              Array.from({ length: usersData.totalPages }, (_, i) => i + 1).map(
+                (p: number) => (
+                  <Pagination.Item key={p}>
+                    <Pagination.Link
+                      isActive={p === page}
+                      onPress={() => setPage(p)}
+                    >
+                      {p}
+                    </Pagination.Link>
+                  </Pagination.Item>
+                ),
+              )}
+            <Pagination.Item>
+              <Pagination.Next
+                isDisabled={page === usersData?.totalPages}
+                onPress={() =>
+                  setPage((p) => Math.min(usersData?.totalPages || 1, p + 1))
+                }
+              >
+                {usersTableTranslations("pagination.next")}
+                <Pagination.NextIcon />
+              </Pagination.Next>
+            </Pagination.Item>
+          </Pagination.Content>
+        </Pagination>
+      </Table.Footer>
     </Table>
   );
 }

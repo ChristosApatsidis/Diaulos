@@ -390,6 +390,11 @@
       "rank": "Rank",
       "actions": "Actions"
     },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "results": "{start}-{end} of {total} results"
+    },
     "emptyState": {
       "title": "No Users Found",
       "description": "There are no users to display. Please check back later."
