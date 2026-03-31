@@ -11,6 +11,7 @@ type InfoCardProps = {
 function InfoCard({ children, className = "" }: InfoCardProps) {
   return (
     <Surface
+      variant="default"
       className={`flex flex-col rounded-3xl border border-secondary p-4 ${className}`}
     >
       {children}

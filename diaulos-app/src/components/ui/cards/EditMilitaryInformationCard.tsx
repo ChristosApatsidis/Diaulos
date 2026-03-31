@@ -21,6 +21,12 @@ type EditProfileForm = {
   email: string;
   specialization: string;
   rank: string;
+
+  branch?: string;
+  combatArmsSupportBranch?: string;
+  unitOfService?: string;
+  role?: string;
+  permissions?: string[];
 };
 
 /**
@@ -90,10 +96,10 @@ export default function EditMilitaryInformationCard({
                   )}
                   value={formData.specialization}
                   onChange={(e) => {
-                    setFormData({
-                      ...formData,
+                    setFormData((prev: any) => ({
+                      ...prev,
                       specialization: e.target.value,
-                    });
+                    }));
                     setErrors({ ...errors, specialization: "" }); // Clear specialization error on change
                   }}
                 />
@@ -108,10 +114,10 @@ export default function EditMilitaryInformationCard({
               isInvalid={!!errors.rank}
               value={formData.rank}
               onChange={(value) => {
-                setFormData({
-                  ...formData,
+                setFormData((prev: any) => ({
+                  ...prev,
                   rank: value as string,
-                });
+                }));
                 setErrors({ ...errors, rank: "" }); // Clear rank error on change
               }}
             >
@@ -122,20 +128,20 @@ export default function EditMilitaryInformationCard({
               </Select.Trigger>
               <Select.Popover>
                 <ListBox>
-                  {Object.entries(ranks[session?.user?.branch || ""] || {}).map(
-                    ([rankKey, rankName]) => (
-                      <ListBox.Item
-                        key={rankKey}
-                        id={rankKey}
-                        textValue={rankName}
-                      >
-                        {generalTranslations(
-                          `ranks.${session?.user?.branch}.${rankKey}`,
-                        ) || rankName}
-                        <ListBox.ItemIndicator />
-                      </ListBox.Item>
-                    ),
-                  )}
+                  {Object.entries(
+                    ranks[formData.branch || session?.user?.branch || ""] || {},
+                  ).map(([rankKey, rankName]) => (
+                    <ListBox.Item
+                      key={rankKey}
+                      id={rankKey}
+                      textValue={rankName}
+                    >
+                      {generalTranslations(
+                        `ranks.${formData.branch || session?.user?.branch}.${rankKey}`,
+                      ) || rankName}
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+                  ))}
                 </ListBox>
               </Select.Popover>
             </Select>

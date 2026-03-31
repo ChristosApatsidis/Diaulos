@@ -14,7 +14,7 @@ export default function PersonalInfoCard({ user }: { user?: User }) {
     "component_ui_cards_personalInfo",
   );
 
-  user = user ?? (session?.user as User | undefined);
+  user = (user as User) ?? (session?.user as User | undefined);
 
   return (
     <InfoCard className="h-full">

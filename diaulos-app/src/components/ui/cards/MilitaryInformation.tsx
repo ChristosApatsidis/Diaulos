@@ -15,7 +15,7 @@ export default function MilitaryInformationCard({ user }: { user?: User }) {
     "component_ui_cards_militaryInformation",
   );
 
-  user = user ?? (session?.user as User | undefined);
+  user = (user as User) ?? (session?.user as User | undefined);
 
   return (
     <InfoCard className="h-full">
@@ -30,8 +30,7 @@ export default function MilitaryInformationCard({ user }: { user?: User }) {
             <InfoRow
               label={militaryInformationTranslations("infoRows.branch")}
               value={
-                generalTranslations(`branches.${session?.user?.branch}`) ||
-                session?.user?.branch
+                generalTranslations(`branches.${user.branch}`) || user.branch
               }
               skeleton={isSessionPending}
             />
@@ -39,15 +38,14 @@ export default function MilitaryInformationCard({ user }: { user?: User }) {
               label={militaryInformationTranslations(
                 "infoRows.combatArmsSupportBranch",
               )}
-              value={session?.user?.combatArmsSupportBranch}
+              value={user.combatArmsSupportBranch}
               skeleton={isSessionPending}
             />
             <InfoRow
               label={militaryInformationTranslations("infoRows.rank")}
               value={
-                generalTranslations(
-                  `ranks.${session?.user?.branch}.${session?.user?.rank}`,
-                ) || session?.user?.rank
+                generalTranslations(`ranks.${user.branch}.${user.rank}`) ||
+                user.rank
               }
               skeleton={isSessionPending}
             />
@@ -55,12 +53,12 @@ export default function MilitaryInformationCard({ user }: { user?: User }) {
           <div className="space-y-2">
             <InfoRow
               label={militaryInformationTranslations("infoRows.specialization")}
-              value={session?.user?.specialization}
+              value={user.specialization}
               skeleton={isSessionPending}
             />
             <InfoRow
               label={militaryInformationTranslations("infoRows.unitOfService")}
-              value={session?.user?.unitOfService}
+              value={user.unitOfService}
               skeleton={isSessionPending}
             />
           </div>

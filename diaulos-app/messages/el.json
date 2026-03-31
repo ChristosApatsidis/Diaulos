@@ -309,6 +309,10 @@
     }
   },
 
+  "component_ui_cards_editAccountPermissions": {
+    "title": "Δικαιώματα Λογαριασμού"
+  },
+
   "component_ui_modals_updatePassword": {
     "title": "Ενημέρωση Κωδικού",
     "fields": {
@@ -400,7 +404,8 @@
       "description": "Δεν υπάρχουν χρήστες για εμφάνιση. Παρακαλώ ελέγξτε ξανά αργότερα."
     },
     "buttons": {
-      "delete": "Διαγραφή"
+      "delete": "Διαγραφή",
+      "isDeleting": "Διαγραφή..."
     },
     "toast": {
       "deleteSuccess": {
@@ -417,6 +422,27 @@
   "component_ui_modals_viewUserDetails": {
     "buttons": {
       "viewDetails": "Προβολή λεπτομερειών"
+    }
+  },
+
+  "component_ui_modals_editUserDetails": {
+    "buttons": {
+      "editDetails": "Επεξεργασία",
+      "cancel": "Ακύρωση",
+      "save": "Αποθήκευση αλλαγών",
+      "savingChanges": "Αποθήκευση αλλαγών..."
+    },
+    "toast": {
+      "updateSuccess": {
+        "title": "Ενημέρωση Χρήστη",
+        "description": "Τα στοιχεία του χρήστη {name} ενημερώθηκαν με επιτυχία."
+      }
+    },
+    "errors": {
+      "updateFailed":"Αποτυχία ενημέρωσης κωδικού. Παρακαλώ δοκιμάστε ξανά αργότερα.",
+      "emailIsTaken": "Η διεύθυνση email χρησιμοποιείται ήδη από άλλον χρήστη.",
+      "usernameIsTaken": "Το όνομα χρήστη χρησιμοποιείται ήδη από άλλον χρήστη.",
+      "validationError": "Παρακαλώ διορθώστε τα σφάλματα στη φόρμα και δοκιμάστε ξανά."
     }
   }
 }

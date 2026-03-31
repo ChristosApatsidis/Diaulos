@@ -25,8 +25,8 @@ export default function ViewUserDetailsModal({ user }: { user: User }) {
   return (
     <Modal>
       <Button
-        variant="outline"
-        className="bg-warning-soft border-warning/50 hover:bg-warning/20 focus:ring-warning/50"
+        variant="tertiary"
+        className="bg-warning-soft border-warning/50 hover:bg-warning/20 focus:ring-warning/50 font-normal"
         size="sm"
         onPress={state.open}
       >
@@ -38,7 +38,7 @@ export default function ViewUserDetailsModal({ user }: { user: User }) {
           <Modal.Dialog className="md:min-w-[700px] lg:min-w-[800px]">
             <Modal.CloseTrigger />
             <Modal.Header>
-              <Modal.Icon className="bg-warning-soft text-warning-soft-foreground">
+              <Modal.Icon className="bg-warning-soft text-warning-soft-foreground font-normal">
                 <UserIcon size={20} />
               </Modal.Icon>
             </Modal.Header>

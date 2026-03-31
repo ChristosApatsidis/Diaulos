@@ -309,6 +309,10 @@
     }
   },
 
+  "component_ui_cards_editAccountPermissions": {
+    "title": "Account Permissions"
+  },
+
   "component_ui_modals_updatePassword": {
     "title": "Update Password",
     "fields": {
@@ -400,7 +404,8 @@
       "description": "There are no users to display. Please check back later."
     },
     "buttons": {
-      "delete": "Delete"
+      "delete": "Delete",
+      "isDeleting": "Deleting..."
     },
     "toast": {
       "deleteSuccess": {
@@ -417,6 +422,27 @@
   "component_ui_modals_viewUserDetails": {
     "buttons": {
       "viewDetails": "View Details"
+    }
+  },
+
+  "component_ui_modals_editUserDetails": {
+    "buttons": {
+      "editDetails": "Edit",
+      "cancel": "Cancel",
+      "save": "Save Changes",
+      "savingChanges": "Saving..."
+    },
+    "toast": {
+      "updateSuccess": {
+        "title": "User Updated",
+        "description": "The user's {name} details have been successfully updated."
+      }
+    },
+    "errors": {
+      "updateFailed": "Failed to update user details. Please try again later.",
+      "emailIsTaken": "The email address is already taken by another user.",
+      "usernameIsTaken": "The username is already taken by another user.",
+      "validationError": "Please correct the errors in the form and try again."
     }
   }
 }

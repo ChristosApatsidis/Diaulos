@@ -15,7 +15,9 @@ import {
 import { useLocale, useTranslations } from "next-intl";
 import useSWR from "swr";
 import ViewUserDetailsModal from "@/components/ui/modals/ViewUserDetails";
+import EditUserDetailsModal from "@/components/ui/modals/EditUserDetails";
 import { authClient } from "@/lib/better-auth/auth-client";
+import { Trash2 } from "lucide-react";
 import type { User } from "@/types";
 
 export type UsersResponse = {
@@ -119,12 +121,13 @@ export default function UsersTable() {
       <Table.ScrollContainer className="max-h-[680px] overflow-y-auto">
         <Table.Content>
           {/* Table Header */}
-          <Table.Header
-            columns={columns}
-            className="sticky top-0 z-10 bg-surface-secondary"
-          >
+          <Table.Header columns={columns} className="sticky top-0 z-10">
             {(column) => (
-              <Table.Column isRowHeader={column.id === "name"} key={column.id}>
+              <Table.Column
+                isRowHeader={column.id === "name"}
+                key={column.id}
+                className="text-foreground"
+              >
                 {column.name}
               </Table.Column>
             )}
@@ -144,7 +147,7 @@ export default function UsersTable() {
                         animationType="shimmer"
                         className={`h-14 bg-overlay w-full ${
                           i === 0
-                            ? "rounded-t-lg"
+                            ? "rounded-t-2xl"
                             : i === limit - 1
                               ? "rounded-b-2xl"
                               : ""
@@ -172,7 +175,9 @@ export default function UsersTable() {
                     <Table.Cell>{user.name}</Table.Cell>
                     <Table.Cell>{user.username || "-"}</Table.Cell>
                     <Table.Cell>{user.email || "-"}</Table.Cell>
-                    <Table.Cell>{user.role}</Table.Cell>
+                    <Table.Cell>
+                      {generalTranslations(`roles.${user.role}`) || user.role}
+                    </Table.Cell>
                     <Table.Cell>
                       {generalTranslations(`branches.${user.branch}`) ||
                         user.branch}
@@ -283,6 +288,13 @@ export default function UsersTable() {
   );
 }
 
+/**
+ * UserActions is a component that renders action buttons for each user in the users table, including options to view details, edit, and delete the user. It conditionally renders the delete and edit buttons based on whether the user is the currently logged-in user to prevent self-deletion or self-editing. The component also handles the logic for deleting a user and updating the users list after an action is performed.
+ * @param user - The user object representing the user for whom the actions are being rendered.
+ * @param onUserDeleted - A callback function that is called after a user has been successfully deleted, typically to refresh the users list.
+ * @param onUserUpdated - A callback function that is called after a user's details have been successfully updated, typically to refresh the users list.
+ * @returns A React component that renders action buttons for the user, or null if the buttons should not be displayed (e.g., for the currently logged-in user).
+ */
 function UserActions({
   user,
   onUserDeleted,
@@ -292,55 +304,75 @@ function UserActions({
   onUserDeleted: () => void;
   onUserUpdated: () => void;
 }) {
-  const usersTableTranslations = useTranslations("component_ui_tables_users");
   const { data: session } = authClient.useSession();
 
-  const [isDeleting, setIsDeleting] = useState<boolean>(false);
-
-  // Handle delete user action — called after modal confirmation
-  const handleDeleteUser = () => {
-    setIsDeleting(true);
-
-    fetch(`/api/admin/users-management/users/${user.id}`, {
-      method: "DELETE",
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to delete user");
-        toast.success(usersTableTranslations("toast.deleteSuccess.title"), {
-          description: usersTableTranslations(
-            "toast.deleteSuccess.description",
-          ),
-        });
-        onUserDeleted();
-      })
-      .catch((_err) =>
-        toast.danger(usersTableTranslations("toast.deleteError.title"), {
-          description: usersTableTranslations("toast.deleteError.description"),
-        }),
-      )
-      .finally(() => setIsDeleting(false));
-  };
+  if (session?.user.id === user.id) return null;
 
   return (
     <div className="flex gap-2">
       {/* Delete User Button */}
-      {session?.user?.id !== user.id && (
-        <Button
-          size="sm"
-          variant="danger"
-          onPress={handleDeleteUser}
-          isDisabled={isDeleting}
-        >
-          {usersTableTranslations("buttons.delete")}
-        </Button>
-      )}
-
-      {/* Update User Button */}
-      {session?.user?.id !== user.id && (
-        <Button size="sm" variant="primary" onPress={() => onUserUpdated()}>
-          Edit
-        </Button>
-      )}
+      <UserActionDelete user={user} onUserDeleted={onUserDeleted} />
+      {/* Edit User Details Button */}
+      <EditUserDetailsModal user={user} onUserUpdated={onUserUpdated} />
     </div>
+  );
+}
+
+/**
+ * UserActionDelete is a component that renders a delete button for a user in the users table. It handles the deletion of a user by making a DELETE request to the server and provides feedback to the admin through toast notifications. The button is disabled while the deletion is in progress and is not rendered for the currently logged-in user to prevent self-deletion.
+ * @param user - The user object representing the user to be deleted.
+ * @param onUserDeleted - A callback function that is called after the user has been successfully deleted, typically to refresh the users list.
+ * @returns A React component that renders a delete button for the user, or null if the button should not be displayed.
+ */
+function UserActionDelete({
+  user,
+  onUserDeleted,
+}: {
+  user: User;
+  onUserDeleted: () => void;
+}) {
+  const usersTableTranslations = useTranslations("component_ui_tables_users");
+
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+
+  // Handle delete user action — called after modal confirmation
+  const handleDeleteUser = async () => {
+    setIsDeleting(true);
+
+    const response = await fetch(
+      `/api/admin/users-management/users/${user.id}`,
+      { method: "DELETE" },
+    );
+
+    // Handle error response
+    if (!response.ok) {
+      toast.danger(usersTableTranslations("toast.deleteError.title"), {
+        description: usersTableTranslations("toast.deleteError.description"),
+      });
+      setIsDeleting(false);
+      return;
+    }
+
+    // Success - show success toast and refresh users list
+    toast.success(usersTableTranslations("toast.deleteSuccess.title"), {
+      description: usersTableTranslations("toast.deleteSuccess.description"),
+    });
+    onUserDeleted();
+    setIsDeleting(false);
+  };
+
+  return (
+    <Button
+      size="sm"
+      variant="danger-soft"
+      onPress={handleDeleteUser}
+      isDisabled={isDeleting}
+      className="font-normal"
+    >
+      <Trash2 size={16} />
+      {isDeleting
+        ? usersTableTranslations("buttons.isDeleting")
+        : usersTableTranslations("buttons.delete")}
+    </Button>
   );
 }

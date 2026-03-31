@@ -37,6 +37,7 @@ export default function EditPersonalInformationCard({
   setFormData,
   errors,
   setErrors,
+  updateEmailButton = true,
 }: {
   formData: EditProfileForm;
   setFormData: React.Dispatch<React.SetStateAction<EditProfileForm>>;
@@ -54,6 +55,7 @@ export default function EditPersonalInformationCard({
       general?: string;
     }>
   >;
+  updateEmailButton?: boolean;
 }) {
   const { data: session } = authClient.useSession();
   const editPersonalInformationTranslations = useTranslations(
@@ -164,10 +166,10 @@ export default function EditPersonalInformationCard({
                 )}
                 value={formData.name}
                 onChange={(e) => {
-                  setFormData({
-                    ...formData,
+                  setFormData((prev: any) => ({
+                    ...prev,
                     name: e.target.value,
-                  });
+                  }));
                   setErrors({ ...errors, name: "" }); // Clear name error on change
                 }}
               />
@@ -191,10 +193,10 @@ export default function EditPersonalInformationCard({
                 )}
                 value={formData.username}
                 onChange={(e) => {
-                  setFormData({
-                    ...formData,
+                  setFormData((prev: any) => ({
+                    ...prev,
                     username: e.target.value,
-                  });
+                  }));
                   setErrors({ ...errors, username: "" }); // Clear username error on change
                 }}
               />
@@ -221,10 +223,10 @@ export default function EditPersonalInformationCard({
                 )}
                 value={formData.email}
                 onChange={(e) => {
-                  setFormData({
-                    ...formData,
+                  setFormData((prev: any) => ({
+                    ...prev,
                     email: e.target.value,
-                  });
+                  }));
                   setErrors({ ...errors, email: "" }); // Clear email error on change
                 }}
               />
@@ -233,16 +235,20 @@ export default function EditPersonalInformationCard({
                   editPersonalInformationTranslations(`errors.${errors.email}`)}
               </FieldError>
             </TextField>
-            <Button
-              onPress={handleChangeEmail}
-              isDisabled={
-                loadingChangeEmail ||
-                !formData.email ||
-                formData.email === session?.user?.email
-              }
-            >
-              {editPersonalInformationTranslations("form.buttons.updateEmail")}
-            </Button>
+            {updateEmailButton && (
+              <Button
+                onPress={handleChangeEmail}
+                isDisabled={
+                  loadingChangeEmail ||
+                  !formData.email ||
+                  formData.email === session?.user?.email
+                }
+              >
+                {editPersonalInformationTranslations(
+                  "form.buttons.updateEmail",
+                )}
+              </Button>
+            )}
           </div>
         </Form>
       </InfoCard.Body>
