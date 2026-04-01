@@ -119,7 +119,7 @@ export default function UsersTable() {
   return (
     <Table key={locale} className="min-w-full">
       <Table.ScrollContainer className="max-h-[680px] overflow-y-auto">
-        <Table.Content>
+        <Table.Content aria-label="Users table">
           {/* Table Header */}
           <Table.Header columns={columns} className="sticky top-0 z-10">
             {(column) => (
@@ -225,10 +225,10 @@ export default function UsersTable() {
             <Pagination.Item>
               <Pagination.Content>
                 <Select
-                  placeholder="Select one"
                   value={limit}
                   onChange={(value) => handleLimitChange(Number(value))}
                   className="w-22"
+                  aria-label="Rows per page"
                 >
                   <Select.Trigger>
                     <Select.Value />

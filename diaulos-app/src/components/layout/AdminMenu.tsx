@@ -3,7 +3,13 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { Button, ListBox, Select } from "@heroui/react";
-import { DatabaseIcon, SettingsIcon, ShieldUser, UserIcon } from "lucide-react";
+import {
+  DatabaseIcon,
+  SettingsIcon,
+  ShieldUser,
+  UserIcon,
+  Network,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export default function AdminMenu() {
@@ -28,6 +34,11 @@ export default function AdminMenu() {
       icon: DatabaseIcon,
     },
     {
+      label: adminMenuTranslations("units"),
+      href: "/admin/units",
+      icon: Network,
+    },
+    {
       label: adminMenuTranslations("settings"),
       href: "/admin/settings",
       icon: SettingsIcon,
@@ -42,6 +53,7 @@ export default function AdminMenu() {
           className="w-full p-2"
           value={pathname}
           onChange={(value) => router.push(value as string)}
+          aria-label="Admin navigation menu"
         >
           <Select.Trigger>
             <Select.Value />
