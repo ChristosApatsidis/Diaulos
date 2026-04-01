@@ -2,7 +2,7 @@
 import { headers } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 import "server-only";
-import { auth } from "@/lib/auth/auth";
+import { auth } from "@/lib/better-auth/auth";
 
 const COUCHDB_URL = process.env.COUCHDB_URL;
 

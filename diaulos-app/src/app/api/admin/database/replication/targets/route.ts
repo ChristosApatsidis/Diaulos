@@ -2,9 +2,27 @@
 import { headers } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 import "server-only";
-import { auth } from "@/lib/auth/auth";
+import { auth } from "@/lib/better-auth/auth";
 import { buildDatabaseAuthUrl } from "@/utils/database-auth-url";
-import type { ReplicationDoc, ReplicationEndpoint } from "@/types";
+
+type ReplicationEndpoint = {
+  protocol?: "http" | "https" | string;
+  host: string;
+  port?: number | string;
+  username?: string;
+  password?: string;
+  database: string;
+  params?: Record<string, string | number | boolean>;
+};
+
+type ReplicationDoc = {
+  _id: string,
+  source: string,
+  target: string,
+  target_name: string,
+  continuous: boolean,
+  create_target: boolean,
+};
 
 const COUCHDB_URL = process.env.COUCHDB_URL;
 
