@@ -4,6 +4,7 @@
     "description": "",
     "errors": {
       "generic": "An error occurred. Please try again later.",
+      "fetchingData": "Failed to fetch data. Please check your connection and try again.",
       "401": "Unauthorized. Please check your credentials and try again.",
       "403": "Forbidden. You don't have permission to access this resource.",
       "404": "Not Found. The requested resource could not be found.",
