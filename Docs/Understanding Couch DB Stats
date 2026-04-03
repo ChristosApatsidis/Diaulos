@@ -1,0 +1,398 @@
+Understanding
+
+**CouchDB Stats**
+
+A Developer\'s Reading Guide
+
+*Apache CouchDB 3.x · Fauxton Dashboard & /\_node/noname@127.0.0.1/\_stats API*
+
+CouchDB exposes a rich set of runtime metrics through its Fauxton web UI and the HTTP stats API. These numbers tell the story of your database\'s health, load, and behaviour. This guide teaches you how to find each metric, what it measures, what a healthy value looks like, and which combinations of values should trigger action.
+
+  --- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  ℹ   **Note:** All stats are cumulative counters that reset when CouchDB restarts. They measure activity since the last startup --- not the current moment. To observe trends, compare stats over time or use a monitoring tool like Prometheus with the CouchDB exporter.
+
+  --- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**1 Where to Find the Stats**
+
+CouchDB exposes its stats in two ways: through the Fauxton web UI and directly over HTTP.
+
+**1.1 Fauxton Dashboard**
+
+Fauxton is CouchDB\'s built-in web interface. Navigate to:
+
+> http://localhost:5984/\_utils/#/dashboard
+
+Click the Database icon in the left sidebar to reach the stats page. The dashboard is divided into panels --- each maps to a section in this guide.
+
+**1.2 The Stats API**
+
+The same data is available as JSON at:
+
+> GET http://localhost:5984/\_node/noname@127.0.0.1/\_stats
+
+You can also hit the shortcut endpoint (returns a subset):
+
+> GET http://localhost:5984/\_stats
+
+  --- ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+  ℹ   **Note:** The \_node/noname@127.0.0.1 path targets the local node. In a cluster, replace the node name with the actual node identifier shown in /\_membership.
+
+  --- ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**2 Database Info --- The Instance Snapshot**
+
+The top panel of the dashboard gives you the identity of the instance you are looking at. Always verify this before reading any other metric, especially in multi-node or multi-environment setups.
+
+  ----------------------- ----------------- ----------------------------------------------------------------------------------------------------------------------------------
+  **Metric**              **Unit / Type**   **How to interpret it**
+
+  **host**                string            The hostname and port CouchDB is listening on. Confirms you\'re looking at the right instance.
+
+  **version**             semver            The CouchDB release. Ensure all cluster nodes run the same version. Features and API behaviour can differ across minor versions.
+
+  **vendor**              string            Always \'The Apache Software Foundation\' for official builds. Third-party distributions may differ.
+
+  **databases (count)**   integer           Number of databases on this node. Includes system databases (\_users, \_replicator, \_global_changes).
+  ----------------------- ----------------- ----------------------------------------------------------------------------------------------------------------------------------
+
+  --- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  ✓   **Best practice:** The three underscore-prefixed databases (\_users, \_replicator, \_global_changes) are always present. Count them in your total so the number doesn\'t surprise you.
+
+  --- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**3 HTTPD --- HTTP Request Traffic**
+
+CouchDB is an HTTP-native database --- every operation is an HTTP request. The HTTPD panel shows you the volume, shape, and health of that traffic since the last restart.
+
+**3.1 Request Volume Metrics**
+
+  --------------------- ----------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  **Metric**            **Unit / Type**   **How to interpret it**
+
+  **totalRequests**     counter           All HTTP requests received. Use this as your baseline load indicator.
+
+  **bulkRequests**      counter           Requests that used the /\_bulk_docs endpoint. Bulk operations are more efficient than individual document writes --- a high ratio of bulk to total is a good sign.
+
+  **viewReads**         counter           Reads from MapReduce design document views. If zero but your app queries data, you are likely using Mango queries instead.
+
+  **clientsChanges**    gauge             Current number of clients subscribed to /\_changes (long-poll or continuous). This is an active connection count, not a cumulative counter.
+
+  **abortedRequests**   counter           Requests where the client disconnected before CouchDB finished responding. Some aborts are normal; a spike may indicate slow queries or client timeout mismatches.
+  --------------------- ----------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**3.2 HTTP Method Breakdown**
+
+The distribution of HTTP methods tells you what kinds of operations your app is performing:
+
+  ------------------- ----------------- ---------------------------------------------------------------------------------------------------------------------------------
+  **Metric**          **Unit / Type**   **How to interpret it**
+
+  **GET**             counter           Document reads, view queries, Mango queries. Typically the highest value.
+
+  **POST**            counter           Document creates (without an ID), bulk writes, Mango queries, login. High POST counts are normal for apps that POST to /\_find.
+
+  **PUT**             counter           Document creates or updates with a known ID, database creation, design document updates.
+
+  **DELETE**          counter           Document deletions, database deletions.
+
+  **COPY**            counter           Document copy operations. Rare in most apps.
+
+  **HEAD**            counter           Existence checks --- returns headers but no body. Useful for checking if a document or database exists.
+  ------------------- ----------------- ---------------------------------------------------------------------------------------------------------------------------------
+
+  --- -----------------------------------------------------------------------------------------------------------------------------------------------------
+  ℹ   **Note:** A very high POST count relative to GET is common in Mango-heavy apps, because queries are POSTed to /\_find. This is normal and expected.
+
+  --- -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+**3.3 HTTP Status Codes**
+
+Status codes are the most direct signal of request health. Learn to read them as a distribution, not just individual values:
+
+  ------------------- ----------------- ---------------------------------------------------------------------------------------------------------------------
+  **Metric**          **Unit / Type**   **How to interpret it**
+
+  **2xx**             counter           Successful responses. This should be the overwhelming majority (\>95%) of all requests.
+
+  **200**             counter           OK --- document retrieved, query returned results, etc.
+
+  **201**             counter           Created --- document or database successfully created.
+
+  **202**             counter           Accepted --- write accepted but not yet quorum-committed (cluster setting dependent).
+
+  **3xx**             counter           Redirects. Rare in CouchDB; typically only seen for /\_session redirects.
+
+  **400**             counter           Bad Request --- malformed JSON, invalid query syntax. Indicates a bug in the calling code.
+
+  **401**             counter           Unauthorized --- missing or wrong credentials. Indicates expired sessions or misconfigured auth.
+
+  **403**             counter           Forbidden --- credentials are valid but the user lacks permission.
+
+  **404**             counter           Not Found --- document or database does not exist. Can be normal (existence checks) or indicate stale references.
+
+  **409**             counter           Conflict --- write attempted on an out-of-date document revision. Indicates a revision management issue in the app.
+
+  **412**             counter           Precondition Failed --- usually trying to create a database that already exists.
+
+  **429**             counter           Too Many Requests --- rate limiting triggered. Rarely seen unless you\'ve configured rate limiting.
+
+  **500**             counter           Internal Server Error --- CouchDB itself failed. Any non-zero value deserves investigation.
+  ------------------- ----------------- ---------------------------------------------------------------------------------------------------------------------
+
+  --- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  ⚠   **Watch out:** A single 500 error is worth investigating. Many databases run for months without any 500s. Check the CouchDB log at the same timestamp to find the cause.
+
+  --- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**3.4 How to Calculate Your Error Rate**
+
+**Error rate =** (4xx + 5xx) ÷ totalRequests × 100
+
+A healthy CouchDB instance should have an error rate below 1%. Between 1--5% suggests application-layer issues (bad queries, stale references, auth problems). Above 5% indicates a systemic problem.
+
+**4 Documents --- Read / Write Activity**
+
+The Documents panel tracks every operation that touched a document since startup. Use it to understand your workload profile and spot anomalies.
+
+  ------------------- ----------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  **Metric**          **Unit / Type**   **How to interpret it**
+
+  **reads**           counter           Individual document fetches (GET /db/docid). Does not include documents returned inside Mango or view query results.
+
+  **writes**          counter           Total write operations: creates, updates, and deletes. Includes bulk writes counted per-document.
+
+  **inserts**         counter           New documents created (revisions starting with 1-). Distinct from updates.
+
+  **localWrites**     counter           Writes to \_local/\* documents. These are used internally by the replication engine and are normally zero if no replication is active.
+
+  **dbChanges**       counter           Number of entries appended to the \_changes feed. Roughly tracks your write history. One change per document write.
+
+  **purges**          counter           Permanent history removals. Unlike deletion (which creates a tombstone), a purge removes all revision history. Normally zero --- purges are rare maintenance operations.
+  ------------------- ----------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**4.1 The Read/Write Ratio**
+
+Divide reads by writes to understand your workload:
+
+  ---------------------------- --------------------------- -------------------------------------------------------------------------------------------
+  **If you see...**            **And also...**             **It likely means...**
+
+  Reads \>\> Writes (\>10:1)   High view/query counts      Read-heavy app. Prioritise indexing and cache tuning.
+
+  Writes \>\> Reads (\<2:1)    High dbChanges              Write-heavy app. Watch disk usage and compaction frequency.
+
+  Writes high, inserts low     dbChanges growing fast      Many updates to existing documents. Watch for revision tree growth --- compact regularly.
+
+  localWrites \> 0             Replication is configured   Normal. localWrites tracks internal replication checkpoints.
+
+  purges \> 0                  No special other signals    Someone intentionally purged documents. Verify this was intentional maintenance.
+  ---------------------------- --------------------------- -------------------------------------------------------------------------------------------
+
+**5 Mango Queries --- The Query Engine**
+
+Mango is CouchDB\'s declarative JSON query language (introduced in CouchDB 2.0). The Mango panel is the most actionable section of the stats --- it reveals directly whether your queries are efficient or performing expensive full scans.
+
+  ------------------------ ----------------- ------------------------------------------------------------------------------------------------------------------------------------------------------
+  **Metric**               **Unit / Type**   **How to interpret it**
+
+  **docsExamined**         counter           Total documents the query engine inspected to fulfil all queries. Includes documents from indexed and unindexed queries alike.
+
+  **resultsReturned**      counter           Total documents actually returned to callers across all queries.
+
+  **unindexedQueries**     counter           Queries that ran without a matching index. CouchDB fell back to a full collection scan for each one. This is the most important metric in the panel.
+
+  **tooManyDocsScanned**   counter           Queries that caused CouchDB to emit an internal warning because the scan exceeded its internal threshold. These are your slowest individual queries.
+  ------------------------ ----------------- ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**5.1 Query Efficiency**
+
+**Efficiency =** resultsReturned ÷ docsExamined × 100
+
+This ratio tells you how much wasted work the query engine is doing:
+
+-   90--100% --- excellent. Indexes are well-matched to your query patterns.
+
+-   70--89% --- acceptable. Some queries may be doing extra work. Review unindexedQueries.
+
+-   50--69% --- poor. Significant number of unindexed queries. Add indexes.
+
+-   Below 50% --- critical. Most queries are scanning collections. Immediate action required.
+
+**5.2 Understanding Unindexed Queries**
+
+When unindexedQueries is non-zero, CouchDB is performing full collection scans --- reading every document to find matches. This is slow and gets slower as your data grows.
+
+To find and fix unindexed queries:
+
+1.  Enable the slow query log in CouchDB config: \[mango\] index_scan_warning_threshold = 100
+
+2.  Check your application logs for queries that include the warning \'No index exists for this sort\'
+
+3.  For each unindexed query pattern, create a Mango index: POST /your_db/\_index with {\"index\": {\"fields\": \[\"field_name\"\]}}
+
+4.  After adding indexes, re-run queries and watch docsExamined fall relative to resultsReturned
+
+  --- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  ⚠   **Watch out:** unindexedQueries grows by 1 for every query that lacks an index --- not every document scanned. Even a single query type called 1,000 times per minute will rapidly accumulate a large count.
+
+  --- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**5.3 Reading tooManyDocsScanned**
+
+This counter increments when a single query exceeds CouchDB\'s internal scan warning threshold. The default threshold is 1,000 documents per query. A non-zero value means at least one query pattern is doing significant full-scan work. These are your highest-priority queries to index.
+
+**6 Replication --- Sync Jobs**
+
+CouchDB\'s built-in replication continuously syncs databases between nodes or to/from external CouchDB instances. Replication jobs are defined as documents in the \_replicator database. The replication panel shows the health of all those jobs.
+
+  -------------------- ----------------- ---------------------------------------------------------------------------------------------------------------------------------------
+  **Metric**           **Unit / Type**   **How to interpret it**
+
+  **requests**         counter           Total replication API calls made since startup. Includes status checks and job creation attempts.
+
+  **workersStarted**   counter           Cumulative count of replication worker processes that have started. Each job starts at least one worker.
+
+  **failedStarts**     counter           Workers that failed to initialise. High failedStarts with low workersStarted is a red flag --- jobs are being created but cannot run.
+
+  **runningJobs**      gauge             Currently active replication workers. This is a live count, not cumulative.
+
+  **pendingJobs**      gauge             Jobs waiting to start (scheduler hasn\'t assigned them a worker yet). Some pending jobs are normal in a busy system.
+
+  **crashedJobs**      counter           Jobs that started but crashed during execution. CouchDB will retry these with exponential back-off.
+  -------------------- ----------------- ---------------------------------------------------------------------------------------------------------------------------------------
+
+**6.1 Reading Replication Health**
+
+  ------------------------ -------------------------- ------------------------------------------------------------------------------------------------------------------------------------
+  **If you see...**        **And also...**            **It likely means...**
+
+  failedStarts \> 0        workersStarted ≈ 0         Jobs are being rejected immediately. Check \_replicator docs for invalid target URLs or missing credentials.
+
+  crashedJobs \> 0         workersStarted \> 0        Jobs start but fail mid-sync. Check target reachability, SSL certificates, or auth token expiry.
+
+  runningJobs = 0          pendingJobs = 0            No active replication. Either intentional (no jobs defined) or all jobs have failed.
+
+  pendingJobs high         runningJobs at max         Job queue backing up. CouchDB has a default max_jobs limit. Increase it in config or reduce the number of concurrent replications.
+
+  workersStarted growing   crashedJobs also growing   Retry storm --- a job keeps crashing and restarting. Look up the specific job in \_replicator and fix the root cause.
+  ------------------------ -------------------------- ------------------------------------------------------------------------------------------------------------------------------------
+
+  --- ---------------------------------------------------------------------------------------------------------------------------------------------------------
+  ✓   **Best practice:** To inspect a failed job, GET /\_replicator/{job_id}. The doc will contain a \_replication_state_reason field with the error message.
+
+  --- ---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**6.2 Retry Settings**
+
+The replication panel also exposes retry configuration:
+
+  ---------------------------- ----------------- ---------------------------------------------------------------------------------------------------------
+  **Metric**                   **Unit / Type**   **How to interpret it**
+
+  **retries_per_request**      integer           How many times CouchDB retries a failed HTTP request during replication before giving up on that batch.
+
+  **max_retry_timeout_msec**   ms                Maximum back-off wait between retries. Caps the exponential back-off.
+
+  **min_retry_timeout_msec**   ms                Initial back-off wait on the first retry.
+  ---------------------------- ----------------- ---------------------------------------------------------------------------------------------------------
+
+**7 Cache --- Design Document Cache**
+
+CouchDB caches design documents (ddocs) in memory to avoid re-reading them from disk on every query. Design documents contain your view definitions and Mango index configurations --- they are read every time a related query runs.
+
+  --------------------- ----------------- -----------------------------------------------------------------------------------------------------------------------------------------
+  **Metric**            **Unit / Type**   **How to interpret it**
+
+  **ddocHits**          counter           Times a design document was served from the in-memory cache. Cache hits are fast --- no disk read required.
+
+  **ddocMisses**        counter           Times a design document was NOT in cache and had to be fetched from disk. Misses are expected after a restart while the cache warms up.
+
+  **authCacheHits**     counter           Times an authentication check was resolved from cache (avoids a \_users database read).
+
+  **authCacheMisses**   counter           Times an auth check required a live database lookup. A high miss rate can slow down every authenticated request.
+  --------------------- ----------------- -----------------------------------------------------------------------------------------------------------------------------------------
+
+**7.1 Cache Hit Rate**
+
+**DDDoc hit rate =** ddocHits ÷ (ddocHits + ddocMisses) × 100
+
+Target: 90% or higher after the cache has warmed up (typically a few minutes after restart).
+
+**Auth cache hit rate =** authCacheHits ÷ (authCacheHits + authCacheMisses) × 100
+
+A low auth cache hit rate (below 50%) means every request is hitting the \_users database. Check that auth_cache_size in your CouchDB config is large enough for the number of distinct users making concurrent requests.
+
+  ------------------------------ --------------------------- --------------------------------------------------------------------------------------------------
+  **If you see...**              **And also...**             **It likely means...**
+
+  ddocMisses spike               After a deployment          New design documents were pushed. The cache is warming. Normal --- will resolve within minutes.
+
+  ddocMisses consistently high   Many distinct design docs   Cache size too small. Increase max_ddoc_cache_size in couch.ini.
+
+  authCacheMisses = 0            authCacheHits = 0           All requests are unauthenticated (no session or API key), or auth caching is disabled in config.
+
+  authCacheMisses high           High request volume         Many distinct users, or auth cache too small. Tune auth_cache_size in couch.ini.
+  ------------------------------ --------------------------- --------------------------------------------------------------------------------------------------
+
+**8 Building a Monitoring Strategy**
+
+Stats are most useful when observed over time, not just at a single snapshot. Here is a practical approach:
+
+**8.1 Key Metrics to Alert On**
+
+-   **5xx errors \> 0** --- Server errors always warrant immediate investigation.
+
+-   **unindexedQueries growing** --- New query patterns without indexes. Add indexes before data grows.
+
+-   **failedStarts == requests** --- All replication jobs are failing. Total sync outage.
+
+-   **crashedJobs growing** --- Replication retry storm. Investigate the specific job.
+
+-   **abortedRequests spiking** --- Clients are timing out. Check for slow queries or server overload.
+
+**8.2 Good Baselines to Track**
+
+-   Error rate (4xx + 5xx) ÷ totalRequests --- establish your baseline and alert on deviations
+
+-   Mango efficiency --- resultsReturned ÷ docsExamined --- should stay above 85%
+
+-   DDDoc hit rate --- should stay above 90% except immediately after restart
+
+-   runningJobs --- if you have active replications, this should be \> 0
+
+**8.3 Useful CouchDB Config Knobs**
+
+  ---------------------------------- ----------------- -------------------------------------------------------------------------------------------------
+  **Metric**                         **Unit / Type**   **How to interpret it**
+
+  **max_ddoc_cache_size**            bytes             Maximum memory for the design doc cache. Increase if ddocMisses is chronically high.
+
+  **auth_cache_size**                integer           Number of auth entries to cache. Increase for high-concurrency authenticated apps.
+
+  **max_jobs (replicator)**          integer           Maximum concurrent replication jobs. Increase if pendingJobs is always \> 0.
+
+  **index_scan_warning_threshold**   integer           Docs-per-query threshold before CouchDB warns. Lower this to catch inefficient queries earlier.
+  ---------------------------------- ----------------- -------------------------------------------------------------------------------------------------
+
+**Quick Reference Cheatsheet**
+
+  ------------------- --------------------------------------------------------------------------------------
+  **Section**         **One-line purpose**
+
+  **Database Info**   Confirm you\'re on the right host, version, and see all database names
+
+  **HTTPD**           Total load + method mix + error rate (target \<1% 4xx/5xx)
+
+  **Documents**       Read/write profile and workload type (read-heavy vs write-heavy)
+
+  **Mango Queries**   Index coverage --- unindexedQueries should be 0; efficiency should be \>90%
+
+  **Replication**     Job health --- failedStarts and crashedJobs should be 0 if replication is configured
+
+  **Cache**           DDDoc hit rate should be \>90%; auth cache hit rate should be \>50%
+  ------------------- --------------------------------------------------------------------------------------
+
+Apache CouchDB Documentation:
+
+https://docs.couchdb.org/en/stable/
