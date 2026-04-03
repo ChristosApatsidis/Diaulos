@@ -1,4 +1,5 @@
 // api/database/route.ts
+import { AdminDatabaseStats } from "@/types/admin/database";
 import { NextResponse } from "next/server";
 import "server-only";
 
@@ -93,7 +94,7 @@ export async function GET() {
     const replicator = stats?.couch_replicator;
     const ddocCache = stats?.ddoc_cache;
 
-    return NextResponse.json({
+    const responseData = {
       host: url.host,
       version: info.version,
       vendor: info.vendor?.name ?? "Apache CouchDB",
@@ -104,7 +105,6 @@ export async function GET() {
         commits: c?.commits?.value ?? null,
         fsyncCount: stats?.fsync?.count?.value ?? null,
       },
-
       documents: {
         reads: c?.database_reads?.value ?? null,
         writes: c?.document_writes?.value ?? null,
@@ -113,7 +113,6 @@ export async function GET() {
         dbChanges: c?.database_writes?.value ?? null,
         purges: c?.database_purges?.value ?? null,
       },
-
       httpd: {
         totalRequests: httpd?.requests?.value ?? null,
         bulkRequests: httpd?.bulk_requests?.value ?? null,
@@ -135,14 +134,12 @@ export async function GET() {
           "500": codes?.["500"]?.value ?? null,
         },
       },
-
       mango: {
         docsExamined: mango?.docs_examined?.value ?? null,
         resultsReturned: mango?.results_returned?.value ?? null,
         unindexedQueries: mango?.unindexed_queries?.value ?? null,
         tooManyDocsScanned: mango?.too_many_docs_scanned?.value ?? null,
       },
-
       replication: {
         requests: replicator?.requests?.value ?? null,
         workersStarted: replicator?.workers_started?.value ?? null,
@@ -156,12 +153,18 @@ export async function GET() {
         min_retry_timeout_msec:
           replicatorConfig?.min_retry_timeout_msec ?? null,
       },
-
       cache: {
         ddocHits: ddocCache?.hit?.value ?? null,
         ddocMisses: ddocCache?.miss?.value ?? null,
         authCacheHits: c?.auth_cache_hits?.value ?? null,
         authCacheMisses: c?.auth_cache_misses?.value ?? null,
+      },
+    } as AdminDatabaseStats;
+
+    return NextResponse.json(responseData, {
+      status: 200,
+      headers: {
+        "Cache-Control": "public, max-age=10",
       },
     });
   } catch (err: any) {
