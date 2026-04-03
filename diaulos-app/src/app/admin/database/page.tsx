@@ -2,9 +2,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import UsersTable from "@/components/ui/tables/Users";
-import { useEffect, useState } from "react";
-import TreeView, { type TreeNodeData } from "@/components/ui/treeView";
+import { toast } from "@heroui/react";
 import useSWR from "swr";
 import AdminDatabaseInfoCard from "@/components/ui/cards/AdminDatabaseInfoCard";
 import AdminDatabaseStatsDatabasesCard from "@/components/ui/cards/AdminDatabaseStatsDatabasesCard";
@@ -25,7 +23,7 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json());
  * @returns The rendered admin database dashboard page.
  */
 export default function AdminDatabasePage() {
-  const generalTranslations = useTranslations("general");
+  const adminDatabaseTranslations = useTranslations("page_admin_database");
 
   const {
     data: databaseInfoData,
@@ -41,6 +39,26 @@ export default function AdminDatabasePage() {
     "/api/admin/database/replication/targets",
     fetcher,
   );
+
+  if (databaseInfoError) {
+    toast.danger(
+      adminDatabaseTranslations("toast.errorLoadingDBStats.title", {
+        message: adminDatabaseTranslations(
+          "toast.errorLoadingDBStats.description",
+        ),
+      }),
+    );
+  }
+
+  if (targetsError) {
+    toast.danger(
+      adminDatabaseTranslations("toast.errorLoadingReplicationTargets.title", {
+        message: adminDatabaseTranslations(
+          "toast.errorLoadingReplicationTargets.description",
+        ),
+      }),
+    );
+  }
 
   return (
     <main className="px-4 py-4 pb-4 flex flex-col gap-2">
@@ -109,6 +127,23 @@ export default function AdminDatabasePage() {
               cache={databaseInfoData?.cache}
               cacheLoading={databaseInfoLoading}
               cacheError={databaseInfoError}
+            />
+          </div>
+        </div>
+        {/* Replication targets */}
+        <div className="grid grid-cols-12 gap-2">
+          <div className="col-span-12 sm:col-span-6 md:col-span-12 lg:col-span-6 2xl:col-span-3">
+            <AdminDatabaseStatsMangoCard
+              mango={databaseInfoData?.mango}
+              mangoLoading={databaseInfoLoading}
+              mangoError={databaseInfoError}
+            />
+          </div>
+          <div className="col-span-12 sm:col-span-6 md:col-span-12 lg:col-span-6 2xl:col-span-9">
+            <AdminDatabaseStatsMangoCard
+              mango={databaseInfoData?.mango}
+              mangoLoading={databaseInfoLoading}
+              mangoError={databaseInfoError}
             />
           </div>
         </div>

@@ -446,5 +446,18 @@
       "usernameIsTaken": "The username is already taken by another user.",
       "validationError": "Please correct the errors in the form and try again."
     }
+  },
+
+  "page_admin_database": {
+    "toast": {
+      "errorLoadingDBStats": {
+        "title": "Data Load Failed",
+        "description": "Failed to load database statistics."
+      },
+      "errorLoadingReplicationTargets": {
+        "title": "Data Load Failed",
+        "description": "Failed to load replication targets."
+      }
+    }
   }
 }
