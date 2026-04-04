@@ -2,7 +2,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { toast } from "@heroui/react";
+import { Surface, toast } from "@heroui/react";
 import useSWR from "swr";
 import AdminDatabaseInfoCard from "@/components/ui/cards/AdminDatabaseInfoCard";
 import AdminDatabaseStatsDatabasesCard from "@/components/ui/cards/AdminDatabaseStatsDatabasesCard";
@@ -11,6 +11,8 @@ import AdminDatabaseStatsDocumentsCard from "@/components/ui/cards/AdminDatabase
 import AdminDatabaseStatsHTTPDCard from "@/components/ui/cards/AdminDatabaseStatsHTTPDCard";
 import AdminDatabaseStatsMangoCard from "@/components/ui/cards/AdminDatabaseStatsMangoCard";
 import AdminDatabaseStatsCacheCard from "@/components/ui/cards/AdminDatabaseStatsCacheCard";
+import AdminDatabaseReplicationTargetsCard from "@/components/ui/cards/AdminDatabaseReplicationTargetsCard";
+import DatabaseReplicationTargetsTable from "@/components/ui/tables/DatabaseReplicationTargetsTable";
 import { AdminDatabaseStats, ReplicationTarget } from "@/types/admin/database";
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
@@ -29,15 +31,31 @@ export default function AdminDatabasePage() {
     data: databaseInfoData,
     error: databaseInfoError,
     isLoading: databaseInfoLoading,
-  } = useSWR<AdminDatabaseStats>("/api/admin/database", fetcher);
+    mutate: refreshDatabaseInfo,
+  } = useSWR<AdminDatabaseStats>("/api/admin/database", fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+    dedupingInterval: 0,
+    refreshInterval: 5000,
+  });
 
   const {
-    data: targets,
-    error: targetsError,
-    isLoading: targetsLoading,
+    data: databaseReplicationTargets,
+    error: databaseReplicationTargetsError,
+    isLoading: databaseReplicationTargetsLoading,
+    isValidating: databaseReplicationTargetsValidating,
+    mutate: refreshDatabaseReplicationTargets,
   } = useSWR<ReplicationTarget[]>(
     "/api/admin/database/replication/targets",
     fetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      dedupingInterval: 0,
+      refreshInterval: 5000,
+    },
   );
 
   if (databaseInfoError) {
@@ -45,16 +63,6 @@ export default function AdminDatabasePage() {
       adminDatabaseTranslations("toast.errorLoadingDBStats.title", {
         message: adminDatabaseTranslations(
           "toast.errorLoadingDBStats.description",
-        ),
-      }),
-    );
-  }
-
-  if (targetsError) {
-    toast.danger(
-      adminDatabaseTranslations("toast.errorLoadingReplicationTargets.title", {
-        message: adminDatabaseTranslations(
-          "toast.errorLoadingReplicationTargets.description",
         ),
       }),
     );
@@ -132,18 +140,25 @@ export default function AdminDatabasePage() {
         </div>
         {/* Replication targets */}
         <div className="grid grid-cols-12 gap-2">
-          <div className="col-span-12 sm:col-span-6 md:col-span-12 lg:col-span-6 2xl:col-span-3">
-            <AdminDatabaseStatsMangoCard
-              mango={databaseInfoData?.mango}
-              mangoLoading={databaseInfoLoading}
-              mangoError={databaseInfoError}
-            />
-          </div>
-          <div className="col-span-12 sm:col-span-6 md:col-span-12 lg:col-span-6 2xl:col-span-9">
-            <AdminDatabaseStatsMangoCard
-              mango={databaseInfoData?.mango}
-              mangoLoading={databaseInfoLoading}
-              mangoError={databaseInfoError}
+          <div className="col-span-12">
+            <AdminDatabaseReplicationTargetsCard
+              databaseReplicationTargets={databaseReplicationTargets}
+              databaseReplicationTargetsLoading={
+                databaseReplicationTargetsLoading
+              }
+              databaseReplicationTargetsValidating={
+                databaseReplicationTargetsValidating
+              }
+              databaseReplicationTargetsError={databaseReplicationTargetsError}
+              onRefresh={() => {
+                refreshDatabaseReplicationTargets();
+                refreshDatabaseInfo();
+              }}
+              databases={databaseInfoData?.databases}
+              sourceDatabase={{
+                host: databaseInfoData?.host.split(":")[0] ?? "",
+                port: databaseInfoData?.host.split(":")[1] ?? "5984",
+              }}
             />
           </div>
         </div>

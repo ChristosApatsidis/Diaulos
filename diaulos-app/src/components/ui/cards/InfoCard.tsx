@@ -5,13 +5,18 @@ import { Separator, Surface } from "@heroui/react";
 
 type InfoCardProps = {
   children: React.ReactNode;
+  variant?: "default" | "secondary" | "tertiary" | "transparent";
   className?: string;
 };
 
-function InfoCard({ children, className = "" }: InfoCardProps) {
+function InfoCard({
+  children,
+  variant = "default",
+  className = "",
+}: InfoCardProps) {
   return (
     <Surface
-      variant="default"
+      variant={variant}
       className={`flex flex-col rounded-3xl border border-secondary p-4 ${className}`}
     >
       {children}
