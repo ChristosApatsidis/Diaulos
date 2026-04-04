@@ -82,9 +82,6 @@ configs:
   couchdb_replicator_config:
     content: |
       [replicator]
-      retries_per_request = 99999
-      min_retry_timeout_msec = 1000
-      max_retry_timeout_msec = 5000
 
 networks:
   couchdb-net:
