@@ -94,23 +94,39 @@ export default function AdminDatabaseReplicationTargetsCard({
             </div>
             <Separator className="my-2" />
             {!databaseReplicationTargetsLoading ? (
-              <div className="flex flex-row gap-2">
-                <NewDatabaseReplicationTarget
-                  sourceDatabaseHost={sourceDatabase?.host.split(":")[0]}
-                  sourceDatabasePort={sourceDatabase?.port.split(":")[0]}
-                  databases={databases}
-                  onReplicationCreated={() => onRefresh()}
-                />
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onPress={() => onRefresh()}
-                  isDisabled={databaseReplicationTargetsValidating}
-                >
-                  {databaseReplicationTargetsValidating
-                    ? "Refreshing..."
-                    : "Refresh"}
-                </Button>
+              <div className="flex flex-col gap-2">
+                <div>
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    onPress={() =>
+                      window.open(
+                        `http://${sourceDatabase?.host}:${sourceDatabase?.port}/_utils/`,
+                        "_blank",
+                      )
+                    }
+                  >
+                    Go to Couch DB Dashboard
+                  </Button>
+                </div>
+                <div className="flex flex-row gap-2">
+                  <NewDatabaseReplicationTarget
+                    sourceDatabaseHost={sourceDatabase?.host.split(":")[0]}
+                    sourceDatabasePort={sourceDatabase?.port.split(":")[0]}
+                    databases={databases}
+                    onReplicationCreated={() => onRefresh()}
+                  />
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onPress={() => onRefresh()}
+                    isDisabled={databaseReplicationTargetsValidating}
+                  >
+                    {databaseReplicationTargetsValidating
+                      ? "Refreshing..."
+                      : "Refresh"}
+                  </Button>
+                </div>
               </div>
             ) : (
               <div className="flex flex-row gap-2">
