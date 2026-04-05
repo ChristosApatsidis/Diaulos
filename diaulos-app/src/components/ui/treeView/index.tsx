@@ -7,7 +7,8 @@ import { ChevronRight, type LucideIcon } from "lucide-react";
 export type TreeNodeData = {
   id: string | number;
   label: string;
-  icon: LucideIcon;
+  labelStyle?: string;
+  icon?: LucideIcon;
   iconColor?: string;
   count?: number;
   children?: TreeNodeData[];
@@ -29,7 +30,6 @@ function TreeNode({
   const [open, setOpen] = useState(
     defaultExpanded || node.defaultOpen || false,
   );
-  const [selected, _setSelected] = useState(false);
   const hasChildren = !!node.children?.length;
   const Icon = node.icon;
 
@@ -37,40 +37,37 @@ function TreeNode({
     <div>
       <div
         onClick={() => hasChildren && setOpen(!open)}
-        className={`flex items-center gap-1.5 px-2 py-1.5 rounded-md cursor-pointer text-sm select-none
+        className={`flex items-center gap-1.5 px-2 py-2 rounded-md cursor-pointer text-sm select-none
           transition-colors duration-100 hover:bg-gray-100 dark:hover:bg-gray-800`}
       >
         {/* Chevron */}
         <ChevronRight
-          size={13}
+          size={16}
           className={`flex-shrink-0 text-gray-400 transition-transform duration-200
             ${hasChildren ? "" : "opacity-0 pointer-events-none"}
             ${open ? "rotate-90" : ""}`}
         />
 
         {/* Custom Lucide icon */}
-        <Icon
-          size={16}
-          className="flex-shrink-0"
-          style={{
-            color: node.iconColor || "#9ca3af",
-          }}
-          strokeWidth={1.75}
-        />
+        {Icon && (
+          <Icon
+            size={16}
+            className="flex-shrink-0"
+            style={{
+              color: node.iconColor || "#9ca3af",
+            }}
+            strokeWidth={1.75}
+          />
+        )}
 
         {/* Label */}
-        <span
-          className={`flex-1 truncate ${selected ? "text-blue-600 dark:text-blue-400" : "text-gray-800 dark:text-gray-200"}`}
-        >
+        <span className={`flex-1 truncate ${node.labelStyle}`}>
           {node.label}
         </span>
 
         {/* Badge */}
         {node.count != null && (
-          <span
-            className={`text-xs px-1.5 py-0.5 rounded-full font-medium
-            ${selected ? "bg-blue-500 text-white" : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400"}`}
-          >
+          <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium`}>
             {node.count}
           </span>
         )}
@@ -79,8 +76,10 @@ function TreeNode({
       {/* Children */}
       {hasChildren && open && (
         <div
-          className="pl-5 relative before:absolute before:left-[15px] before:top-0
-          before:bottom-2 before:w-px before:bg-gray-200 dark:before:bg-gray-700"
+          className="pl-6 relative
+      before:absolute before:left-[15px] before:top-0 before:bottom-0 before:w-0.5 before:bg-gray-700
+      after:absolute after:left-[15px] after:bottom-0 after:h-0.5 after:w-sm after:bg-gray-700
+      dark:before:bg-gray-700 dark:after:bg-gray-700"
         >
           {node.children?.map((child) => (
             <TreeNode key={child.id} node={child} />

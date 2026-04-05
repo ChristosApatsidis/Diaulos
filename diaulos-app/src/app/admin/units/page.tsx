@@ -8,6 +8,7 @@ import {
   Package,
   Paintbrush,
   Plane,
+  Dot,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import TreeView, { type TreeNodeData } from "@/components/ui/treeView";
@@ -75,11 +76,7 @@ export default function AdminUnitsPage() {
   const unitToTreeNode = (unit: UnitWithChildren): TreeNodeData => ({
     id: unit._id,
     label: unit.name,
-    icon: ["af_general_staff", "navy_general_staff", "army"].includes(
-      unit.unitType,
-    )
-      ? Plane
-      : Folder,
+    labelStyle: `${unit.parentId === null ? "text-lg font-bold" : "font-semibold"}`,
     iconColor: "#3b82f6",
     defaultOpen: true,
     children: unit.children?.map(unitToTreeNode),
