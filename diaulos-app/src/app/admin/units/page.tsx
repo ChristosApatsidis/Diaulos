@@ -1,7 +1,14 @@
 // admin/units/page.tsx
 "use client";
 
-import { FileCode, Folder, Image, Package, Paintbrush } from "lucide-react";
+import {
+  FileCode,
+  Folder,
+  Image,
+  Package,
+  Paintbrush,
+  Plane,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 import TreeView, { type TreeNodeData } from "@/components/ui/treeView";
 import useSWR from "swr";
@@ -68,7 +75,11 @@ export default function AdminUnitsPage() {
   const unitToTreeNode = (unit: UnitWithChildren): TreeNodeData => ({
     id: unit._id,
     label: unit.name,
-    icon: Folder,
+    icon: ["af_general_staff", "navy_general_staff", "army"].includes(
+      unit.unitType,
+    )
+      ? Plane
+      : Folder,
     iconColor: "#3b82f6",
     defaultOpen: true,
     children: unit.children?.map(unitToTreeNode),

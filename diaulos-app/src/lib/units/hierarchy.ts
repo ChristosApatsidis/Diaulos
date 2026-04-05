@@ -4,11 +4,14 @@ import type { BranchType, UnitType } from "@/types/units";
 // Maps each unitType to its required parent unitType (null = root)
 export const HIERARCHY: Record<UnitType, UnitType | null> = {
   // Army
-  army:                    null,
-  corps:                   "army",
-  division:                "corps",
-  brigade:                 "division",
-  regiment:                "brigade",
+  army:                    null,          // Στρατός — root
+  corps:                   "army",        // Σώμα
+  division:                "corps",       // Μεραρχία 
+  brigade:                 "division",    // Ταξιαρχία
+  regiment:                "brigade",     // Σύνταγμα
+  battalion:               "regiment",    // Τάγμα
+  company:                 "battalion",   // Λόχος
+  platoon:                 "company",     // Διμοιρία
 
   // Hellenic Air Force
   af_general_staff:        null,

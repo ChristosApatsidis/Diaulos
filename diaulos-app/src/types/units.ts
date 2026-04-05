@@ -14,7 +14,10 @@ export type ArmyUnitType =
   | "corps" 
   | "division" 
   | "brigade" 
-  | "regiment";
+  | "regiment"
+  | "battalion"
+  | "company"
+  | "platoon";
 
 export type AirForceUnitType =
   | "af_general_staff"       // Αρχηγείο ΓΕΑ — root
