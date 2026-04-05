@@ -5,7 +5,7 @@ import { useState } from "react";
 import { ChevronRight, type LucideIcon } from "lucide-react";
 
 export type TreeNodeData = {
-  id: number;
+  id: string | number;
   label: string;
   icon: LucideIcon;
   iconColor?: string;
