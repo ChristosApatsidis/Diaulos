@@ -2,7 +2,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Surface, toast } from "@heroui/react";
+import { toast } from "@heroui/react";
 import useSWR from "swr";
 import AdminDatabaseInfoCard from "@/components/ui/cards/AdminDatabaseInfoCard";
 import AdminDatabaseStatsDatabasesCard from "@/components/ui/cards/AdminDatabaseStatsDatabasesCard";

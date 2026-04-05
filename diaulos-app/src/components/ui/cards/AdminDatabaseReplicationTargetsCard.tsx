@@ -2,7 +2,7 @@
 "use client";
 
 import { Skeleton, Button, Separator, toast } from "@heroui/react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
 import { ReplicationTarget } from "@/types/admin/database";
 import DatabaseReplicationTargetsTable from "@/components/ui/tables/DatabaseReplicationTargetsTable";
@@ -37,7 +37,6 @@ export default function AdminDatabaseReplicationTargetsCard({
   };
   onRefresh: () => void;
 }) {
-  const locale = useLocale();
   const generalTranslations = useTranslations("general");
 
   if (databaseReplicationTargetsError) {

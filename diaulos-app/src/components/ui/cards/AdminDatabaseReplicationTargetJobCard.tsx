@@ -90,6 +90,12 @@ export default function AdminDatabaseReplicationTargetJobCard({
   );
 }
 
+/**
+ * This component provides action buttons for a replication job, such as deleting the job. It handles the deletion process by making an API call to the backend and provides feedback to the user through toast notifications.
+ * @param docId - The document ID of the replication job to be deleted.
+ * @param onDelete - A callback function to be called after the deletion process is completed, allowing the parent component to refresh the data or update the UI accordingly.
+ * @returns The rendered action buttons for managing the replication job.
+ */
 function ReplicationTargetJobActions({
   docId,
   onDelete,
