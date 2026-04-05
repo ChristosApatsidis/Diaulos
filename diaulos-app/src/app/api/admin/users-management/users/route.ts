@@ -63,9 +63,6 @@ export async function GET(request: NextRequest) {
 
     const totalPages = Math.ceil(stats.total / limit);
 
-    // wait 2 seconds to simulate loading state (for demo purposes)
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
     // Normalize _id to id for frontend consistency
     users.forEach((user: any) => {
       if (user._id) {

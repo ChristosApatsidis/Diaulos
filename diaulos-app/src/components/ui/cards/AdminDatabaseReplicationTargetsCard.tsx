@@ -2,7 +2,6 @@
 "use client";
 
 import { Button, Separator, Skeleton } from "@heroui/react";
-import { useTranslations } from "next-intl";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
 import NewDatabaseReplicationTarget from "@/components/ui/modals/NewDatabaseReplicationTarget";
 import DatabaseReplicationTargetsTable from "@/components/ui/tables/DatabaseReplicationTargetsTable";
@@ -37,8 +36,6 @@ export default function AdminDatabaseReplicationTargetsCard({
   };
   onRefresh: () => void;
 }) {
-  const _generalTranslations = useTranslations("general");
-
   if (databaseReplicationTargetsError) {
     return (
       <InfoCard className="h-full">

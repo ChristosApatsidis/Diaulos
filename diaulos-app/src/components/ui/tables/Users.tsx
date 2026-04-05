@@ -18,20 +18,7 @@ import useSWR from "swr";
 import EditUserDetailsModal from "@/components/ui/modals/EditUserDetails";
 import ViewUserDetailsModal from "@/components/ui/modals/ViewUserDetails";
 import { authClient } from "@/lib/better-auth/auth-client";
-import type { User } from "@/types";
-
-export type UsersResponse = {
-  users: User[];
-  stats: {
-    total: number;
-    admins: number;
-    viewers: number;
-    users: number;
-  };
-  page: number;
-  totalPages: number;
-  limit: number;
-};
+import type { UsersResponse } from "@/types/admin/users";
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
@@ -170,7 +157,7 @@ export default function UsersTable() {
           >
             {usersLoading
               ? null
-              : (user: User) => (
+              : (user: UsersResponse["users"][number]) => (
                   <Table.Row key={user.id}>
                     <Table.Cell>{user.name}</Table.Cell>
                     <Table.Cell>{user.username || "-"}</Table.Cell>
@@ -300,7 +287,7 @@ function UserActions({
   onUserDeleted,
   onUserUpdated,
 }: {
-  user: User;
+  user: UsersResponse["users"][number];
   onUserDeleted: () => void;
   onUserUpdated: () => void;
 }) {
@@ -328,7 +315,7 @@ function UserActionDelete({
   user,
   onUserDeleted,
 }: {
-  user: User;
+  user: UsersResponse["users"][number];
   onUserDeleted: () => void;
 }) {
   const usersTableTranslations = useTranslations("component_ui_tables_users");
@@ -357,7 +344,9 @@ function UserActionDelete({
     toast.success(usersTableTranslations("toast.deleteSuccess.title"), {
       description: usersTableTranslations("toast.deleteSuccess.description"),
     });
-    onUserDeleted();
+
+    await onUserDeleted();
+
     setIsDeleting(false);
   };
 
