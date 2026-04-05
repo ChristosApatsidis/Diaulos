@@ -1,6 +1,5 @@
 // api/units/route.tsx
 import { NextResponse } from "next/server";
-import nano from "@/lib/db";
 
 export async function GET() {
   const units = [

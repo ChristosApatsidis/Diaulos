@@ -24,7 +24,7 @@ export type ReplicationJob = {
   [key: string]: unknown;
 };
 
- export type ReplicationTarget = {
+export type ReplicationTarget = {
   target_name: string;
   target_url: string;
   target_host: string;
@@ -86,12 +86,9 @@ export type AdminDatabaseStatsStorage = {
   fsyncCount: number;
 };
 
-export type AdminDatabaseStatsDatabases = [
-  "_global_changes",
-  "_replicator",
-  "_users",
-  string,
-] | [];
+export type AdminDatabaseStatsDatabases =
+  | ["_global_changes", "_replicator", "_users", string]
+  | [];
 
 export type AdminDatabaseStats = {
   host: string;

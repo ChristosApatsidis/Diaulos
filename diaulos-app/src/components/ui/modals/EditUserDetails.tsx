@@ -1,14 +1,14 @@
 // components/ui/modals/EditUserDetails.tsx
 "use client";
 
-import { Button, Modal, toast, useOverlayState } from "@heroui/react";
-import { UserPen, Save } from "lucide-react";
-import { useTranslations } from "next-intl";
-import EditPersonalInformationCard from "@/components/ui/cards/EditPersonalInformationCard";
-import EditMilitaryInformationCard from "@/components/ui/cards/EditMilitaryInformationCard";
-import EditAccountPermissionsCard from "@/components/ui/cards/EditAccountPermissionsCard";
-import type { User } from "@/types";
 import { useEffect, useState } from "react";
+import { Button, Modal, toast, useOverlayState } from "@heroui/react";
+import { Save, UserPen } from "lucide-react";
+import { useTranslations } from "next-intl";
+import EditAccountPermissionsCard from "@/components/ui/cards/EditAccountPermissionsCard";
+import EditMilitaryInformationCard from "@/components/ui/cards/EditMilitaryInformationCard";
+import EditPersonalInformationCard from "@/components/ui/cards/EditPersonalInformationCard";
+import type { User } from "@/types";
 
 type EditProfileForm = {
   name: string;

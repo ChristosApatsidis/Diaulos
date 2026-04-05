@@ -1,19 +1,21 @@
 // admin/database/page.tsx
 "use client";
 
-import { useTranslations } from "next-intl";
 import { toast } from "@heroui/react";
+import { useTranslations } from "next-intl";
 import useSWR from "swr";
 import AdminDatabaseInfoCard from "@/components/ui/cards/AdminDatabaseInfoCard";
+import AdminDatabaseReplicationTargetsCard from "@/components/ui/cards/AdminDatabaseReplicationTargetsCard";
+import AdminDatabaseStatsCacheCard from "@/components/ui/cards/AdminDatabaseStatsCacheCard";
 import AdminDatabaseStatsDatabasesCard from "@/components/ui/cards/AdminDatabaseStatsDatabasesCard";
-import AdminDatabaseStatsReplicationCard from "@/components/ui/cards/AdminDatabaseStatsReplicationCard";
 import AdminDatabaseStatsDocumentsCard from "@/components/ui/cards/AdminDatabaseStatsDocumentsCard";
 import AdminDatabaseStatsHTTPDCard from "@/components/ui/cards/AdminDatabaseStatsHTTPDCard";
 import AdminDatabaseStatsMangoCard from "@/components/ui/cards/AdminDatabaseStatsMangoCard";
-import AdminDatabaseStatsCacheCard from "@/components/ui/cards/AdminDatabaseStatsCacheCard";
-import AdminDatabaseReplicationTargetsCard from "@/components/ui/cards/AdminDatabaseReplicationTargetsCard";
-import DatabaseReplicationTargetsTable from "@/components/ui/tables/DatabaseReplicationTargetsTable";
-import { AdminDatabaseStats, ReplicationTarget } from "@/types/admin/database";
+import AdminDatabaseStatsReplicationCard from "@/components/ui/cards/AdminDatabaseStatsReplicationCard";
+import type {
+  AdminDatabaseStats,
+  ReplicationTarget,
+} from "@/types/admin/database";
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 

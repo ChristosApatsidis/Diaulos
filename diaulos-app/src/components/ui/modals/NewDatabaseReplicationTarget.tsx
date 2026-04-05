@@ -1,22 +1,22 @@
 // components/ui/modals/NewDatabaseReplicationTarget.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { Key } from "@heroui/react";
 import {
   Button,
-  Skeleton,
-  Modal,
-  useOverlayState,
-  TextField,
-  Label,
-  Separator,
-  Input,
   Checkbox,
-  Select,
-  ListBox,
   FieldError,
+  Input,
+  Label,
+  ListBox,
+  Modal,
+  Select,
+  Separator,
+  Skeleton,
+  TextField,
   toast,
+  useOverlayState,
 } from "@heroui/react";
 import { Eye } from "lucide-react";
 
@@ -120,7 +120,7 @@ export default function NewDatabaseReplicationTarget({
     if (Object.keys(errors).length) {
       setErrors({});
     }
-  }, [source, target, options, targetName]);
+  }, [errors]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -384,7 +384,7 @@ function EndpointFields({
   );
 }
 
-const InfoRow = ({
+const _InfoRow = ({
   label,
   value,
   skeleton,

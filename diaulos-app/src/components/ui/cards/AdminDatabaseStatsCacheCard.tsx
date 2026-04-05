@@ -1,10 +1,10 @@
 // components/ui/cards/AdminDatabaseStatsMangoCard.tsx
 "use client";
 
-import { Skeleton, Separator, ProgressBar } from "@heroui/react";
+import { ProgressBar, Separator, Skeleton } from "@heroui/react";
 import { useLocale, useTranslations } from "next-intl";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
-import { AdminDatabaseStatsCache } from "@/types/admin/database";
+import type { AdminDatabaseStatsCache } from "@/types/admin/database";
 
 /**
  * This component displays cache statistics for the CouchDB server in the admin dashboard.
@@ -25,8 +25,8 @@ export default function AdminDatabaseStatsCacheCard({
   cacheLoading?: boolean;
   cacheError?: any;
 }) {
-  const locale = useLocale();
-  const generalTranslations = useTranslations("general");
+  const _locale = useLocale();
+  const _generalTranslations = useTranslations("general");
 
   // Calculate derived metrics
   const cacheTotal = (cache?.ddocHits ?? 0) + (cache?.ddocMisses ?? 0);

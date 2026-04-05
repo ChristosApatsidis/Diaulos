@@ -1,6 +1,7 @@
 // api/database/route.ts
-import { AdminDatabaseStats } from "@/types/admin/database";
+
 import { NextResponse } from "next/server";
+import type { AdminDatabaseStats } from "@/types/admin/database";
 import "server-only";
 
 const COUCHDB_URL = process.env.COUCHDB_URL;

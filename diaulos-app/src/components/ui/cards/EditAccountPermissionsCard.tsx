@@ -1,7 +1,7 @@
 // components/ui/modals/EditUserDetails.tsx
 "use client";
 
-import { Checkbox, Label, Description } from "@heroui/react";
+import { Checkbox, Description, Label } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { InfoCard } from "./InfoCard";
 

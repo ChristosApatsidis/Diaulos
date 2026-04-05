@@ -1,11 +1,11 @@
 // components/ui/cards/AdminDatabaseStatsMangoCard.tsx
 "use client";
 
-import { Chip, Skeleton, Separator, ProgressBar } from "@heroui/react";
+import { Chip, ProgressBar, Separator, Skeleton } from "@heroui/react";
+import { TriangleAlert } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
-import { TriangleAlert } from "lucide-react";
-import { AdminDatabaseStatsMango } from "@/types/admin/database";
+import type { AdminDatabaseStatsMango } from "@/types/admin/database";
 
 /**
  * This component displays cache statistics for the CouchDB server in the admin dashboard.
@@ -26,8 +26,8 @@ export default function AdminDatabaseStatsMangoCard({
   mangoLoading?: boolean;
   mangoError?: any;
 }) {
-  const locale = useLocale();
-  const generalTranslations = useTranslations("general");
+  const _locale = useLocale();
+  const _generalTranslations = useTranslations("general");
 
   // The efficiency of Mango queries is calculated as the percentage of results returned out of the total documents examined. It is rounded to the nearest whole number for display.
   const mangoEfficiency =

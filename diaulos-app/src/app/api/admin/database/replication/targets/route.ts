@@ -16,12 +16,12 @@ type ReplicationEndpoint = {
 };
 
 type ReplicationDoc = {
-  _id: string,
-  source: string,
-  target: string,
-  target_name: string,
-  continuous: boolean,
-  create_target: boolean,
+  _id: string;
+  source: string;
+  target: string;
+  target_name: string;
+  continuous: boolean;
+  create_target: boolean;
 };
 
 const COUCHDB_URL = process.env.COUCHDB_URL;

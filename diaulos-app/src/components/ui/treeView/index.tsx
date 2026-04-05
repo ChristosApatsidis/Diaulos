@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronRight, LucideIcon } from "lucide-react";
+import { ChevronRight, type LucideIcon } from "lucide-react";
 
 export type TreeNodeData = {
   id: number;
@@ -29,7 +29,7 @@ function TreeNode({
   const [open, setOpen] = useState(
     defaultExpanded || node.defaultOpen || false,
   );
-  const [selected, setSelected] = useState(false);
+  const [selected, _setSelected] = useState(false);
   const hasChildren = !!node.children?.length;
   const Icon = node.icon;
 
@@ -82,7 +82,7 @@ function TreeNode({
           className="pl-5 relative before:absolute before:left-[15px] before:top-0
           before:bottom-2 before:w-px before:bg-gray-200 dark:before:bg-gray-700"
         >
-          {node.children!.map((child) => (
+          {node.children?.map((child) => (
             <TreeNode key={child.id} node={child} />
           ))}
         </div>

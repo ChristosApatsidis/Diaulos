@@ -12,12 +12,12 @@ import {
   Table,
   toast,
 } from "@heroui/react";
+import { Trash2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import useSWR from "swr";
-import ViewUserDetailsModal from "@/components/ui/modals/ViewUserDetails";
 import EditUserDetailsModal from "@/components/ui/modals/EditUserDetails";
+import ViewUserDetailsModal from "@/components/ui/modals/ViewUserDetails";
 import { authClient } from "@/lib/better-auth/auth-client";
-import { Trash2 } from "lucide-react";
 import type { User } from "@/types";
 
 export type UsersResponse = {

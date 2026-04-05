@@ -1,8 +1,6 @@
 // components/ui/tables/DatabaseReplicationTargetsTable.tsx
 "use client";
 
-import { ReplicationTarget } from "@/types/admin/database";
-import { useState } from "react";
 import {
   Chip,
   EmptyState,
@@ -13,6 +11,7 @@ import {
 } from "@heroui/react";
 import { useLocale } from "next-intl";
 import ViewDatabaseReplicationTarget from "@/components/ui/modals/ViewDatabaseReplicationTrget";
+import type { ReplicationTarget } from "@/types/admin/database";
 
 /**
  * This component renders a table of database replication targets for the CouchDB admin dashboard. It displays the target name, target URL, number of replication jobs, and error status for each replication target.

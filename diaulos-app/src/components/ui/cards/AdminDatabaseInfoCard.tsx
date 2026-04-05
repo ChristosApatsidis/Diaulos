@@ -4,7 +4,7 @@
 import { Skeleton } from "@heroui/react";
 import { useLocale, useTranslations } from "next-intl";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
-import {
+import type {
   AdminDatabaseStats,
   AdminDatabaseStatsDatabases,
 } from "@/types/admin/database";
@@ -32,8 +32,8 @@ export default function AdminDatabaseInfoCard({
   dbInfoLoading?: boolean;
   dbInfoError?: any;
 }) {
-  const locale = useLocale();
-  const generalTranslations = useTranslations("general");
+  const _locale = useLocale();
+  const _generalTranslations = useTranslations("general");
 
   if (dbInfoError) {
     return (

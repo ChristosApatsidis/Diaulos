@@ -1,10 +1,10 @@
 // components/ui/cards/AdminDatabaseStatsHTTPDCard.tsx
 "use client";
 
-import { Skeleton, Separator, ProgressBar } from "@heroui/react";
+import { ProgressBar, Separator, Skeleton } from "@heroui/react";
 import { useLocale, useTranslations } from "next-intl";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
-import { AdminDatabaseStatsHttpd } from "@/types/admin/database";
+import type { AdminDatabaseStatsHttpd } from "@/types/admin/database";
 
 /**
  * This component displays HTTPD statistics for the CouchDB server in the admin dashboard.
@@ -25,8 +25,8 @@ export default function AdminDatabaseStatsHTTPDCard({
   httpdLoading?: boolean;
   httpdError?: any;
 }) {
-  const locale = useLocale();
-  const generalTranslations = useTranslations("general");
+  const _locale = useLocale();
+  const _generalTranslations = useTranslations("general");
 
   // The error rate is calculated as the percentage of requests that resulted in 4xx or 5xx status codes out of the total requests. It is rounded to the nearest whole number for display.
   const errorRate =

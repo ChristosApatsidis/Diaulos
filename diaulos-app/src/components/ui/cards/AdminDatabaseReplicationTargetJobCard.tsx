@@ -2,13 +2,13 @@
 "use client";
 
 import { useState } from "react";
-import { Skeleton, Button, toast } from "@heroui/react";
+import { Button, Skeleton, toast } from "@heroui/react";
 import { useLocale, useTranslations } from "next-intl";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
-import { ReplicationJob } from "@/types/admin/database";
 import { formatDateTime } from "@/utils/formatDateTime";
+import type { ReplicationJob } from "@/types/admin/database";
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
+const _fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 /**
  * This component displays detailed information about a specific replication job associated with a replication target in the CouchDB admin dashboard.
@@ -25,7 +25,7 @@ export default function AdminDatabaseReplicationTargetJobCard({
   onReplicationJobDelete: () => void;
 }) {
   const locale = useLocale();
-  const generalTranslations = useTranslations("general");
+  const _generalTranslations = useTranslations("general");
 
   return (
     <InfoCard className="h-full" variant="default">

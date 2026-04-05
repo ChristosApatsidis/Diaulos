@@ -1,12 +1,12 @@
 // components/ui/cards/AdminDatabaseReplicationTargetsCard.tsx
 "use client";
 
-import { Skeleton, Button, Separator, toast } from "@heroui/react";
+import { Button, Separator, Skeleton } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
-import { ReplicationTarget } from "@/types/admin/database";
-import DatabaseReplicationTargetsTable from "@/components/ui/tables/DatabaseReplicationTargetsTable";
 import NewDatabaseReplicationTarget from "@/components/ui/modals/NewDatabaseReplicationTarget";
+import DatabaseReplicationTargetsTable from "@/components/ui/tables/DatabaseReplicationTargetsTable";
+import type { ReplicationTarget } from "@/types/admin/database";
 
 /**
  * This component displays replication statistics for the CouchDB server in the admin dashboard.
@@ -37,7 +37,7 @@ export default function AdminDatabaseReplicationTargetsCard({
   };
   onRefresh: () => void;
 }) {
-  const generalTranslations = useTranslations("general");
+  const _generalTranslations = useTranslations("general");
 
   if (databaseReplicationTargetsError) {
     return (

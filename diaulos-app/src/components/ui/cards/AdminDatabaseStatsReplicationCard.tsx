@@ -1,11 +1,11 @@
 // components/ui/cards/AdminDatabaseStatsReplicationCard.tsx
 "use client";
 
-import { Chip, Skeleton, Separator } from "@heroui/react";
+import { Chip, Separator, Skeleton } from "@heroui/react";
+import { CircleCheck, TriangleAlert } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
-import { TriangleAlert, CircleCheck } from "lucide-react";
-import { AdminDatabaseStatsReplication } from "@/types/admin/database";
+import type { AdminDatabaseStatsReplication } from "@/types/admin/database";
 
 /**
  * This component displays replication statistics for the CouchDB server in the admin dashboard.
@@ -26,8 +26,8 @@ export default function AdminDatabaseStatsReplicationCard({
   replicationLoading?: boolean;
   replicationError?: any;
 }) {
-  const locale = useLocale();
-  const generalTranslations = useTranslations("general");
+  const _locale = useLocale();
+  const _generalTranslations = useTranslations("general");
 
   if (replicationError) {
     return (

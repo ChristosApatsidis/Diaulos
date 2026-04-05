@@ -19,8 +19,8 @@ export function buildDatabaseAuthUrl(endpoint: ReplicationEndpoint): string {
           endpoint.password,
         )}@`
       : endpoint.username
-      ? `${encodeURIComponent(endpoint.username)}@`
-      : "";
+        ? `${encodeURIComponent(endpoint.username)}@`
+        : "";
 
   const db = encodeURIComponent(endpoint.database);
 
@@ -28,7 +28,8 @@ export function buildDatabaseAuthUrl(endpoint: ReplicationEndpoint): string {
     endpoint.params && Object.keys(endpoint.params).length > 0
       ? `?${Object.entries(endpoint.params)
           .map(
-            ([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`,
+            ([k, v]) =>
+              `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`,
           )
           .join("&")}`
       : "";

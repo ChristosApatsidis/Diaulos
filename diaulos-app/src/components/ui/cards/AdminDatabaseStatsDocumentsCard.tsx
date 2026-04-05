@@ -4,7 +4,7 @@
 import { Skeleton } from "@heroui/react";
 import { useLocale, useTranslations } from "next-intl";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
-import { AdminDatabaseStatsDocuments } from "@/types/admin/database";
+import type { AdminDatabaseStatsDocuments } from "@/types/admin/database";
 
 /**
  * This component displays document statistics for the CouchDB server in the admin dashboard.
@@ -24,8 +24,8 @@ export default function AdminDatabaseStatsDocumentsCard({
   documentsLoading?: boolean;
   documentsError?: any;
 }) {
-  const locale = useLocale();
-  const generalTranslations = useTranslations("general");
+  const _locale = useLocale();
+  const _generalTranslations = useTranslations("general");
 
   if (documentsError) {
     return (

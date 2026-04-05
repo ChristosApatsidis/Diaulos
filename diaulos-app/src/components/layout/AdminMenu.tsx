@@ -5,10 +5,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { Button, ListBox, Select } from "@heroui/react";
 import {
   DatabaseIcon,
+  Network,
   SettingsIcon,
   ShieldUser,
   UserIcon,
-  Network,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 

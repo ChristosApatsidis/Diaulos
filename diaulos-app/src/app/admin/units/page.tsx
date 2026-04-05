@@ -1,32 +1,12 @@
 // admin/units/page.tsx
 "use client";
 
+import { FileCode, Folder, Image, Package, Paintbrush } from "lucide-react";
 import { useTranslations } from "next-intl";
-import UsersTable from "@/components/ui/tables/Users";
-import { useState } from "react";
 import TreeView, { type TreeNodeData } from "@/components/ui/treeView";
 
-import {
-  ChevronRight,
-  Folder,
-  FolderOpen,
-  FileCode,
-  Paintbrush,
-  Image,
-  Package,
-  Settings,
-  GitBranch,
-  Lock,
-  BookOpen,
-  LayoutGrid,
-  TestTube,
-  Globe,
-  FileText,
-  LucideIcon,
-} from "lucide-react";
-
 export default function AdminUnitsPage() {
-  const generalTranslations = useTranslations("general");
+  const _generalTranslations = useTranslations("general");
 
   const myTree: TreeNodeData[] = [
     {

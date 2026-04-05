@@ -1,16 +1,16 @@
 // components/ui/modals/ViewDatabaseReplicationTrget.tsx
 "use client";
 
-import { ReplicationJob, ReplicationTarget } from "@/types/admin/database";
 import {
   Button,
-  Skeleton,
   Modal,
-  useOverlayState,
   Separator,
+  Skeleton,
+  useOverlayState,
 } from "@heroui/react";
 import { Eye } from "lucide-react";
 import AdminDatabaseReplicationTargetJobCard from "../cards/AdminDatabaseReplicationTargetJobCard";
+import type { ReplicationJob, ReplicationTarget } from "@/types/admin/database";
 
 /**
  * This component is a modal that displays detailed information about a specific replication target in the CouchDB admin dashboard.
