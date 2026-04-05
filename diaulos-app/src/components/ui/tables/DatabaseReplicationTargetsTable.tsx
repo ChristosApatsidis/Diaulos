@@ -26,10 +26,12 @@ export default function DatabaseReplicationTargetsTable({
   databaseReplicationTargets,
   databaseReplicationTargetsError,
   databaseReplicationTargetsLoading,
+  onReplicationJobDelete,
 }: {
   databaseReplicationTargets: ReplicationTarget[] | undefined;
   databaseReplicationTargetsError: Error | undefined;
   databaseReplicationTargetsLoading: boolean;
+  onReplicationJobDelete: () => void;
 }) {
   const locale = useLocale();
 
@@ -163,7 +165,10 @@ export default function DatabaseReplicationTargetsTable({
                       <div className="flex">{errorsChip}</div>
                     </Table.Cell>
                     <Table.Cell>
-                      <TrgetActions target={item} />
+                      <TrgetActions
+                        target={item}
+                        onReplicationJobDelete={onReplicationJobDelete}
+                      />
                     </Table.Cell>
                   </Table.Row>
                 );
@@ -176,15 +181,19 @@ export default function DatabaseReplicationTargetsTable({
   );
 }
 
-function TrgetActions({ target }: { target: ReplicationTarget }) {
-  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
+function TrgetActions({
+  target,
+  onReplicationJobDelete,
+}: {
+  target: ReplicationTarget;
+  onReplicationJobDelete: () => void;
+}) {
   return (
     <div className="flex flex-row items-center gap-2">
-      <ViewDatabaseReplicationTarget target={target} />
-
-      {/* Modals for viewing and editing would go here */}
+      <ViewDatabaseReplicationTarget
+        target={target}
+        onReplicationJobDelete={onReplicationJobDelete}
+      />
     </div>
   );
 }

@@ -55,10 +55,12 @@ export default function AdminDatabaseReplicationTargetsCard({
     );
   }
 
+  // Calculate total replication targets and active replications
   const targets = Array.isArray(databaseReplicationTargets)
     ? databaseReplicationTargets
     : [];
 
+  // Count active replications by summing the length of the replications array for each target
   const activeReplications = targets.reduce(
     (acc, target) => acc + target.replications.length,
     0,
@@ -121,12 +123,12 @@ export default function AdminDatabaseReplicationTargetsCard({
           {/* Replication targets table */}
           <div className="col-span-12 2xl:col-span-9">
             <DatabaseReplicationTargetsTable
-              key={JSON.stringify(databaseReplicationTargets)}
               databaseReplicationTargets={databaseReplicationTargets}
               databaseReplicationTargetsError={databaseReplicationTargetsError}
               databaseReplicationTargetsLoading={
                 databaseReplicationTargetsLoading
               }
+              onReplicationJobDelete={onRefresh}
             />
           </div>
         </div>

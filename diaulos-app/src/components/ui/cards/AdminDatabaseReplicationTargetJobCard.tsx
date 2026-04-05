@@ -1,11 +1,14 @@
 // components/ui/cards/AdminDatabaseReplicationTargetJobCard.tsx
 "use client";
 
-import { Skeleton } from "@heroui/react";
+import { useState } from "react";
+import { Skeleton, Button, toast } from "@heroui/react";
 import { useLocale, useTranslations } from "next-intl";
 import { InfoCard } from "@/components/ui/cards/InfoCard";
 import { ReplicationJob } from "@/types/admin/database";
 import { formatDateTime } from "@/utils/formatDateTime";
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 /**
  * This component displays detailed information about a specific replication job associated with a replication target in the CouchDB admin dashboard.
@@ -16,8 +19,10 @@ import { formatDateTime } from "@/utils/formatDateTime";
  */
 export default function AdminDatabaseReplicationTargetJobCard({
   databaseReplicationTargetJob,
+  onReplicationJobDelete,
 }: {
   databaseReplicationTargetJob: ReplicationJob;
+  onReplicationJobDelete: () => void;
 }) {
   const locale = useLocale();
   const generalTranslations = useTranslations("general");
@@ -73,9 +78,63 @@ export default function AdminDatabaseReplicationTargetJobCard({
               />
             </div>
           </div>
+          <div>
+            <ReplicationTargetJobActions
+              docId={databaseReplicationTargetJob.doc_id}
+              onDelete={onReplicationJobDelete}
+            />
+          </div>
         </div>
       </InfoCard.Body>
     </InfoCard>
+  );
+}
+
+function ReplicationTargetJobActions({
+  docId,
+  onDelete,
+}: {
+  docId: string;
+  onDelete: () => void;
+}) {
+  const [loadingDeleteReplicationJob, setLoadingDeleteReplicationJob] =
+    useState<boolean>(false);
+
+  const handleDeleteReplicationJob = async () => {
+    try {
+      setLoadingDeleteReplicationJob(true);
+
+      const res = await fetch(
+        `/api/admin/database/replication/targets/${docId}`,
+        {
+          method: "DELETE",
+        },
+      );
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Failed to delete replication job");
+      }
+
+      toast.success("Replication job deleted successfully");
+
+      onDelete();
+    } catch (err: any) {
+      toast.danger(err.message || "Failed to delete replication job");
+    } finally {
+      setLoadingDeleteReplicationJob(false);
+    }
+  };
+
+  return (
+    <Button
+      size="sm"
+      variant="danger"
+      onClick={handleDeleteReplicationJob}
+      isPending={loadingDeleteReplicationJob}
+    >
+      Delete replication job
+    </Button>
   );
 }
 

@@ -82,6 +82,9 @@ configs:
   couchdb_replicator_config:
     content: |
       [replicator]
+      interval = 5000
+      retries_per_request = 0
+      max_history = 2
 
 networks:
   couchdb-net:

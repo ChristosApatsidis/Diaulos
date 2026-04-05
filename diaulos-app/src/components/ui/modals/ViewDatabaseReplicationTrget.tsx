@@ -23,8 +23,10 @@ import AdminDatabaseReplicationTargetJobCard from "../cards/AdminDatabaseReplica
  */
 export default function ViewDatabaseReplicationTarget({
   target,
+  onReplicationJobDelete,
 }: {
   target: ReplicationTarget;
+  onReplicationJobDelete: () => void;
 }) {
   const state = useOverlayState();
 
@@ -58,7 +60,7 @@ export default function ViewDatabaseReplicationTarget({
                 <Separator />
                 <div className="flex flex-col gap-2">
                   {target.replications.length > 0 ? (
-                    <>
+                    <div className="flex flex-col gap-4">
                       <span className="text-xs text-gray-500 uppercase tracking-wider">
                         Replication Jobs
                       </span>
@@ -67,11 +69,12 @@ export default function ViewDatabaseReplicationTarget({
                           <div key={job.doc_id}>
                             <AdminDatabaseReplicationTargetJobCard
                               databaseReplicationTargetJob={job}
+                              onReplicationJobDelete={onReplicationJobDelete}
                             />
                           </div>
                         ))}
                       </div>
-                    </>
+                    </div>
                   ) : (
                     <span className="text-sm text-gray-500">
                       No replication jobs found.
